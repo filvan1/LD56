@@ -26,10 +26,6 @@ position = Vector2(123, 200)
 [node name="Enemy" parent="." instance=ExtResource("6_woxhm")]
 position = Vector2(130, 131)
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
-position = Vector2(128, 233)
-player = NodePath("../Player")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_gf0ek")
 autoplay = true
@@ -41,6 +37,10 @@ script = ExtResource("6_a6m6d")
 shake_x = ExtResource("7_rqdsw")
 shake_y = ExtResource("8_a2ukd")
 scroll_curve = SubResource("Curve_cmcic")
+
+[node name="HealthBar" parent="Camera" node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
+position = Vector2(0, 105)
+player = NodePath("../../Player")
 
 [node name="Camera" type="Camera2D" parent="Camera"]
 
