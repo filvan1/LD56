@@ -31,16 +31,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if state == AntState.YEETING:
-		t += delta
-		
-		if t > 1.0:
-			_land()
-		else:
-			position = origin + (target - origin) * t
-			position.y -= trajectory.sample(t)
-			rotation += delta
-			
 	$CollisionShape2D.disabled = (state == AntState.HOMING or state == AntState.MURDERING or not alive)
 		
 	if get_parent().get_swarming_ants().size() == 0 and self.alive and self.state == AntState.HOMING:
@@ -98,6 +88,22 @@ func _physics_process(delta: float) -> void:
 			sprite.play("walk")
 		else:
 			sprite.play("idle")
+			
+			
+	if state == AntState.YEETING:
+		t += delta
+		
+		if t > 1.0:
+			_land()
+		else:
+			var dst = (origin + (target - origin) * t)
+			dst.y -= trajectory.sample(t)
+			
+			velocity = (dst - position) / delta
+			rotation += delta
+			if move_and_slide():
+				_land()
+			
 			
 func stop_murder():
 	print("murder done")
