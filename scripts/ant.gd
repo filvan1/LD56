@@ -36,6 +36,9 @@ func _process(delta: float) -> void:
 func _land():
 	state = AntState.HOMING
 	
+func die():
+	alive = false
+	
 func yeet(to: Vector2):
 	origin = position
 	target = to
@@ -43,6 +46,10 @@ func yeet(to: Vector2):
 	state = AntState.YEETING
 	
 func _physics_process(delta: float) -> void:
+	if not alive:
+		sprite.play("idle")
+		return
+	
 	if state == AntState.SWARMING or state == AntState.HOMING:
 		var speed = new_velocity.length()
 		velocity = new_velocity
