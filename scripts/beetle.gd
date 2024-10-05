@@ -28,12 +28,12 @@ func _ready() -> void:
 	aggro_range = 200.0
 	activity_time = 1.0
 	CurrentState = EnemyState.IDLE
+	NextState = EnemyState.IDLE
 
 func _physics_process(delta: float) -> void:
 	match(EnemyState):
 		EnemyState.NONE: pass
 		EnemyState.MOVING:
-			print("MINGV")
 			match(current_move_state):
 				MoveStates.TURNING:
 					move_counter += delta
