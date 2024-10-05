@@ -60,7 +60,7 @@ func _fire(aim: Vector2):
 	projectiles.add_child(projectile)
 	
 func _physics_process(delta: float) -> void:
-	pass
+	$Control.position = $Ants.center_of_mass
 	#$Control.velocity = Vector2.ZERO
 	#$Control.velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		
