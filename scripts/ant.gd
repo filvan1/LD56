@@ -41,7 +41,12 @@ func _process(delta: float) -> void:
 			position.y -= trajectory.sample(t)
 			rotation += delta
 			
-		$CollisionShape2D.disabled = state == AntState.HOMING or state == AntState.MURDERING or not alive
+	$CollisionShape2D.disabled = (state == AntState.HOMING or state == AntState.MURDERING or not alive)
+		
+	if get_parent().get_swarming_ants().size() == 0 and self.alive and self.state == AntState.HOMING:
+		# This means that we've yoten the last swarming ant but this one is still alive and homing.
+		# Make this one the swarm.
+		self.state = AntState.SWARMING
 
 func _land():
 	state = AntState.HOMING
