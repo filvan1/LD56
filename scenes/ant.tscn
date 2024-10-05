@@ -1,7 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwvu5v5kgsed0"]
+[gd_scene load_steps=9 format=3 uid="uid://bwvu5v5kgsed0"]
 
 [ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
 [ext_resource type="Script" path="res://scripts/ant.gd" id="1_j8bc2"]
+
+[sub_resource type="Curve" id="Curve_4rsrx"]
+max_value = 20.0
+_data = [Vector2(0.00311527, 0), 0.0, 84.4273, 0, 0, Vector2(1, 0), -86.3594, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nsgyo"]
 atlas = ExtResource("1_apb61")
@@ -44,12 +49,13 @@ radius = 2.0
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_j8bc2")
+trajectory = SubResource("Curve_4rsrx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_atsc6")
 animation = &"idle"
-frame_progress = 0.935555
+frame_progress = 0.0404904
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_byf4t")
