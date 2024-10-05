@@ -1,12 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=9 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="5_gf0ek"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="6_a6m6d"]
 [ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/enemy.tscn" id="6_woxhm"]
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve" id="Curve_118fh"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.056338, 0.257742), 0.0, 0.0, 0, 0, Vector2(0.102518, -0.142008), 0.0, 0.0, 0, 0, Vector2(0.128521, 0.542903), 0.0, 0.0, 0, 0, Vector2(0.145683, -0.725892), 0.0, 0.0, 0, 0, Vector2(0.188849, -0.262219), 0.0, 0.0, 0, 0, Vector2(0.242958, 0.509355), 0.0, 0.0, 0, 0, Vector2(0.276408, 0.329032), 0.0, 0.0, 0, 0, Vector2(0.323741, -0.253633), 0.0, 0.0, 0, 0, Vector2(0.357914, 0.0726552), 0.0, 0.0, 0, 0, Vector2(0.402878, -0.0303831), 0.0, 0.0, 0, 0, Vector2(0.460432, 0.0554821), 0.0, 0.0, 0, 0, Vector2(0.51259, -0.193527), 0.0, 0.0, 0, 0, Vector2(0.539568, 0.0898283), 0.0, 0.0, 0, 0, Vector2(0.591727, 0.0812417), 0.0, 0.0, 0, 0, Vector2(0.619718, 0.303871), 0.0, 0.0, 0, 0, Vector2(0.674296, 0.144516), 0.0, 0.0, 0, 0, Vector2(0.73741, -0.40819), 0.0, 0.0, 0, 0, Vector2(0.803957, -0.116248), 0.0, 0.0, 0, 0, Vector2(0.884892, -0.227873), 0.0, 0.0, 0, 0, Vector2(1, 0.00396299), 0.0, 0.0, 0, 0]
+point_count = 21
+
+[sub_resource type="Curve" id="Curve_t31yu"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0773381, 0.428996), 0.0, 0.0, 0, 0, Vector2(0.151079, -0.305152), 0.0, 0.0, 0, 0, Vector2(0.235612, 0.390357), 0.0, 0.0, 0, 0, Vector2(0.284173, 0.132761), 0.0, 0.0, 0, 0, Vector2(0.366906, 0.459049), 0.0, 0.0, 0, 0, Vector2(0.419065, 0.175694), 0.0, 0.0, 0, 0, Vector2(0.503597, -0.588507), 0.0, 0.0, 0, 0, Vector2(0.589928, -0.00462353), 0.0, 0.0, 0, 0, Vector2(0.706835, -0.159181), 0.0, 0.0, 0, 0, Vector2(0.778777, 0.149934), 0.0, 0.0, 0, 0, Vector2(0.839928, 0.0640687), 0.0, 0.0, 0, 0, Vector2(0.870504, -0.124835), 0.0, 0.0, 0, 0, Vector2(0.944245, 0.00396299), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 15
+
+[node name="World" type="Node2D"]
 
 [node name="Room" parent="." instance=ExtResource("1_sxbc5")]
 position = Vector2(128, 128)
@@ -25,3 +36,13 @@ player = NodePath("../Player")
 stream = ExtResource("5_gf0ek")
 autoplay = true
 parameters/looping = false
+
+[node name="Camera" type="Node2D" parent="."]
+position = Vector2(128, 128)
+script = ExtResource("6_a6m6d")
+curve_x = SubResource("Curve_118fh")
+curve_y = SubResource("Curve_t31yu")
+
+[node name="Camera" type="Camera2D" parent="Camera"]
+
+[connection signal="on_charge" from="Enemy" to="Camera" method="shake"]

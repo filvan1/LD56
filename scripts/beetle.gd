@@ -22,6 +22,8 @@ var p1 = p0 + Vector2(5.0, 0.0).rotated(rotation)
 var p2 = p0 + Vector2(0, 5.0).rotated(rotation)
 var move_dir = rand.randi_range(-1, 1)
 
+signal on_charge
+
 func _ready() -> void:
 	aggro_range = 200.0
 	activity_time = 1.0
@@ -71,6 +73,8 @@ func _process(delta: float) -> void:
 						attack_start_pos = global_position
 						attack_target_pos = global_position + (player.global_position - global_position).normalized() * 50.0
 						current_attack_state = AttackingStates.CHARGING
+						on_charge.emit()
+						
 				
 				AttackingStates.CHARGING:
 					attack_counter += delta
