@@ -2,23 +2,23 @@
 
 [ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_02i0o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsgyo"]
 atlas = ExtResource("1_apb61")
-region = Rect2(0, 0, 3, 6)
+region = Rect2(0, 0, 1, 3)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vllqb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e10qa"]
 atlas = ExtResource("1_apb61")
-region = Rect2(3, 0, 3, 6)
+region = Rect2(1, 0, 1, 3)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nimie"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0lwb"]
 atlas = ExtResource("1_apb61")
-region = Rect2(6, 0, 3, 6)
+region = Rect2(2, 0, 1, 3)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_atsc6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_02i0o")
+"texture": SubResource("AtlasTexture_nsgyo")
 }],
 "loop": true,
 "name": &"idle",
@@ -26,10 +26,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vllqb")
+"texture": SubResource("AtlasTexture_e10qa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nimie")
+"texture": SubResource("AtlasTexture_y0lwb")
 }],
 "loop": true,
 "name": &"walk",
@@ -37,15 +37,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_byf4t"]
-radius = 4.0
+radius = 2.0
 
 [node name="Ant" type="CharacterBody2D"]
+motion_mode = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_atsc6")
 animation = &"walk"
-frame_progress = 0.0652412
+frame_progress = 0.537131
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_byf4t")

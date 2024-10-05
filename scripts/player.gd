@@ -6,30 +6,23 @@ extends CharacterBody2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
 func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO
-	
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1.0
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1.0
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1.0
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1.0
+	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		
 	if velocity.length_squared() > 0.0001:
 		velocity = velocity / velocity.length() * 50.0
 		
 	move_and_slide()
 	
-	if velocity.length_squared() > 0.0001:
-		rotation = atan2(velocity.y, velocity.x)
+	var effective_velocity = get_real_velocity()
+	if effective_velocity.length_squared() > 1.0:
+		rotation = atan2(effective_velocity.y, effective_velocity.x)
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
+		

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://delg17ewn0h2t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b824v"]
+radius = 10.0499
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b824v")
