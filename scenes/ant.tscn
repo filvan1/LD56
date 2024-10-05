@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bwvu5v5kgsed0"]
+
+[ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02i0o"]
+atlas = ExtResource("1_apb61")
+region = Rect2(0, 0, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vllqb"]
+atlas = ExtResource("1_apb61")
+region = Rect2(3, 0, 3, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nimie"]
+atlas = ExtResource("1_apb61")
+region = Rect2(6, 0, 3, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_atsc6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02i0o")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vllqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nimie")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_byf4t"]
+radius = 4.0
+
+[node name="Ant" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_atsc6")
+animation = &"walk"
+frame_progress = 0.0652412
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_byf4t")

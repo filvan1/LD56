@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=4 format=3 uid="uid://drfdj5sutodh0"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ljltc"]
+[ext_resource type="PackedScene" uid="uid://bwvu5v5kgsed0" path="res://scenes/ant.tscn" id="1_fkxko"]
+[ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_r6h04"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(471, 293)
-shape = SubResource("CircleShape2D_ljltc")
+[node name="Room" parent="." instance=ExtResource("1_sxbc5")]
+
+[node name="Ant" parent="." instance=ExtResource("1_fkxko")]
+position = Vector2(93, 87)
+motion_mode = 1
+script = ExtResource("2_r6h04")
