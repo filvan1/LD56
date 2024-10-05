@@ -9,6 +9,7 @@ var charge_time = 0.5
 var attack_counter = 0.0
 var attack_start_pos = Vector2(0,0)
 var attack_target_pos = Vector2(0,0)
+var target_angle_diff = 0.0
 var t = 0
 var step = 1
 
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 					
 					
 					if(move_counter < 1.0):
-						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta)
+						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta * 2.0)
 						#rotate_towards_point(player.global_position, delta)
 					elif(move_counter > 1.5):
 						p0 = global_position
@@ -64,10 +65,9 @@ func _process(delta: float) -> void:
 			match(current_attack_state):
 				AttackingStates.WINDUP:
 					attack_counter += delta
-					if(attack_counter < windup_time):
-						rotate_towards_point(player.global_position, delta * 2.0)
-						global_position = get_bezier_position(attack_start_pos, attack_start_pos - (player.global_position - global_position).normalized(), attack_start_pos - 2.0 * (player.global_position - global_position).normalized(), attack_counter / windup_time)
-					else:
+					target_angle_diff = rotate_towards_point(player.global_position, delta * 2.0)
+					global_position = get_bezier_position(attack_start_pos, attack_start_pos - (player.global_position - global_position).normalized(), attack_start_pos - 5.0 * (player.global_position - global_position).normalized(), attack_counter / 2)
+					if(target_angle_diff < 0.01 && attack_counter > 2.0):
 						attack_counter = 0
 						attack_start_pos = global_position
 						attack_target_pos = global_position + (player.global_position - global_position).normalized() * 50.0
@@ -75,8 +75,11 @@ func _process(delta: float) -> void:
 				
 				AttackingStates.CHARGING:
 					attack_counter += delta
-					move_along_bezier(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
+					global_position = get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
+					
+					#move_along_bezier(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 					if(attack_counter > 1.0):
+						print(rotation)
 						attack_counter = 0
 						current_attack_state = AttackingStates.NONE
 						CurrentState = EnemyState.IDLE

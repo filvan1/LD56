@@ -33,8 +33,10 @@ func move_along_bezier(start_pos: Vector2, control_pos: Vector2, end_pos: Vector
 	global_position = get_bezier_position(start_pos, control_pos, end_pos, t)
 	rotation = get_bezier_tangent(start_pos, control_pos, end_pos, t).angle()
 
-func rotate_towards_point(target_position: Vector2, t: float):
+func rotate_towards_point(target_position: Vector2, t: float) -> float:
 	var target_direction = (target_position - global_position).normalized()
 	var target_angle = target_direction.angle()
 
 	rotation = rotate_toward(rotation, target_angle, t)
+
+	return absf(angle_difference(rotation, target_angle))
