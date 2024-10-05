@@ -1,3 +1,4 @@
+class_name Player
 extends Node2D
 
 var max_speed: float = 35.0
@@ -17,6 +18,15 @@ func _ready() -> void:
 
 func _spawn_ants(n: int):
 	pass
+	
+func get_max_health():
+	return swarm.get_ant_count()
+
+func get_health():
+	return swarm.get_alive_ants().size()
+	
+func get_ammo():
+	return swarm.get_swarming_ants().size()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

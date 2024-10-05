@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvbd7uhyjfbxp"]
+
+[ext_resource type="Texture2D" uid="uid://cn3spc181v1p8" path="res://textures/ui/hp-frame.png" id="1_ps4cs"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="2_6mwho"]
+[ext_resource type="Texture2D" uid="uid://c82brekn3xdmb" path="res://textures/ui/hp-bg.png" id="2_inb0t"]
+[ext_resource type="Texture2D" uid="uid://b0j8gdecqqt17" path="res://textures/ui/hp-health.png" id="3_mg0pl"]
+[ext_resource type="Texture2D" uid="uid://b2gj01heebjcd" path="res://textures/ui/ph-ammo.png" id="4_6ffq2"]
+
+[node name="HealthBar" type="Sprite2D"]
+texture = ExtResource("1_ps4cs")
+region_enabled = true
+region_rect = Rect2(0, 0, 176, 18)
+script = ExtResource("2_6mwho")
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("2_inb0t")
+
+[node name="health" type="Sprite2D" parent="."]
+position = Vector2(-81, -6)
+texture = ExtResource("3_mg0pl")
+centered = false
+region_enabled = true
+region_rect = Rect2(7, 3, 162, 12)
+
+[node name="ammo" type="Sprite2D" parent="."]
+position = Vector2(-81, -6)
+texture = ExtResource("4_6ffq2")
+centered = false
+region_enabled = true
+region_rect = Rect2(7, 3, 162, 12)

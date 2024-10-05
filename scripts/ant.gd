@@ -15,6 +15,8 @@ var origin: Vector2
 var target: Vector2
 var t: float = 0.0
 
+var alive = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

@@ -28,14 +28,20 @@ func _process(delta: float):
 	if show_ranges:
 		queue_redraw()
 		
-func _swarming_ants():
-	return get_children().filter(func(a): return a.state == Ant.AntState.SWARMING)
+func get_swarming_ants():
+	return get_children().filter(func(a): return a.alive and a.state == Ant.AntState.SWARMING)
+	
+func get_alive_ants():
+	return get_children().filter(func(a): return a.alive)
+
+func get_ant_count():
+	return get_child_count()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		center_of_mass = Vector2.ZERO
-		var swarming_ants = _swarming_ants()
+		var swarming_ants = get_swarming_ants()
 		
 		for a: Ant in swarming_ants:
 			center_of_mass += a.position / swarming_ants.size()
@@ -48,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			var total_cohesion_weight = 0
 			
 			for b: Ant in get_children():
-				if a == b:
+				if a == b or not b.alive:
 					continue
 					
 				var v = b.position - a.position
@@ -80,6 +86,6 @@ func _physics_process(delta: float) -> void:
 			a.new_velocity = a.velocity + (avoidance_vector * avoidance + alignment_vector * alignment + cohesion_vector * cohesion + tracking_vector * tracking + random_vector * random) * delta
 
 		for a: Ant in get_children():
-			if a.state == Ant.AntState.HOMING:
+			if a.alive and a.state == Ant.AntState.HOMING:
 				# Simply move towards swarm CoM
 				a.new_velocity = center_of_mass - a.position

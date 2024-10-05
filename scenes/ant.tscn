@@ -55,7 +55,7 @@ trajectory = SubResource("Curve_4rsrx")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_atsc6")
 animation = &"idle"
-frame_progress = 0.0404904
+frame_progress = 0.993501
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_byf4t")
