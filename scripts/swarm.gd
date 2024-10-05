@@ -13,6 +13,7 @@ extends Node2D
 @export var show_ranges: bool = false
 
 var tracking_target: Vector2 = Vector2.ZERO
+var center_of_mass: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +31,10 @@ func _process(delta: float):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
+		center_of_mass = Vector2.ZERO
 		for a: Ant in get_children():
+			center_of_mass += a.position / get_child_count()
+			
 			var avoidance_vector = Vector2.ZERO
 			var alignment_vector = Vector2.ZERO
 			var cohesion_vector = Vector2.ZERO
