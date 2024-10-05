@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=3 format=3 uid="uid://drfdj5sutodh0"]
 
-[ext_resource type="PackedScene" uid="uid://bwvu5v5kgsed0" path="res://scenes/ant.tscn" id="1_fkxko"]
 [ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_ul626"]
 
@@ -8,8 +7,5 @@
 
 [node name="Room" parent="." instance=ExtResource("1_sxbc5")]
 
-[node name="s" parent="." instance=ExtResource("4_ul626")]
-position = Vector2(83, 89)
-
-[node name="Ant" parent="." instance=ExtResource("1_fkxko")]
-position = Vector2(69, 92)
+[node name="Player" parent="." instance=ExtResource("4_ul626")]
+position = Vector2(86, 71)

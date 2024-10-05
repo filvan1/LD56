@@ -1,4 +1,6 @@
-extends CharacterBody2D
+extends Node2D
+
+var max_speed: float = 35.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,15 +11,13 @@ func _spawn_ants(n: int):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	get_parent().get_node("Ants").tracking_target = position
+	$Ants.tracking_target = $Control.position
 	
 func _physics_process(delta: float) -> void:
-	velocity = Vector2.ZERO
-	velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	$Control.velocity = Vector2.ZERO
+	$Control.velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		
-	if velocity.length_squared() > 0.0001:
-		velocity = velocity / velocity.length() * 50.0
+	if $Control.velocity.length_squared() > 0.0001:
+		$Control.velocity = $Control.velocity / $Control.velocity.length() * max_speed
 		
-	move_and_slide()
-	
-	var effective_velocity = get_real_velocity()
+	$Control.move_and_slide()

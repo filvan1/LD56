@@ -4,9 +4,13 @@ extends Node2D
 @export var avoidance: float = 1.0
 @export var alignment: float = 1.0
 @export var cohesion: float = 1.0
+@export var tracking: float = 1.0
+@export var random: float = 1.0
 
 @export var avoidance_range: float = 10.0
 @export var visual_range: float = 50.0
+
+@export var show_ranges: bool = false
 
 var tracking_target: Vector2 = Vector2.ZERO
 
@@ -15,11 +19,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _draw():
-	draw_circle(tracking_target, avoidance_range, Color.RED, false)
-	draw_circle(tracking_target, visual_range, Color.YELLOW, false)
+	if show_ranges:
+		draw_circle(tracking_target, avoidance_range, Color.RED, false)
+		draw_circle(tracking_target, visual_range, Color.YELLOW, false)
 	
 func _process(delta: float):
-	queue_redraw()
+	if show_ranges:
+		queue_redraw()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -29,7 +35,8 @@ func _physics_process(delta: float) -> void:
 			var alignment_vector = Vector2.ZERO
 			var cohesion_vector = Vector2.ZERO
 			
-			var visible_neighbors = 0
+			var total_alignment_weight = 0
+			var total_cohesion_weight = 0
 			
 			for b: Ant in get_children():
 				if a == b:
@@ -41,10 +48,18 @@ func _physics_process(delta: float) -> void:
 					avoidance_vector -= v
 					
 				if v.length() < visual_range:
-					visible_neighbors += 1
+					total_alignment_weight += 1
+					total_cohesion_weight += 1
 					alignment_vector += b.velocity
 					cohesion_vector += b.position
 					
-			alignment_vector = alignment_vector / visible_neighbors - a.position
-			cohesion_vector = cohesion_vector / visible_neighbors - a.position
-			a.new_velocity = a.velocity + (avoidance_vector * avoidance + alignment_vector * alignment + cohesion_vector * cohesion) * delta
+			if total_alignment_weight > 0:
+				alignment_vector = alignment_vector / total_alignment_weight - a.velocity
+			if total_cohesion_weight > 0:
+				cohesion_vector = cohesion_vector / total_cohesion_weight - a.position
+				
+			var tracking_vector = tracking_target - a.position
+			
+			var random_vector = Vector2.from_angle(randf_range(0, 2*PI))
+			
+			a.new_velocity = a.velocity + (avoidance_vector * avoidance + alignment_vector * alignment + cohesion_vector * cohesion + tracking_vector * tracking + random_vector * random) * delta

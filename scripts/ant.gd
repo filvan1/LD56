@@ -3,10 +3,8 @@ extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
 
-@export var min_speed: float = 10.0
-@export var max_speed: float = 80.0
-
 var new_velocity: Vector2 = Vector2.ZERO
+var max_speed: float = 40.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,10 +16,9 @@ func _process(delta: float) -> void:
 	
 func _physics_process(delta: float) -> void:
 	var speed = new_velocity.length()
+	velocity = new_velocity
 	if speed > max_speed:
 		velocity = new_velocity / speed * max_speed
-	elif speed < min_speed and speed > 0.1:
-		velocity = new_velocity / speed * min_speed
 	
 	move_and_slide()
 	
@@ -31,3 +28,4 @@ func _physics_process(delta: float) -> void:
 		sprite.play("walk")
 	else:
 		sprite.play("idle")
+		
