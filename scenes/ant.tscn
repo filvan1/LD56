@@ -47,6 +47,7 @@ radius = 2.0
 
 [node name="Ant" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_j8bc2")
 trajectory = SubResource("Curve_4rsrx")

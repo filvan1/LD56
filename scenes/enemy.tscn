@@ -6,20 +6,27 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2i0p"]
 
 [node name="Enemy" type="Node2D"]
+
+[node name="EnemyBody" type="CharacterBody2D" parent="."]
+collision_layer = 4
 script = ExtResource("1_wvsy4")
 CurrentState = 1
 NextState = 1
 
-[node name="Collider" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 3
-
-[node name="ColliderShape" type="CollisionShape2D" parent="Collider"]
+[node name="ColliderShape" type="CollisionShape2D" parent="EnemyBody"]
 shape = SubResource("RectangleShape2D_d2i0p")
 
-[node name="Sprite2D" type="Sprite2D" parent="Collider"]
+[node name="Area" type="Area2D" parent="EnemyBody"]
+collision_layer = 8
+collision_mask = 3
+
+[node name="ColliderShape" type="CollisionShape2D" parent="EnemyBody/Area"]
+shape = SubResource("RectangleShape2D_d2i0p")
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemyBody/Area"]
 rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_yl0i8")
 
-[connection signal="body_entered" from="Collider" to="." method="_on_collider_body_entered"]
+[connection signal="body_entered" from="EnemyBody/Area" to="." method="_on_collider_body_entered"]
+[connection signal="body_entered" from="EnemyBody/Area" to="EnemyBody" method="_on_collider_body_entered"]

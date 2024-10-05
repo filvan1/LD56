@@ -29,6 +29,36 @@ func _ready() -> void:
 	activity_time = 1.0
 	CurrentState = EnemyState.IDLE
 
+func _physics_process(delta: float) -> void:
+	match(EnemyState):
+		EnemyState.NONE: pass
+		EnemyState.MOVING:
+			print("MINGV")
+			match(current_move_state):
+				MoveStates.TURNING:
+					move_counter += delta
+					
+					
+					if(move_counter < 1.0):
+						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta * 2.0)
+					elif(move_counter > 1.5):
+						p0 = global_position
+						p1 = p0 + Vector2(20.0, 0.0).rotated(rotation)
+						p2 = p0 + Vector2(20.0, move_dir * 20.0).rotated(rotation)
+						current_move_state = MoveStates.WALKING
+						move_counter = 0.0
+				MoveStates.WALKING:
+					
+					move_counter += delta
+					
+					if(move_counter < 1.0):
+						move_along_bezier(p0, p1, p2, move_counter)
+					elif(move_counter > 2.0):
+						current_move_state = MoveStates.NONE
+						CurrentState = EnemyState.IDLE
+						move_counter = 0.0
+
+
 func _process(delta: float) -> void:
 	super._process(delta)
 
@@ -78,7 +108,9 @@ func _process(delta: float) -> void:
 				
 				AttackingStates.CHARGING:
 					attack_counter += delta
-					global_position = get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
+					velocity = Vector2(50.0, 0).rotated(rotation)
+					move_and_slide() 
+					#get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 					
 					if(attack_counter > 1.0):
 						print(rotation)

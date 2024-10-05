@@ -1,4 +1,4 @@
-class_name Enemy extends Node2D
+class_name Enemy extends CharacterBody2D
 
 signal died
 
@@ -9,8 +9,8 @@ var counter = 0.0
 var activity_time = 2.0
 var rand = RandomNumberGenerator.new()
 var aggro_range = 0.0
-@onready var player: Node2D = $"../Player/Control"
-@onready var collider = $Collider
+@onready var player: Node2D = $"../../Player/Control"
+#@onready var collider = $Collider
 
 var alive = true
 var health = 100.0
