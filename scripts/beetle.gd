@@ -22,7 +22,7 @@ var p2 = p0 + Vector2(0, 5.0).rotated(rotation)
 var move_dir = rand.randi_range(-1, 1)
 
 func _ready() -> void:
-	aggro_range = 20.0
+	aggro_range = 200.0
 	activity_time = 1.0
 	CurrentState = EnemyState.IDLE
 

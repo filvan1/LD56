@@ -1,11 +1,134 @@
-[gd_scene load_steps=3 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=8 format=3 uid="uid://drfdj5sutodh0"]
 
-[ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
-[ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_ul626"]
+[ext_resource type="PackedScene" path="res://scenes/room.tscn" id="1_sxbc5"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_gl5y8"]
+[ext_resource type="Script" path="res://scripts/swarm.gd" id="3_ayx6a"]
+[ext_resource type="PackedScene" uid="uid://bwvu5v5kgsed0" path="res://scenes/ant.tscn" id="4_r5elx"]
+[ext_resource type="Texture2D" uid="uid://dbfiksexirp3g" path="res://textures/crosshair.png" id="5_0hn1h"]
+[ext_resource type="PackedScene" uid="uid://d3311vnw7q2wq" path="res://scenes/enemy.tscn" id="6_woxhm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b824v"]
+radius = 5.0
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Room" parent="." instance=ExtResource("1_sxbc5")]
 
-[node name="Player" parent="." instance=ExtResource("4_ul626")]
+[node name="Player" type="Node2D" parent="."]
+process_physics_priority = 20
 position = Vector2(86, 71)
+script = ExtResource("2_gl5y8")
+shoot_range = 80.0
+
+[node name="Control" type="CharacterBody2D" parent="Player"]
+collision_layer = 0
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Control"]
+shape = SubResource("CircleShape2D_b824v")
+
+[node name="Ants" type="Node2D" parent="Player"]
+process_physics_priority = 10
+script = ExtResource("3_ayx6a")
+avoidance = 100.0
+alignment = -2.0
+cohesion = 20.0
+tracking = 4.0
+random = 2.0
+avoidance_range = 3.0
+visual_range = 10.0
+
+[node name="Ant" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-7, 3)
+
+[node name="Ant2" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-2, 9)
+
+[node name="Ant3" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-10, -1)
+
+[node name="Ant4" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-6, -6)
+
+[node name="Ant5" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(2, -5)
+
+[node name="Ant6" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(5, 5)
+
+[node name="Ant7" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(7, 0)
+
+[node name="Ant8" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(0, 3)
+
+[node name="Ant9" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(5, 9)
+
+[node name="Ant10" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-3, -1)
+
+[node name="Ant11" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(1, -6)
+
+[node name="Ant12" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(9, -5)
+
+[node name="Ant13" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(12, 5)
+
+[node name="Ant14" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(2, -2)
+
+[node name="Ant15" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-5, 1)
+
+[node name="Ant16" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(0, 7)
+
+[node name="Ant17" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-8, -3)
+
+[node name="Ant18" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-4, -8)
+
+[node name="Ant19" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(4, -7)
+
+[node name="Ant20" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(7, 3)
+
+[node name="Ant21" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(9, -2)
+
+[node name="Ant22" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(2, 1)
+
+[node name="Ant23" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(7, 7)
+
+[node name="Ant24" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(-1, -3)
+
+[node name="Ant25" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(3, -8)
+
+[node name="Ant26" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(11, -7)
+
+[node name="Ant27" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(14, 3)
+
+[node name="Ant28" parent="Player/Ants" instance=ExtResource("4_r5elx")]
+position = Vector2(16, -2)
+
+[node name="Projectiles" type="Node2D" parent="Player"]
+
+[node name="AimIndicator" type="Node2D" parent="Player"]
+
+[node name="Crosshair" type="Sprite2D" parent="Player/AimIndicator"]
+texture = ExtResource("5_0hn1h")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_woxhm")]
+position = Vector2(130, 131)
+player = NodePath("../Player/Control")
