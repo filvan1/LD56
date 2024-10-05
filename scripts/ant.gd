@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @export var trajectory: Curve
 
-enum AntState { SWARMING, YEETING, HOMING }
+enum AntState { SWARMING, YEETING, HOMING, MURDERING}
 
 var state = AntState.SWARMING
 
@@ -16,6 +16,14 @@ var target: Vector2
 var t: float = 0.0
 
 var alive = true
+
+var current_enemy: Enemy
+var murder_target_position: Vector2
+var murder_target_position_offset: Vector2
+var murder_timer = 0.0
+var current_tick_number = 0
+const max_damage_ticks = 5
+const tick_time = 0.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,10 +41,7 @@ func _process(delta: float) -> void:
 			position.y -= trajectory.sample(t)
 			rotation += delta
 			
-	if state == AntState.HOMING or not alive:
-		$CollisionShape2D.disabled = true
-	else:
-		$CollisionShape2D.disabled = false
+		$CollisionShape2D.disabled = state == AntState.HOMING or state == AntState.MURDERING or not alive
 
 func _land():
 	state = AntState.HOMING
@@ -54,7 +59,26 @@ func _physics_process(delta: float) -> void:
 	if not alive:
 		sprite.play("idle")
 		return
-	
+
+	if state == AntState.MURDERING:
+		murder_timer += delta
+		global_position = current_enemy.global_position - murder_target_position_offset.rotated(current_enemy.rotation)
+		
+		if murder_timer > tick_time:
+			current_enemy._take_damage(10.0)
+			current_tick_number += 1
+			murder_timer = 0
+			print("murder")
+		
+		if current_tick_number >= max_damage_ticks:
+			
+			current_enemy = null
+			state = AntState.HOMING
+			murder_timer = 0
+			current_tick_number = 0
+
+
+
 	if state == AntState.SWARMING or state == AntState.HOMING:
 		var speed = new_velocity.length()
 		velocity = new_velocity
@@ -70,5 +94,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite.play("idle")
 			
+func stop_murder():
+	print("murder done")
+	current_enemy = null
+	state = AntState.HOMING
+
 func on_hit(enemy: Enemy):
-	pass
+	current_enemy = enemy
+	current_enemy.died.connect(stop_murder)
+	murder_target_position_offset = enemy.global_position - global_position
+	print(murder_target_position_offset)
+	state = AntState.MURDERING

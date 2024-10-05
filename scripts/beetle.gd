@@ -28,7 +28,7 @@ func _ready() -> void:
 	CurrentState = EnemyState.IDLE
 
 func _process(delta: float) -> void:
-	
+	super._process(delta)
 
 	match(CurrentState):
 		EnemyState.NONE: pass
@@ -41,7 +41,6 @@ func _process(delta: float) -> void:
 					
 					if(move_counter < 1.0):
 						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta * 2.0)
-						#rotate_towards_point(player.global_position, delta)
 					elif(move_counter > 1.5):
 						p0 = global_position
 						p1 = p0 + Vector2(20.0, 0.0).rotated(rotation)
@@ -65,7 +64,8 @@ func _process(delta: float) -> void:
 				AttackingStates.WINDUP:
 					attack_counter += delta
 					target_angle_diff = rotate_towards_point(player.global_position, delta * 2.0)
-					global_position = get_bezier_position(attack_start_pos, attack_start_pos - (player.global_position - global_position).normalized(), attack_start_pos - 5.0 * (player.global_position - global_position).normalized(), attack_counter / 2)
+					var target_dir = (player.global_position - global_position).normalized()
+					global_position = get_bezier_position(attack_start_pos, attack_start_pos - target_dir, attack_start_pos - 5.0 * target_dir, attack_counter / 2)
 					if(target_angle_diff < 0.01 && attack_counter > 2.0):
 						attack_counter = 0
 						attack_start_pos = global_position
@@ -117,10 +117,3 @@ func _process(delta: float) -> void:
 	
 func _lethal() -> bool:
 	return current_attack_state == AttackingStates.CHARGING
-
-func _on_collider_body_entered(body: Node2D) -> void:
-	if is_instance_of(body, Ant):
-		if body.state == Ant.AntState.YEETING:
-			body.on_hit(self)
-		elif _lethal():
-			body.die()
