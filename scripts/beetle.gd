@@ -28,6 +28,7 @@ func _ready() -> void:
 	CurrentState = EnemyState.IDLE
 
 func _process(delta: float) -> void:
+	
 
 	match(CurrentState):
 		EnemyState.NONE: pass
@@ -43,7 +44,6 @@ func _process(delta: float) -> void:
 						#rotate_towards_point(player.global_position, delta)
 					elif(move_counter > 1.5):
 						p0 = global_position
-						print("done turning")
 						p1 = p0 + Vector2(20.0, 0.0).rotated(rotation)
 						p2 = p0 + Vector2(20.0, move_dir * 20.0).rotated(rotation)
 						current_move_state = MoveStates.WALKING
@@ -55,11 +55,10 @@ func _process(delta: float) -> void:
 					if(move_counter < 1.0):
 						move_along_bezier(p0, p1, p2, move_counter)
 					elif(move_counter > 2.0):
-						
-						print("done walking")
 						current_move_state = MoveStates.NONE
 						CurrentState = EnemyState.IDLE
-						move_counter = 0.0				
+						move_counter = 0.0
+
 		# Attacking state
 		EnemyState.ATTACKING:
 			match(current_attack_state):
@@ -77,7 +76,11 @@ func _process(delta: float) -> void:
 					attack_counter += delta
 					global_position = get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 					
-					#move_along_bezier(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
+					# Check collision with ants
+					var bodies: Array[Node2D] = collider.get_overlapping_bodies()
+					for i in bodies:
+						i.get_parent()
+					
 					if(attack_counter > 1.0):
 						print(rotation)
 						attack_counter = 0

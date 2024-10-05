@@ -69,6 +69,7 @@ aim_right={
 
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Ants"
+2d_physics/layer_3="Enemies"
 
 [rendering]
 

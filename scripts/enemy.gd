@@ -7,7 +7,8 @@ var counter = 0.0
 var activity_time = 2.0
 var rand = RandomNumberGenerator.new()
 var aggro_range = 0.0
-@export var player: Node2D
+@onready var player: Node2D = $"../Player/Control"
+@onready var collider = $Collider
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
