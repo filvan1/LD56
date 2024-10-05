@@ -1,10 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://delg17ewn0h2t"]
+[gd_scene load_steps=5 format=3 uid="uid://delg17ewn0h2t"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_iigm6"]
+[ext_resource type="Script" path="res://scripts/swarm.gd" id="2_2uxy4"]
+[ext_resource type="PackedScene" uid="uid://bwvu5v5kgsed0" path="res://scenes/ant.tscn" id="2_rl1ch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b824v"]
-radius = 10.0499
+radius = 5.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="Node2D"]
+process_physics_priority = 20
+
+[node name="Control" type="CharacterBody2D" parent="."]
+collision_layer = 0
 motion_mode = 1
+script = ExtResource("1_iigm6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control"]
 shape = SubResource("CircleShape2D_b824v")
+
+[node name="Ants" type="Node2D" parent="."]
+process_physics_priority = 10
+script = ExtResource("2_2uxy4")
+avoidance = 20.0
+alignment = 10.0
+cohesion = 10.0
+avoidance_range = 5.0
+visual_range = 20.0
+
+[node name="Ant" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(-7, 3)
+
+[node name="Ant2" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(-2, 9)
+
+[node name="Ant3" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(-10, -1)
+
+[node name="Ant4" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(-6, -6)
+
+[node name="Ant5" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(2, -5)
+
+[node name="Ant6" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(5, 5)
+
+[node name="Ant7" parent="Ants" instance=ExtResource("2_rl1ch")]
+position = Vector2(7, 0)

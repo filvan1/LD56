@@ -3,10 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://bvxsi18sqpytx" path="res://textures/room.png" id="1_qho22"]
 
 [node name="Room" type="Sprite2D"]
-position = Vector2(128, 128)
+position = Vector2(128, 126)
 texture = ExtResource("1_qho22")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-102, -21, -99, -27, -105, -45, -97, -51, -96, -55, -105, -58, -103, -79, -101, -108, -74, -102, -49, -101, -34, -102, -24, -104, -21, -108, -18, -128, -128, -128, -128, -17, -105, -18, -104, -16)
+polygon = PackedVector2Array(-100, -23, -99, -27, -105, -45, -97, -51, -96, -55, -105, -58, -103, -79, -101, -108, -74, -102, -49, -101, -34, -102, -24, -104, -21, -108, -18, -128, -128, -128, -128, -17, -116, -18, -104, -19)

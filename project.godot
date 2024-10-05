@@ -45,6 +45,11 @@ move_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Environment"
+2d_physics/layer_2="Ants"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

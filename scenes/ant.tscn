@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwvu5v5kgsed0"]
+[gd_scene load_steps=8 format=3 uid="uid://bwvu5v5kgsed0"]
 
 [ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
+[ext_resource type="Script" path="res://scripts/ant.gd" id="1_j8bc2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nsgyo"]
 atlas = ExtResource("1_apb61")
@@ -40,13 +41,16 @@ animations = [{
 radius = 2.0
 
 [node name="Ant" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
 motion_mode = 1
+script = ExtResource("1_j8bc2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_atsc6")
-animation = &"walk"
-frame_progress = 0.537131
+animation = &"idle"
+frame_progress = 0.422741
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_byf4t")
