@@ -10,6 +10,9 @@ var max_speed: float = 35.0
 @onready var swarm: Swarm = $Ants
 
 var cooldown_remaining: float = 0
+var current_room_coords = Vector2i.ZERO
+
+signal enter_room(coords: Vector2i)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,6 +29,9 @@ func get_health():
 	
 func get_ammo():
 	return swarm.get_swarming_ants().size()
+	
+func get_room_coords():
+	return Vector2i(($Control.global_position / Vector2(256, 256)).floor())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,6 +50,11 @@ func _process(delta: float) -> void:
 			_fire(aim)
 	else:
 		aim_indicator.visible = false
+		
+	var room_coords = get_room_coords()
+	if room_coords != self.current_room_coords:
+		self.current_room_coords = room_coords
+		enter_room.emit(room_coords)
 		
 		
 func _fire(aim: Vector2):
