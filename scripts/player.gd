@@ -32,6 +32,9 @@ func get_ammo():
 	
 func get_room_coords():
 	return Vector2i(($Control.global_position / Vector2(256, 256)).floor())
+	
+func get_control_position():
+	return $Control.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

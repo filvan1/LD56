@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=11 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
+[ext_resource type="PackedScene" uid="uid://brx8osdc0d37a" path="res://scenes/dungie.tscn" id="9_t7o5o"]
 
 [sub_resource type="Curve" id="Curve_cmcic"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.327338, 0.0984148), 0.550859, 0.550859, 0, 0, Vector2(0.507194, 0.497688), 2.88435, 2.88435, 0, 0, Vector2(1, 1), -1.8159e-07, 0.0, 0, 0]
@@ -23,8 +24,9 @@ position = Vector2(384, 128)
 [node name="Player" parent="." instance=ExtResource("4_cieux")]
 position = Vector2(123, 200)
 
-[node name="Enemy" parent="." instance=ExtResource("6_woxhm")]
-position = Vector2(130, 131)
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_woxhm")]
+position = Vector2(389, 127)
+player = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_gf0ek")
@@ -44,5 +46,10 @@ player = NodePath("../../Player")
 
 [node name="Camera" type="Camera2D" parent="Camera"]
 
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_t7o5o")]
+position = Vector2(128, 58)
+player = NodePath("../Player")
+
 [connection signal="enter_room" from="Player" to="Camera" method="_on_player_enter_room"]
 [connection signal="on_charge" from="Enemy" to="Camera" method="shake"]
+[connection signal="on_crash" from="Enemy2" to="Camera" method="shake"]

@@ -95,13 +95,13 @@ func _process(delta: float) -> void:
 			match(current_attack_state):
 				AttackingStates.WINDUP:
 					attack_counter += delta
-					target_angle_diff = rotate_towards_point(player.global_position, delta * 2.0)
-					var target_dir = (player.global_position - global_position).normalized()
+					target_angle_diff = rotate_towards_point(player.get_control_position(), delta * 2.0)
+					var target_dir = (player.get_control_position() - global_position).normalized()
 					global_position = get_bezier_position(attack_start_pos, attack_start_pos - target_dir, attack_start_pos - 5.0 * target_dir, attack_counter / 2)
 					if(target_angle_diff < 0.01 && attack_counter > 2.0):
 						attack_counter = 0
 						attack_start_pos = global_position
-						attack_target_pos = global_position + (player.global_position - global_position).normalized() * 50.0
+						attack_target_pos = global_position + (player.get_control_position() - global_position).normalized() * 50.0
 						current_attack_state = AttackingStates.CHARGING
 						on_charge.emit()
 						
@@ -125,7 +125,7 @@ func _process(delta: float) -> void:
 		if(t > idle_limit):
 			match(CurrentState):
 				EnemyState.MOVING:
-					if((player.global_position - global_position).length() < aggro_range):
+					if((player.get_control_position() - global_position).length() < aggro_range):
 						NextState = EnemyState.ATTACKING
 						print("attacking")
 					else:
@@ -134,7 +134,7 @@ func _process(delta: float) -> void:
 					
 	
 				EnemyState.IDLE:
-					if((player.global_position - global_position).length() < aggro_range):
+					if((player.get_control_position() - global_position).length() < aggro_range):
 						NextState = EnemyState.ATTACKING
 						current_attack_state = AttackingStates.WINDUP
 						attack_start_pos = global_position
