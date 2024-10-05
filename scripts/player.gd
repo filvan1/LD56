@@ -7,8 +7,7 @@ var max_speed: float = 35.0
 @export var shoot_range = 20.0
 
 @onready var aim_indicator = $AimIndicator
-@onready var swarm = $Ants
-@onready var projectiles = $Projectiles
+@onready var swarm: Swarm = $Ants
 
 var cooldown_remaining: float = 0
 
@@ -48,7 +47,7 @@ func _process(delta: float) -> void:
 		
 		
 func _fire(aim: Vector2):
-	var candidates = swarm.get_children().filter(func(a): return a.state == Ant.AntState.SWARMING)
+	var candidates = swarm.get_swarming_ants()
 	if candidates.size() == 0:
 		return
 		

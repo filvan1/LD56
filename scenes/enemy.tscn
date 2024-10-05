@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3311vnw7q2wq"]
+[gd_scene load_steps=4 format=3 uid="uid://dqaw5juj53epg"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_wvsy4"]
 [ext_resource type="Texture2D" uid="uid://d275msx1aywjp" path="res://textures/Bru.png" id="1_yl0i8"]
@@ -21,3 +21,5 @@ shape = SubResource("RectangleShape2D_d2i0p")
 rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_yl0i8")
+
+[connection signal="body_entered" from="Collider" to="." method="_on_collider_body_entered"]

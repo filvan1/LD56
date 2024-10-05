@@ -76,11 +76,6 @@ func _process(delta: float) -> void:
 					attack_counter += delta
 					global_position = get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 					
-					# Check collision with ants
-					var bodies: Array[Node2D] = collider.get_overlapping_bodies()
-					for i in bodies:
-						i.get_parent()
-					
 					if(attack_counter > 1.0):
 						print(rotation)
 						attack_counter = 0
@@ -120,4 +115,12 @@ func _process(delta: float) -> void:
 			
 		CurrentState = NextState
 	
-	
+func _lethal() -> bool:
+	return current_attack_state == AttackingStates.CHARGING
+
+func _on_collider_body_entered(body: Node2D) -> void:
+	if is_instance_of(body, Ant):
+		if body.state == Ant.AntState.YEETING:
+			body.on_hit(self)
+		elif _lethal():
+			body.die()

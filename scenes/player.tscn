@@ -115,8 +115,6 @@ position = Vector2(14, 3)
 [node name="Ant28" parent="Ants" instance=ExtResource("2_rl1ch")]
 position = Vector2(16, -2)
 
-[node name="Projectiles" type="Node2D" parent="."]
-
 [node name="AimIndicator" type="Node2D" parent="."]
 
 [node name="Crosshair" type="Sprite2D" parent="AimIndicator"]

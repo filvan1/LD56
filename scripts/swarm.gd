@@ -1,4 +1,5 @@
 @tool
+class_name Swarm
 extends Node2D
 
 @export var avoidance: float = 1.0

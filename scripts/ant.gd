@@ -32,6 +32,11 @@ func _process(delta: float) -> void:
 			position = origin + (target - origin) * t
 			position.y -= trajectory.sample(t)
 			rotation += delta
+			
+	if state == AntState.HOMING or not alive:
+		$CollisionShape2D.disabled = true
+	else:
+		$CollisionShape2D.disabled = false
 
 func _land():
 	state = AntState.HOMING
@@ -65,3 +70,5 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite.play("idle")
 			
+func on_hit(enemy: Enemy):
+	pass
