@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://drfdj5sutodh0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ljltc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(471, 293)
+shape = SubResource("CircleShape2D_ljltc")
