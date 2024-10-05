@@ -24,11 +24,11 @@ shape = SubResource("CircleShape2D_b824v")
 process_physics_priority = 10
 script = ExtResource("2_2uxy4")
 avoidance = 100.0
-alignment = -2.0
-cohesion = 20.0
+alignment = -5.0
+cohesion = 50.0
 tracking = 4.0
 random = 2.0
-avoidance_range = 3.0
+avoidance_range = 5.0
 visual_range = 10.0
 
 [node name="Ant" parent="Ants" instance=ExtResource("2_rl1ch")]
