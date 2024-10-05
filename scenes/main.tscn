@@ -1,11 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=6 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
-[ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_ul626"]
+[ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
+[ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="5_gf0ek"]
+[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/enemy.tscn" id="6_woxhm"]
+[ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Room" parent="." instance=ExtResource("1_sxbc5")]
+position = Vector2(128, 128)
 
-[node name="Player" parent="." instance=ExtResource("4_ul626")]
-position = Vector2(86, 71)
+[node name="Player" parent="." instance=ExtResource("4_cieux")]
+position = Vector2(123, 200)
+
+[node name="Enemy" parent="." instance=ExtResource("6_woxhm")]
+position = Vector2(130, 131)
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
+position = Vector2(128, 233)
+player = NodePath("../Player")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gf0ek")
+autoplay = true
+parameters/looping = false
