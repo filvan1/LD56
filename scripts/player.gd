@@ -9,6 +9,8 @@ var max_speed: float = 35.0
 @onready var swarm = $Ants
 @onready var projectiles = $Projectiles
 
+const AntProjectile = preload("res://scenes/ant_projectile.tscn")
+
 var cooldown_remaining: float = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -32,11 +34,12 @@ func _process(delta: float) -> void:
 		aim_indicator.visible = true
 		
 		if cooldown_remaining < 0:
-			_fire()
+			_fire(aim)
 	else:
 		aim_indicator.visible = false
 		
-func _fire():
+		
+func _fire(aim: Vector2):
 	var ant_count = swarm.get_child_count()
 	if ant_count == 0:
 		return
@@ -47,11 +50,14 @@ func _fire():
 	var index = randi() % ant_count
 	var ant = swarm.get_child(index)
 	swarm.remove_child(ant)
+		
+	var projectile = AntProjectile.instantiate()
+	projectile.position = ant.position
+	projectile.rotation = ant.rotation
+	projectile.origin = ant.position
+	projectile.target = aim
 	
-	var position = ant.position
-	var rotation = ant.rotation
-	
-	
+	projectiles.add_child(projectile)
 	
 func _physics_process(delta: float) -> void:
 	pass
