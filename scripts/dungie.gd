@@ -82,6 +82,7 @@ func _lethal() -> bool:
 
 func _on_died() -> void:
 	sprite.play("die")
+	$Shadow.stop()
 	$GPUParticles2D.emitting = false
 	$GPUParticles2D2.emitting = false
 	$AudioPlayer.stop()

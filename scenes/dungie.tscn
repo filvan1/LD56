@@ -1,9 +1,32 @@
-[gd_scene load_steps=30 format=3 uid="uid://brx8osdc0d37a"]
+[gd_scene load_steps=34 format=3 uid="uid://brx8osdc0d37a"]
 
 [ext_resource type="Script" path="res://scripts/dungie.gd" id="1_xukpb"]
 [ext_resource type="Texture2D" uid="uid://iwrvm7lbg8my" path="res://textures/dungie.png" id="2_mqgnn"]
 [ext_resource type="AudioStream" uid="uid://1xe174f5ch7q" path="res://sounds/myrljud.wav" id="3_asjpo"]
 [ext_resource type="Texture2D" uid="uid://3u8175t20kgn" path="res://textures/concussion.png" id="4_fksvg"]
+[ext_resource type="Texture2D" uid="uid://bl78gbp5ahg07" path="res://textures/shadow-large.png" id="5_llvdw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8slf"]
+atlas = ExtResource("5_llvdw")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8gov"]
+atlas = ExtResource("5_llvdw")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_or6g4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8slf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8gov")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8clo"]
 particle_flag_disable_z = true
@@ -191,6 +214,13 @@ motion_mode = 1
 script = ExtResource("1_xukpb")
 CurrentState = 1
 NextState = 1
+
+[node name="Shadow" type="AnimatedSprite2D" parent="."]
+position = Vector2(-15, 9.53674e-07)
+rotation = 1.5708
+scale = Vector2(0.610539, 0.61192)
+sprite_frames = SubResource("SpriteFrames_or6g4")
+autoplay = "default"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(0, 13)
