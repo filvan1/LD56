@@ -69,6 +69,8 @@ func _ready() -> void:
 		for child in get_children():
 			if is_instance_of(child, Gate):
 				child.visible = false
+				if cleared:
+					child.unlock_immediately()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://58sq2takmgfe"]
 
-[ext_resource type="PackedScene" uid="uid://ccn4oo6pi7bfu" path="res://scenes/encounters/dungie_encounter.tscn" id="2_cmeh7"]
+[ext_resource type="PackedScene" uid="uid://bqq1xi7o7dbi0" path="res://scenes/encounters/beetle_encounter.tscn" id="2_naseg"]
 [ext_resource type="Script" path="res://scripts/room.gd" id="2_pxbe5"]
 [ext_resource type="Texture2D" uid="uid://bvxsi18sqpytx" path="res://textures/room.png" id="2_vvleq"]
 [ext_resource type="PackedScene" uid="uid://hmn6rk1dl7u4" path="res://scenes/gate.tscn" id="3_qrx53"]
@@ -8,7 +8,7 @@
 [node name="Room" type="Node2D"]
 process_mode = 4
 script = ExtResource("2_pxbe5")
-encounter_scene = ExtResource("2_cmeh7")
+encounter_scene = ExtResource("2_naseg")
 
 [node name="Room" type="Sprite2D" parent="."]
 visible = false

@@ -70,6 +70,7 @@ func generate():
 				if room.contains("A"):
 					start_room = room_coords
 					room_node.open()
+					room_node.cleared = true
 					room_node.encounter_scene = preload("res://scenes/encounters/start_encounter.tscn")
 					
 				$Rooms.add_child(room_node)
