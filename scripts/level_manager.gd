@@ -1,15 +1,20 @@
+@tool
+class_name LevelManager
 extends Node2D
 
-var room_data = []
 var level_grid_size = 5
 var start_position: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not Engine.is_editor_hint():
+		generate()
 	
+func generate():
 	var room_factory = get_node("RoomFactory")
 	
 	var layout_generator = get_node("LayoutGenerator")
-	var level_grid = layout_generator.get_layout()
+	var level_grid = layout_generator.generate_level()
 	var index = 0
 	var tiles
 	

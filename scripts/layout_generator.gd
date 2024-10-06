@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 const GRID_SIZE = 5  # 5x5 grid
@@ -7,9 +8,6 @@ var grid = []
 
 var entrance = Vector2()
 var exit = Vector2()
-
-func _ready():
-	generate_level()
 
 func generate_level():
 	# Initialize an empty grid
@@ -79,6 +77,7 @@ func generate_level():
 	grid = replace_null_values(grid)
 	
 	print_grid()
+	return grid
 
 # Randomly place the first room (entrance) along the edge of the grid
 func place_entrance():
@@ -166,6 +165,3 @@ func replace_null_values(array2d):
 			if array2d[i][j] == null:
 				array2d[i][j] = ""
 	return array2d
-
-func get_layout():
-	return grid

@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 var room_size = 8  # 8x8 tiles per room
