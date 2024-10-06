@@ -63,11 +63,14 @@ func _physics_process(delta: float) -> void:
 			current_enemy._take_damage(10.0)
 			current_tick_number += 1
 			murder_timer = 0
-			print("murder")
+			$ParticleEmitter.restart()
+			$AudioPlayer.play()
+			
 		
 		if current_tick_number >= max_damage_ticks:
 			
 			current_enemy = null
+			$ParticleEmitter.emitting = false
 			state = AntState.HOMING
 			murder_timer = 0
 			current_tick_number = 0
@@ -114,5 +117,10 @@ func on_hit(enemy: Enemy):
 	current_enemy = enemy
 	current_enemy.died.connect(stop_murder)
 	murder_target_position_offset = enemy.global_position - global_position
-	print(murder_target_position_offset)
+	
+	$AudioPlayer.volume_db = 8
+	$AudioPlayer.pitch_scale = 0.5
+	$AudioPlayer.play()
+	$AudioPlayer.volume_db = 8
+	$AudioPlayer.pitch_scale = 8.0
 	state = AntState.MURDERING
