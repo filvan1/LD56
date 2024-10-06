@@ -22,10 +22,12 @@ func _physics_process(delta: float) -> void:
 	
 	if move_and_slide():
 		velocity = Vector2.ZERO
+		position += (get_room_center() - global_position).normalized() * 10
 		on_crash.emit()
 
-	if velocity.length() > 1.0:
-		rotation = atan2(velocity.y, velocity.x)
+	var v = get_real_velocity()
+	if v.length() > 1.0:
+		rotation = atan2(v.y, v.x)
 		sprite.play("roll")
 		sprite.speed_scale = velocity.length() / 50.0 * 2
 	else:

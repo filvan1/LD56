@@ -9,7 +9,7 @@
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
 [ext_resource type="PackedScene" uid="uid://brx8osdc0d37a" path="res://scenes/dungie.tscn" id="9_t7o5o"]
-[ext_resource type="PackedScene" uid="uid://dp3vfby37ujd1" path="res://scenes/pause_menu.tscn" id="10_gphms"]
+[ext_resource type="PackedScene" path="res://scenes/pause_menu.tscn" id="10_gphms"]
 
 [sub_resource type="Curve" id="Curve_cmcic"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.327338, 0.0984148), 0.550859, 0.550859, 0, 0, Vector2(0.507194, 0.497688), 2.88435, 2.88435, 0, 0, Vector2(1, 1), -1.8159e-07, 0.0, 0, 0]
