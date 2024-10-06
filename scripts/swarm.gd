@@ -1,4 +1,3 @@
-@tool
 class_name Swarm
 extends Node2D
 
@@ -15,10 +14,11 @@ extends Node2D
 
 var tracking_target: Vector2 = Vector2.ZERO
 var center_of_mass: Vector2 = Vector2.ZERO
+var ant_scene = preload("res://scenes/ant.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 func _draw():
 	if show_ranges:
@@ -37,6 +37,11 @@ func get_alive_ants():
 
 func get_ant_count():
 	return get_child_count()
+
+func spawn_ant(spawn_position: Vector2):
+	var instance: Ant = ant_scene.instantiate()
+	add_child(instance)
+	instance.global_position = spawn_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
