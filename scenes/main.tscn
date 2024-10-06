@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://drfdj5sutodh0"]
 
-[ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
+[ext_resource type="PackedScene" uid="uid://bc34mteplgg13" path="res://scenes/map_generator.tscn" id="1_r0uww"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="5_gf0ek"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="6_a6m6d"]
@@ -18,10 +18,7 @@ point_count = 4
 
 [node name="World" type="Node2D"]
 
-[node name="Room" parent="." instance=ExtResource("1_sxbc5")]
-
-[node name="Room2" parent="." instance=ExtResource("1_sxbc5")]
-position = Vector2(384, 128)
+[node name="MapGenerator" parent="." instance=ExtResource("1_r0uww")]
 
 [node name="Player" parent="." instance=ExtResource("4_cieux")]
 process_mode = 1
