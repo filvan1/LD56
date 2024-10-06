@@ -91,12 +91,13 @@ height = 26.0
 radius = 13.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dmbx"]
-radius = 7.0
-height = 28.0
+radius = 6.0
+height = 24.0
 
 [node name="EnemyBody" type="CharacterBody2D"]
 position = Vector2(17, 0)
 collision_layer = 4
+motion_mode = 1
 script = ExtResource("1_xukpb")
 CurrentState = 1
 NextState = 1
