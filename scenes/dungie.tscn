@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://brx8osdc0d37a"]
+[gd_scene load_steps=35 format=3 uid="uid://brx8osdc0d37a"]
 
 [ext_resource type="Script" path="res://scripts/dungie.gd" id="1_xukpb"]
 [ext_resource type="Texture2D" uid="uid://iwrvm7lbg8my" path="res://textures/dungie.png" id="2_mqgnn"]
 [ext_resource type="AudioStream" uid="uid://1xe174f5ch7q" path="res://sounds/myrljud.wav" id="3_asjpo"]
 [ext_resource type="Texture2D" uid="uid://3u8175t20kgn" path="res://textures/concussion.png" id="4_fksvg"]
 [ext_resource type="Texture2D" uid="uid://bl78gbp5ahg07" path="res://textures/shadow-large.png" id="5_llvdw"]
+[ext_resource type="AudioStream" uid="uid://cdomlhgqf8me6" path="res://sounds/bonk.wav" id="5_n7yhs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8slf"]
 atlas = ExtResource("5_llvdw")
@@ -262,8 +263,11 @@ position = Vector2(-28, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_2dmbx")
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+[node name="RunAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_asjpo")
+
+[node name="BonkAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_n7yhs")
 
 [node name="Concussion" type="AnimatedSprite2D" parent="."]
 position = Vector2(-29, -19)

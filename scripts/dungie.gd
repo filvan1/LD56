@@ -39,6 +39,7 @@ func _physics_process(delta: float) -> void:
 		if move_and_slide():
 			velocity = Vector2.ZERO
 			on_crash.emit()
+			$BonkAudioPlayer.play()
 			time_since_crash = 0
 			NextState = EnemyState.IDLE
 			sprite.play("idle")
@@ -50,7 +51,7 @@ func _physics_process(delta: float) -> void:
 				sprite.play("roll")
 				sprite.speed_scale = velocity.length() / 50.0 * 2
 				NextState = EnemyState.ATTACKING
-				$AudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
+				$RunAudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
 			else:
 				sprite.speed_scale = 1.0
 				sprite.play("idle")
@@ -60,10 +61,10 @@ func change_state():
 		CurrentState = NextState
 		match(CurrentState):
 			EnemyState.ATTACKING:
-				$AudioPlayer.play()
+				$RunAudioPlayer.play()
 			EnemyState.IDLE:
-				$AudioPlayer.stop()
-				$AudioPlayer.pitch_scale = 0.01
+				$RunAudioPlayer.stop()
+				$RunAudioPlayer.pitch_scale = 0.01
 
 func _process(delta: float) -> void:
 	$Concussion.rotation = -rotation
@@ -74,7 +75,7 @@ func _process(delta: float) -> void:
 	var concussed = alive and time_since_crash < crash_cooldown
 	$Concussion.visible = concussed
 	if concussed:
-		$AudioPlayer.stop()
+		$RunAudioPlayer.stop()
 		$GPUParticles2D.emitting = false
 		$GPUParticles2D2.emitting = false
 	elif alive:
@@ -90,7 +91,7 @@ func _on_died() -> void:
 	$Shadow.stop()
 	$GPUParticles2D.emitting = false
 	$GPUParticles2D2.emitting = false
-	$AudioPlayer.stop()
+	$RunAudioPlayer.stop()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if not alive:
