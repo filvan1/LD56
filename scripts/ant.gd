@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @export var trajectory: Curve
 
-enum AntState { SWARMING, YEETING, HOMING, MURDERING}
+enum AntState { SWARMING, YEETING, HOMING, STUNNED, MURDERING}
 
 var state = AntState.SWARMING
 
@@ -16,7 +16,6 @@ var target: Vector2
 var t: float = 0.0
 
 var alive = true
-var stunned = false
 
 var current_enemy: Enemy
 var murder_target_position: Vector2
@@ -26,6 +25,7 @@ var murder_timer = 0.0
 var current_tick_number = 0
 const max_damage_ticks = 5
 const tick_time = 0.5
+const fling_strength = 50.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -111,7 +111,20 @@ func _physics_process(delta: float) -> void:
 			rotation += delta
 			if move_and_slide():
 				_land()
+	
+	if state == AntState.STUNNED:
+		t += delta
+		
+		if t > 1.0:
+			_land()
+		else:
+			var dst = (origin + (target - origin) * t)
+			dst.y -= trajectory.sample(t)
 			
+			velocity = (dst - position) / delta
+			rotation += delta
+			move_and_slide()
+
 			
 func stop_murder():
 	print("murder done")
@@ -119,9 +132,11 @@ func stop_murder():
 	state = AntState.HOMING
 
 func fling_away():
-	#yeet(position + 10 * Vector2(randf(), randf()))
 	current_enemy = null
-	state = AntState.HOMING
+	origin = position
+	target = position + fling_strength * Vector2(randf(), randf())
+	t = 0
+	state = AntState.STUNNED
 
 func on_hit(enemy: Enemy):
 	current_enemy = enemy
