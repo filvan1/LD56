@@ -1,6 +1,7 @@
 class_name Enemy extends CharacterBody2D
 
 signal died
+signal disengage
 
 enum EnemyState {NONE, IDLE, MOVING, ATTACKING}
 @export var CurrentState = EnemyState.NONE

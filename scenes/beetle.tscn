@@ -109,6 +109,7 @@ shape = SubResource("RectangleShape2D_d2i0p")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_4k0lk")
 animation = &"attack"
+frame_progress = 0.309806
 
 [node name="DashParticlesL" type="GPUParticles2D" parent="."]
 position = Vector2(0, -13)

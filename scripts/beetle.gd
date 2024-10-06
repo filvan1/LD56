@@ -1,6 +1,6 @@
 class_name Beetle extends "enemy.gd"
 
-enum AttackingStates {NONE, WINDUP, CHARGING}
+enum AttackingStates {NONE, WINDUP, CHARGING, BITING}
 enum MoveStates {NONE, TURNING, WALKING}
 
 @onready var sprite = $AnimatedSprite2D
@@ -41,32 +41,6 @@ func _physics_process(delta: float) -> void:
 		sprite.speed_scale = 0
 		return
 	
-	match(EnemyState):
-		EnemyState.NONE: pass
-		EnemyState.MOVING:
-			match(current_move_state):
-				MoveStates.TURNING:
-					move_counter += delta
-					
-					
-					if(move_counter < 1.0):
-						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta * 2.0)
-					elif(move_counter > 1.5):
-						p0 = global_position
-						p1 = p0 + Vector2(20.0, 0.0).rotated(rotation)
-						p2 = p0 + Vector2(20.0, move_dir * 20.0).rotated(rotation)
-						current_move_state = MoveStates.WALKING
-						move_counter = 0.0
-				MoveStates.WALKING:
-					
-					move_counter += delta
-					
-					if(move_counter < 1.0):
-						move_along_bezier(p0, p1, p2, move_counter)
-					elif(move_counter > 2.0):
-						current_move_state = MoveStates.NONE
-						CurrentState = EnemyState.IDLE
-						move_counter = 0.0
 
 
 func _process(delta: float) -> void:
@@ -119,10 +93,9 @@ func _process(delta: float) -> void:
 						attack_start_pos = global_position
 						attack_target_pos = global_position + (player.get_control_position() - global_position).normalized() * 50.0
 						current_attack_state = AttackingStates.CHARGING
-						
+						disengage.emit()
 						dash_particles_l.emitting = true
 						dash_particles_r.emitting = true
-						on_charge.emit()
 						
 				
 				AttackingStates.CHARGING:
@@ -134,6 +107,16 @@ func _process(delta: float) -> void:
 					#get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 
 					if(attack_counter > 0.5):
+						attack_counter = 0
+						current_attack_state = AttackingStates.BITING
+						sprite.play("attack")
+					
+				AttackingStates.BITING:
+					sprite.speed_scale = 2
+					attack_counter += delta
+					#get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
+					if(attack_counter > 1.0):
+						sprite.play("idle")
 						attack_counter = 0
 						current_attack_state = AttackingStates.NONE
 						CurrentState = EnemyState.IDLE
@@ -173,4 +156,4 @@ func _process(delta: float) -> void:
 		CurrentState = NextState
 	
 func _lethal() -> bool:
-	return current_attack_state == AttackingStates.CHARGING
+	return current_attack_state == AttackingStates.BITING

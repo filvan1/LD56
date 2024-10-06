@@ -16,6 +16,7 @@ var target: Vector2
 var t: float = 0.0
 
 var alive = true
+var stunned = false
 
 var current_enemy: Enemy
 var murder_target_position: Vector2
@@ -117,9 +118,15 @@ func stop_murder():
 	current_enemy = null
 	state = AntState.HOMING
 
+func fling_away():
+	#yeet(position + 10 * Vector2(randf(), randf()))
+	current_enemy = null
+	state = AntState.HOMING
+
 func on_hit(enemy: Enemy):
 	current_enemy = enemy
 	current_enemy.died.connect(stop_murder)
+	current_enemy.disengage.connect(fling_away)
 	
 	$AudioPlayer.volume_db = 8
 	$AudioPlayer.pitch_scale = 0.5
