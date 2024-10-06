@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://delg17ewn0h2t"]
+[gd_scene load_steps=5 format=3 uid="uid://delg17ewn0h2t"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_iigm6"]
 [ext_resource type="Script" path="res://scripts/swarm.gd" id="2_2uxy4"]
 [ext_resource type="Texture2D" uid="uid://dbfiksexirp3g" path="res://textures/crosshair.png" id="2_7w71w"]
-[ext_resource type="PackedScene" uid="uid://bwvu5v5kgsed0" path="res://scenes/ant.tscn" id="2_rl1ch"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b824v"]
 radius = 5.0
@@ -32,67 +31,8 @@ random = 2.0
 avoidance_range = 5.0
 visual_range = 10.0
 
-[node name="Ant" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-7, 3)
-
-[node name="Ant2" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-2, 9)
-
-[node name="Ant3" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-10, -1)
-
-[node name="Ant4" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-6, -6)
-
-[node name="Ant5" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(2, -5)
-
-[node name="Ant6" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(5, 5)
-
-[node name="Ant7" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(7, 0)
-
-[node name="Ant8" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(0, 3)
-
-[node name="Ant9" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(5, 9)
-
-[node name="Ant10" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-3, -1)
-
-[node name="Ant11" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(1, -6)
-
-[node name="Ant12" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(9, -5)
-
-[node name="Ant13" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(12, 5)
-
-[node name="Ant14" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(2, -2)
-
-[node name="Ant15" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-5, 1)
-
-[node name="Ant16" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(0, 7)
-
-[node name="Ant17" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-8, -3)
-
-[node name="Ant18" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-4, -8)
-
-[node name="Ant19" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(4, -7)
-
-[node name="Ant20" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(7, 3)
-
 [node name="AimIndicator" type="Node2D" parent="."]
+z_index = 99
 
 [node name="Crosshair" type="Sprite2D" parent="AimIndicator"]
 texture = ExtResource("2_7w71w")

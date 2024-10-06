@@ -17,16 +17,19 @@ var time_since_aim: float = aim_grace_period + 1
 var current_room_coords = Vector2i.ZERO
 var is_aiming = false
 
+const initial_ants = 20
+
 signal enter_room(coords: Vector2i)
 signal die
 signal pause_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_spawn_ants(initial_ants, global_position)# Replace with function body.
 
-func _spawn_ants(n: int):
-	pass
+func _spawn_ants(n: int, spawn_position: Vector2):
+	for i in n:
+		swarm.spawn_ant(spawn_position)
 	
 func get_max_health():
 	return swarm.get_ant_count()
