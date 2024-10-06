@@ -44,5 +44,4 @@ func _on_level_manager_encounter_start(encounter: Encounter) -> void:
 
 
 func _on_level_manager_encounter_finish(encounter: Encounter) -> void:
-	# If encounter is boss, win!
 	current_encounter = null

@@ -7,4 +7,3 @@
 script = ExtResource("1_d8mpa")
 
 [node name="Beetle" parent="." instance=ExtResource("1_esbc2")]
-position = Vector2(0, -55)

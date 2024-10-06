@@ -128,5 +128,5 @@ process_material = SubResource("ParticleProcessMaterial_1alp1")
 lifetime = 0.3
 one_shot = true
 
-[connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]

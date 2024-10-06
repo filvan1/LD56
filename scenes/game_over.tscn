@@ -29,13 +29,13 @@ texture = SubResource("CurveTexture_b4dlk")
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer"]
+[node name="container" type="VBoxContainer" parent="MenuLayer"]
 offset_left = 64.0
 offset_top = 64.0
 offset_right = 192.0
 offset_bottom = 206.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuLayer/VBoxContainer"]
+[node name="title" type="RichTextLabel" parent="MenuLayer/container"]
 clip_contents = false
 custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
@@ -43,18 +43,18 @@ bbcode_enabled = true
 text = "[center]GAME OVER"
 scroll_active = false
 
-[node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
+[node name="buttons" type="VBoxContainer" parent="MenuLayer/container"]
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+[node name="ContinueButton" type="Button" parent="MenuLayer/container/buttons"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "RETRY"
 
-[node name="QuitButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+[node name="QuitButton" type="Button" parent="MenuLayer/container/buttons"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "QUIT"
 
-[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuLayer/container/buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MenuLayer/container/buttons/QuitButton" to="." method="_on_quit_button_pressed"]

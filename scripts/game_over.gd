@@ -15,7 +15,19 @@ func _on_continue_button_pressed() -> void:
 	load_level("res://scenes/main.tscn")
 
 func _on_player_die() -> void:
+	$MenuLayer/container/title.text = "[center]GAME OVER"
+	$MenuLayer/container/buttons/ContinueButton.text = "RETRY"
 	get_tree().paused = true
 	show()
 	$MenuLayer.show()
 	$Background.show()
+
+func _on_level_manager_encounter_finish(encounter:Encounter) -> void:
+	if encounter.is_boss:
+		$MenuLayer/container/title.text = "[center]YOU WIN"
+		$MenuLayer/container/buttons/ContinueButton.text = "PLAY AGAIN"
+		show()
+		$MenuLayer.show()
+		$Background.show()
+			
+	
