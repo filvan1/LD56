@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqaw5juj53epg"]
+[gd_scene load_steps=15 format=3 uid="uid://dqaw5juj53epg"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_wvsy4"]
 [ext_resource type="Texture2D" uid="uid://0je5ijstclbd" path="res://textures/StagBeetle.png" id="2_a3l8o"]
@@ -17,6 +17,10 @@ region = Rect2(32, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ka5rd"]
 atlas = ExtResource("2_a3l8o")
 region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a6fj"]
+atlas = ExtResource("2_a3l8o")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rl8db"]
 atlas = ExtResource("2_a3l8o")
@@ -52,6 +56,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0a6fj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rl8db")
 }, {
 "duration": 1.0,
@@ -65,8 +77,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 8.0
 }]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1alp1"]
+particle_flag_disable_z = true
+angle_min = -443.4
+angle_max = -443.4
+direction = Vector3(-1, 0, 0)
+spread = 24.677
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+color = Color(0.573208, 0.607374, 0.631218, 1)
 
 [node name="Beetle" type="CharacterBody2D"]
 collision_layer = 4
@@ -83,11 +105,26 @@ collision_mask = 3
 [node name="ColliderShape" type="CollisionShape2D" parent="Area"]
 shape = SubResource("RectangleShape2D_d2i0p")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_4k0lk")
 animation = &"attack"
-frame_progress = 0.591669
+
+[node name="DashParticlesL" type="GPUParticles2D" parent="."]
+position = Vector2(0, -13)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_1alp1")
+lifetime = 0.3
+one_shot = true
+
+[node name="DashParticlesR" type="GPUParticles2D" parent="."]
+position = Vector2(0, 13)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_1alp1")
+lifetime = 0.3
+one_shot = true
 
 [connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]
