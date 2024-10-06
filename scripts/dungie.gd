@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		change_state()
 		if (player.get_control_position() - global_position).length() < 128:
 			velocity += (player.get_control_position() - global_position) * delta * 0.15
-			velocity += velocity.normalized() * 10 * delta
+			velocity += velocity.normalized() * 5 * delta
 			velocity = velocity.limit_length(charge_speed)
 		else:
 			velocity += (get_room_center() - global_position) * delta * 0.15
