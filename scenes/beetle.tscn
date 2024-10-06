@@ -94,6 +94,7 @@ color = Color(0.573208, 0.607374, 0.631218, 1)
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_wvsy4")
+max_health = 200.0
 
 [node name="ColliderShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d2i0p")

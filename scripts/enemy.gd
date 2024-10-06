@@ -15,7 +15,7 @@ var aggro_range = 0.0
 #@onready var collider = $Collider
 
 var alive = true
-var health = max_health
+@onready var health = max_health
 
 func get_max_health():
 	return max_health

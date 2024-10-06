@@ -2,9 +2,14 @@
 class_name Room
 extends Node2D
 
-const DUNGIE_ENCOUNTER = preload("res://scenes/encounters/dungie_encounter.tscn")
-const BEETLE_ENCOUNTER = preload("res://scenes/encounters/beetle_encounter.tscn")
-const NORMAL_ENCOUNTERS = [DUNGIE_ENCOUNTER, BEETLE_ENCOUNTER]
+const NORMAL_ENCOUNTERS = [
+	preload("res://scenes/encounters/beetle_encounter.tscn"),
+	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
+]
+	
+const BOSS_ENCOUNTERS = [
+	preload("res://scenes/encounters/dungie_encounter.tscn"),
+]
 
 var coords: Vector2i = Vector2i.ZERO
 var is_open: bool = false
@@ -43,6 +48,9 @@ func _on_complete():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	process_mode = PROCESS_MODE_DISABLED
 	
 	if encounter_scene == null:

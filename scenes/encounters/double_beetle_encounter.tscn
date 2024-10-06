@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8uep1w11y4um"]
+
+[ext_resource type="Script" path="res://scripts/encounter.gd" id="1_eumt6"]
+[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/beetle.tscn" id="2_lkrcb"]
+
+[node name="BeetleEncounter" type="Node2D"]
+script = ExtResource("1_eumt6")
+
+[node name="Beetle" parent="." instance=ExtResource("2_lkrcb")]
+position = Vector2(0, -55)
+
+[node name="Beetle2" parent="." instance=ExtResource("2_lkrcb")]
+position = Vector2(0, 53)

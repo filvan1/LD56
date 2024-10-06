@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 		$ammo.region_rect.size.x = debug_ammo / debug_max * width
 		$health.region_rect.size.x = debug_health / debug_max * width
 	else:
-		if current_encounter and current_encounter.is_boss:
+		if current_encounter and (current_encounter.is_boss or current_encounter.show_healthbar):
 			visible = true
 			var max = current_encounter.get_max_health()
 			var ammo = current_encounter.get_health()

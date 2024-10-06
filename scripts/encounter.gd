@@ -2,6 +2,7 @@ class_name Encounter
 extends Node
 
 @export var is_boss = false
+@export var show_healthbar = false
 
 signal complete
 

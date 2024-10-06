@@ -215,6 +215,7 @@ motion_mode = 1
 script = ExtResource("1_xukpb")
 CurrentState = 1
 NextState = 1
+max_health = 1000.0
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
 visible = false
