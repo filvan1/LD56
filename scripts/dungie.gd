@@ -14,33 +14,34 @@ func _ready() -> void:
 	NextState = EnemyState.IDLE
 
 func _physics_process(delta: float) -> void:
-	change_state()
-	if (player.get_control_position() - global_position).length() < 128:
-		velocity += (player.get_control_position() - global_position) * delta * 0.15
-		velocity += velocity.normalized() * 10 * delta
-		velocity = velocity.limit_length(charge_speed)
-	else:
-		velocity += (get_room_center() - global_position) * delta * 0.15
-		velocity = velocity.limit_length(patrol_speed)
-	
-	
-	if move_and_slide():
-		velocity = Vector2.ZERO
-		position += (get_room_center() - global_position).normalized() * 10
-		on_crash.emit()
-		NextState = EnemyState.IDLE
-	else:
-		var v = get_real_velocity()
-		if v.length() > 1.0:
-		
-			rotation = atan2(v.y, v.x)
-			sprite.play("roll")
-			sprite.speed_scale = velocity.length() / 50.0 * 2
-			NextState = EnemyState.ATTACKING
-			$AudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
+	if alive:
+		change_state()
+		if (player.get_control_position() - global_position).length() < 128:
+			velocity += (player.get_control_position() - global_position) * delta * 0.15
+			velocity += velocity.normalized() * 10 * delta
+			velocity = velocity.limit_length(charge_speed)
 		else:
-			sprite.speed_scale = 1.0
-			sprite.play("idle")
+			velocity += (get_room_center() - global_position) * delta * 0.15
+			velocity = velocity.limit_length(patrol_speed)
+		
+		
+		if move_and_slide():
+			velocity = Vector2.ZERO
+			position += (get_room_center() - global_position).normalized() * 10
+			on_crash.emit()
+			NextState = EnemyState.IDLE
+		else:
+			var v = get_real_velocity()
+			if v.length() > 1.0:
+			
+				rotation = atan2(v.y, v.x)
+				sprite.play("roll")
+				sprite.speed_scale = velocity.length() / 50.0 * 2
+				NextState = EnemyState.ATTACKING
+				$AudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
+			else:
+				sprite.speed_scale = 1.0
+				sprite.play("idle")
 
 func change_state():
 	if CurrentState != NextState:
@@ -59,3 +60,13 @@ func _process(delta: float) -> void:
 	
 func _lethal() -> bool:
 	return true
+
+func _on_died() -> void:
+	sprite.play("die")
+	$GPUParticles2D.emitting = false
+	$GPUParticles2D2.emitting = false
+	$AudioPlayer.stop()
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if not alive:
+		sprite.play("dead")

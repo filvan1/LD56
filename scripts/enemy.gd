@@ -30,9 +30,7 @@ func set_activity_time(tim: float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if not alive:
-		died.emit()
-		queue_free()
+	pass
 
 func get_bezier_position(start_pos: Vector2, control_pos: Vector2, end_pos: Vector2, t: float) -> Vector2:
 	return (1 - t) * ((1 - t) * start_pos + t * control_pos) + t * ((1 - t) * control_pos + t * end_pos)
@@ -58,11 +56,17 @@ func _lethal() -> bool:
 	return false
 
 func _on_collider_body_entered(body: Node2D) -> void:
+	if not alive:
+		return
+		
 	if is_instance_of(body, Ant):
 		if body.state == Ant.AntState.YEETING:
 			body.on_hit(self)
 
 func _on_weapon_body_entered(body: Node2D) -> void:
+	if not alive:
+		return
+		
 	if is_instance_of(body, Ant):
 		if body.state == Ant.AntState.YEETING:
 			pass
@@ -70,7 +74,9 @@ func _on_weapon_body_entered(body: Node2D) -> void:
 			body.die()
 
 func die():
-	alive = false
+	if alive:
+		alive = false
+		died.emit()
 
 func _take_damage(amount: float):
 	print("ow")

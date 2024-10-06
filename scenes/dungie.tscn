@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://brx8osdc0d37a"]
+[gd_scene load_steps=25 format=3 uid="uid://brx8osdc0d37a"]
 
 [ext_resource type="Script" path="res://scripts/dungie.gd" id="1_xukpb"]
 [ext_resource type="Texture2D" uid="uid://iwrvm7lbg8my" path="res://textures/dungie.png" id="2_mqgnn"]
@@ -14,6 +14,34 @@ gravity = Vector3(0, 0, 0)
 color = Color(0.561, 0.511855, 0.280211, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_08m5u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqml7"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(384, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfi2v"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojufb"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(256, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8msq"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(288, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f65nl"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(320, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g26sc"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(352, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bojw"]
+atlas = ExtResource("2_mqgnn")
+region = Rect2(384, 0, 32, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3o3b3"]
 atlas = ExtResource("2_mqgnn")
@@ -49,6 +77,37 @@ region = Rect2(192, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3431a"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqml7")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfi2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojufb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8msq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f65nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g26sc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bojw")
+}],
+"loop": false,
+"name": &"die",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3o3b3")
@@ -119,8 +178,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-17, 0)
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_3431a")
-animation = &"roll"
-frame_progress = 0.101845
+animation = &"die"
 
 [node name="BallCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -147,5 +205,7 @@ shape = SubResource("CapsuleShape2D_2dmbx")
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_asjpo")
 
+[connection signal="died" from="." to="." method="_on_died"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="WeaponArea" to="." method="_on_weapon_body_entered"]
 [connection signal="body_entered" from="BodyArea" to="." method="_on_collider_body_entered"]

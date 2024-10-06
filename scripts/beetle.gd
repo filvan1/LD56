@@ -31,6 +31,9 @@ func _ready() -> void:
 	NextState = EnemyState.IDLE
 
 func _physics_process(delta: float) -> void:
+	if not alive:
+		return
+	
 	match(EnemyState):
 		EnemyState.NONE: pass
 		EnemyState.MOVING:
@@ -60,6 +63,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	if not alive:
+		return
+		
 	super._process(delta)
 
 	match(CurrentState):
