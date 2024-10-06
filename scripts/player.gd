@@ -55,6 +55,7 @@ func _process(delta: float) -> void:
 			time_since_aim = 0
 		else:
 			time_since_aim += delta
+		is_aiming = true
 		
 		aim = $Ants.center_of_mass + aim * shoot_range
 		aim_indicator.position = aim
