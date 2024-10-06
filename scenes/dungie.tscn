@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://brx8osdc0d37a"]
+[gd_scene load_steps=17 format=3 uid="uid://brx8osdc0d37a"]
 
 [ext_resource type="Script" path="res://scripts/dungie.gd" id="1_xukpb"]
 [ext_resource type="Texture2D" uid="uid://iwrvm7lbg8my" path="res://textures/dungie.png" id="2_mqgnn"]
@@ -90,6 +90,10 @@ height = 26.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_djktc"]
 radius = 13.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dmbx"]
+radius = 7.0
+height = 28.0
+
 [node name="EnemyBody" type="CharacterBody2D"]
 position = Vector2(17, 0)
 collision_layer = 4
@@ -121,12 +125,22 @@ position = Vector2(-1, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dy0au")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="WeaponArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 2
 
-[node name="BallCollider" type="CollisionShape2D" parent="Area2D"]
+[node name="BallCollider" type="CollisionShape2D" parent="WeaponArea"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_djktc")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_collider_body_entered"]
+[node name="BodyArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+position = Vector2(-28, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2dmbx")
+
+[connection signal="body_entered" from="WeaponArea" to="." method="_on_weapon_body_entered"]
+[connection signal="body_entered" from="BodyArea" to="." method="_on_collider_body_entered"]

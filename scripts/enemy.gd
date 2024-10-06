@@ -61,6 +61,11 @@ func _on_collider_body_entered(body: Node2D) -> void:
 	if is_instance_of(body, Ant):
 		if body.state == Ant.AntState.YEETING:
 			body.on_hit(self)
+
+func _on_weapon_body_entered(body: Node2D) -> void:
+	if is_instance_of(body, Ant):
+		if body.state == Ant.AntState.YEETING:
+			pass
 		elif _lethal():
 			body.die()
 

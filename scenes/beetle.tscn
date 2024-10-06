@@ -25,3 +25,4 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_yl0i8")
 
 [connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]
