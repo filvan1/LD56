@@ -208,7 +208,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EnemyBody2" type="CharacterBody2D"]
+[node name="Dungie" type="CharacterBody2D"]
 position = Vector2(17, 0)
 collision_layer = 4
 motion_mode = 1

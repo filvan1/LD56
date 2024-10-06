@@ -5,7 +5,7 @@ signal died
 enum EnemyState {NONE, IDLE, MOVING, ATTACKING}
 @export var CurrentState = EnemyState.NONE
 @export var NextState = EnemyState.NONE
-@export var player: Node2D
+@export var player: Player
 var counter = 0.0
 var activity_time = 2.0
 var rand = RandomNumberGenerator.new()

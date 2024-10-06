@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2i0p"]
 
-[node name="EnemyBody" type="CharacterBody2D"]
+[node name="Beetle" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_wvsy4")
@@ -25,5 +25,5 @@ rotation = 1.5708
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_yl0i8")
 
-[connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]
+[connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]

@@ -1,14 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=11 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://bc34mteplgg13" path="res://scenes/map_generator.tscn" id="1_r0uww"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="5_gf0ek"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="6_a6m6d"]
-[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/beetle.tscn" id="6_woxhm"]
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
-[ext_resource type="PackedScene" uid="uid://brx8osdc0d37a" path="res://scenes/dungie.tscn" id="9_t7o5o"]
 [ext_resource type="PackedScene" uid="uid://dp3vfby37ujd1" path="res://scenes/pause_menu.tscn" id="10_gphms"]
 [ext_resource type="PackedScene" uid="uid://cixasxcxg48u7" path="res://scenes/game_over.tscn" id="11_4x2kj"]
 
@@ -24,11 +22,6 @@ player = NodePath("../Player")
 [node name="Player" parent="." instance=ExtResource("4_cieux")]
 process_mode = 1
 position = Vector2(123, 200)
-
-[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_woxhm")]
-process_mode = 1
-position = Vector2(389, 127)
-player = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -51,11 +44,6 @@ player = NodePath("../../Player")
 
 [node name="Camera" type="Camera2D" parent="Camera"]
 
-[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_t7o5o")]
-process_mode = 1
-position = Vector2(128, 58)
-player = NodePath("../Player")
-
 [node name="PauseMenu" parent="." instance=ExtResource("10_gphms")]
 process_mode = 2
 offset_left = -526.0
@@ -75,5 +63,3 @@ offset_bottom = 564.0
 [connection signal="enter_room" from="Player" to="LevelManager" method="enter_room"]
 [connection signal="enter_room" from="Player" to="Camera" method="_on_player_enter_room"]
 [connection signal="pause_game" from="Player" to="PauseMenu" method="_on_player_pause_game"]
-[connection signal="on_charge" from="Enemy" to="Camera" method="shake"]
-[connection signal="on_crash" from="Enemy2" to="Camera" method="shake"]
