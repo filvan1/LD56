@@ -133,7 +133,6 @@ sources/0 = SubResource("TileSetAtlasSource_errgt")
 
 [node name="LevelManager" type="Node2D"]
 script = ExtResource("1_sd1jd")
-regenerate = null
 
 [node name="RoomFactory" type="Node2D" parent="."]
 script = ExtResource("2_mpqw0")

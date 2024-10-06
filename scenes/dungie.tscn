@@ -131,7 +131,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"die",
-"speed": 2.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -239,7 +239,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-17, 0)
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_3431a")
-animation = &"idle"
+animation = &"die"
 
 [node name="BallCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)

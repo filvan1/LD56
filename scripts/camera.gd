@@ -38,7 +38,8 @@ func _process(delta: float) -> void:
 		position = scroll_from + (scroll_to - scroll_from) * scroll_curve.sample(scroll_t) + ROOM_SIZE / 2
 
 
-func _on_player_enter_room(coords: Vector2i) -> void:
-	scroll_from = position - ROOM_SIZE / 2
+func _on_player_enter_room(coords: Vector2i, teleport: bool) -> void:
 	scroll_to = Vector2(coords) * ROOM_SIZE
-	scroll_t = 0.0
+	if not teleport:
+		scroll_from = position - ROOM_SIZE / 2
+		scroll_t = 0.0

@@ -16,10 +16,11 @@ var time_since_fire: float = 1000
 var time_since_aim: float = aim_grace_period + 1
 var current_room_coords = Vector2i.ZERO
 var is_aiming = false
+var teleporting = false
 
 const initial_ants = 20
 
-signal enter_room(coords: Vector2i)
+signal enter_room(coords: Vector2i, teleport: bool)
 signal die
 signal pause_game
 
@@ -45,6 +46,10 @@ func get_room_coords():
 	
 func get_control_position():
 	return $Control.global_position
+	
+func teleport(position: Vector2):
+	teleporting = true
+	global_position = position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -83,7 +88,8 @@ func _process(delta: float) -> void:
 	var room_coords = get_room_coords()
 	if room_coords != self.current_room_coords:
 		self.current_room_coords = room_coords
-		enter_room.emit(room_coords)
+		enter_room.emit(room_coords, teleporting)
+		teleporting = false
 
 	if Input.is_action_just_pressed("pause"):
 		pause_game.emit()

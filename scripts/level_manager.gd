@@ -26,7 +26,8 @@ func room_is_open(room: Vector2i):
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		generate()
-		player.global_position = get_start_position()
+		player.teleport(get_start_position())
+		
 	
 func generate():
 	var room_factory = get_node("RoomFactory")
@@ -37,6 +38,7 @@ func generate():
 	var tiles
 	
 	var tilemap : TileMapLayer = get_node("TileMapLayer")
+	print(level_grid)
 	
 	for row in level_grid:
 		for room in row:
@@ -50,7 +52,6 @@ func generate():
 				for x in range(0, 8):
 					for y in range(0, 8):
 						var tile_index = tiles[x][y]
-						print(tile_index)
 						if tile_index != null:
 							tilemap.set_cell(base+ Vector2i(x,y), 0, Vector2i(tile_index % 10, tile_index / 10))
 			index += 1
