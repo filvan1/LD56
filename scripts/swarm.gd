@@ -46,8 +46,10 @@ func spawn_ant(spawn_position: Vector2):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		center_of_mass = Vector2.ZERO
 		var swarming_ants = get_swarming_ants()
+		
+		if swarming_ants.size() > 0:
+			center_of_mass = Vector2.ZERO
 		
 		for a: Ant in swarming_ants:
 			center_of_mass += a.position / swarming_ants.size()
