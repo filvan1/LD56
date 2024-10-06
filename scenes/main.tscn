@@ -39,7 +39,8 @@ shake_y = ExtResource("8_a2ukd")
 scroll_curve = SubResource("Curve_cmcic")
 
 [node name="HealthBar" parent="Camera" node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
-position = Vector2(0, 105)
+z_index = 100
+position = Vector2(0, -113)
 player = NodePath("../../Player")
 
 [node name="Camera" type="Camera2D" parent="Camera"]
@@ -59,6 +60,8 @@ offset_top = 308.0
 offset_right = 100.0
 offset_bottom = 564.0
 
+[connection signal="encounter_finish" from="LevelManager" to="Camera/HealthBar" method="_on_level_manager_encounter_finish"]
+[connection signal="encounter_start" from="LevelManager" to="Camera/HealthBar" method="_on_level_manager_encounter_start"]
 [connection signal="die" from="Player" to="GameOver" method="_on_player_die"]
 [connection signal="enter_room" from="Player" to="LevelManager" method="enter_room"]
 [connection signal="enter_room" from="Player" to="Camera" method="_on_player_enter_room"]

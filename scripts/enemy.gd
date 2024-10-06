@@ -7,6 +7,7 @@ enum EnemyState {NONE, IDLE, MOVING, ATTACKING}
 @export var CurrentState = EnemyState.NONE
 @export var NextState = EnemyState.NONE
 @export var player: Player
+@export var max_health: float = 100
 var counter = 0.0
 var activity_time = 2.0
 var rand = RandomNumberGenerator.new()
@@ -14,7 +15,13 @@ var aggro_range = 0.0
 #@onready var collider = $Collider
 
 var alive = true
-var health = 100.0
+var health = max_health
+
+func get_max_health():
+	return max_health
+	
+func get_health():
+	return health
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

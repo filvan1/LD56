@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccn4oo6pi7bfu"]
+[gd_scene load_steps=3 format=3 uid="uid://ccn4oo6pi7bfu"]
 
+[ext_resource type="Script" path="res://scripts/encounter.gd" id="1_i6nxi"]
 [ext_resource type="PackedScene" uid="uid://brx8osdc0d37a" path="res://scenes/dungie.tscn" id="1_vv875"]
 
 [node name="DungieEncounter" type="Node2D"]
+script = ExtResource("1_i6nxi")
+is_boss = true
 
 [node name="Dungie" parent="." instance=ExtResource("1_vv875")]
 position = Vector2(15, -73)
