@@ -55,8 +55,7 @@ func change_state():
 				$AudioPlayer.pitch_scale = 0.01
 
 func _process(delta: float) -> void:
-	#super._process(delta)
-	pass
+	super._process(delta)
 	
 func _lethal() -> bool:
 	return true
