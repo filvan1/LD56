@@ -94,6 +94,8 @@ func _process(delta: float) -> void:
 						attack_target_pos = global_position + (player.get_control_position() - global_position).normalized() * 50.0
 						current_attack_state = AttackingStates.CHARGING
 						disengage.emit()
+						on_charge.emit()
+						$/root/World/Camera.shake()
 						dash_particles_l.emitting = true
 						dash_particles_r.emitting = true
 						

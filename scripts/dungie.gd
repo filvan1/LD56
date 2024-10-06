@@ -38,6 +38,7 @@ func _physics_process(delta: float) -> void:
 		if move_and_slide():
 			velocity = Vector2.ZERO
 			on_crash.emit()
+			$/root/World/Camera.shake()
 			$BonkAudioPlayer.play()
 			time_since_crash = 0
 			NextState = EnemyState.IDLE
