@@ -8,7 +8,7 @@
 [node name="Room" type="Node2D"]
 process_mode = 4
 script = ExtResource("2_pxbe5")
-encounter = ExtResource("2_cmeh7")
+encounter_scene = ExtResource("2_cmeh7")
 
 [node name="Room" type="Sprite2D" parent="."]
 visible = false

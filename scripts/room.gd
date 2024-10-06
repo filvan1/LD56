@@ -14,8 +14,8 @@ var visited = false
 var cleared = false
 var layout: String
 
-@export var encounter: PackedScene
-var node: Node2D
+@export var encounter_scene: PackedScene
+var encounter: Encounter
 
 func on_leave():
 	print("left ", coords)
@@ -32,7 +32,8 @@ func on_enter():
 func open():
 	is_open = true
 	
-func _on_clear():
+func _on_complete():
+	level.encounter_finish.emit(encounter)
 	cleared = true
 	open()
 	
@@ -44,12 +45,12 @@ func _on_clear():
 func _ready() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	
-	if encounter == null:
-		encounter = NORMAL_ENCOUNTERS.pick_random()
-	node = encounter.instantiate()
-	add_child(node)
+	if encounter_scene == null:
+		encounter_scene = NORMAL_ENCOUNTERS.pick_random()
+	encounter = encounter_scene.instantiate()
+	add_child(encounter)
 
-	for child in node.get_children():
+	for child in encounter.get_children():
 		if is_instance_of(child, Enemy):
 			child.player = player
 			
@@ -73,14 +74,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		if not cleared:
-			var all_dead = true
-			for child in node.get_children():
-				if is_instance_of(child, Enemy):
-					if child.alive:
-						all_dead = false
-			#print("all_dead ", all_dead)
-			if all_dead:
-				_on_clear()
+			if encounter.is_complete():
+				_on_complete()
 
 func on_camera_land():
 	print(coords)
@@ -89,3 +84,4 @@ func on_camera_land():
 			if is_instance_of(child, Gate):
 				child.lock()
 				child.visible = true
+		level.encounter_start.emit(encounter)

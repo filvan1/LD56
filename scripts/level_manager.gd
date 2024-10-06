@@ -17,7 +17,8 @@ var rooms: Dictionary = {}
 
 const RoomNode = preload("res://scenes/room.tscn")
 
-signal camera_land
+signal encounter_start(encounter: Encounter)
+signal encounter_finish(encounter: Encounter)
 
 func enter_room(room: Vector2i, teleport: bool):
 	if active_room != null:
@@ -69,7 +70,7 @@ func generate():
 				if room.contains("A"):
 					start_room = room_coords
 					room_node.open()
-					room_node.encounter = preload("res://scenes/encounters/start_encounter.tscn")
+					room_node.encounter_scene = preload("res://scenes/encounters/start_encounter.tscn")
 					
 				$Rooms.add_child(room_node)
 					
