@@ -3,7 +3,6 @@ class_name Dungie extends "enemy.gd"
 signal on_crash
 
 @onready var sprite = $AnimatedSprite2D
-@onready var patrol_point = $PatrolPoint
 
 @export var patrol_speed = 30.0
 @export var charge_speed = 60.0

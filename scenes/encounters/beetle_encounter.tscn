@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxnnl7fmsl1y8"]
+
+[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/beetle.tscn" id="1_esbc2"]
+
+[node name="BeetleEncounter" type="Node2D"]
+
+[node name="Beetle" parent="." instance=ExtResource("1_esbc2")]
+position = Vector2(0, -55)

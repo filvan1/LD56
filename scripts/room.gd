@@ -3,7 +3,8 @@ class_name Room
 extends Node2D
 
 const DUNGIE_ENCOUNTER = preload("res://scenes/encounters/dungie_encounter.tscn")
-const NORMAL_ENCOUNTERS = [DUNGIE_ENCOUNTER]
+const BEETLE_ENCOUNTER = preload("res://scenes/encounters/beetle_encounter.tscn")
+const NORMAL_ENCOUNTERS = [DUNGIE_ENCOUNTER, BEETLE_ENCOUNTER]
 
 var coords: Vector2i = Vector2i.ZERO
 var is_open: bool = false
