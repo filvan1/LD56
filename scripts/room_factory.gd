@@ -38,7 +38,7 @@ var TILE_PATH_END_HORIZONTAL_NW = [63, 64]
 var TILE_PATH_END_HORIZONTAL_SW = [65, 66]
 var TILE_PATH_END_VERTICAL_NW = [67, 68]
 var TILE_PATH_END_VERTICAL_NE = [69, 70]
-var TILE_TURN_NE_SW = [71, 72]
+var TILE_TURN_NE_SE = [71, 72]
 var TILE_TURN_NE_NW = [73, 74]
 var TILE_TURN_NE_NE = [75, 76]
 var TILE_TURN_SE_NE = [77, 78]
@@ -107,10 +107,104 @@ func build_walls(exits):
 	
 func build_floor(exits):
 	
+	# first, build complete floor
 	for x in range(1, GRID_SIZE-1):
 		for y in range(1, GRID_SIZE-1):
 			grid[x][y] = get_tile(TILE_FLOOR)
+	
+	# construct paths
+	if exits.contains("N"):
+		for y in range(1,3):	
+			grid[3][y] = get_tile(TILE_PATH_LEFT)
+			grid[4][y] = get_tile(TILE_PATH_RIGHT)
+		grid[3][3] = get_tile(TILE_PATH_END_VERTICAL_SW)
+		grid[4][3] = get_tile(TILE_PATH_END_VERTICAL_SE)
+	
+	if exits.contains("E"):
+		for x in range(5,7):	
+			grid[x][3] = get_tile(TILE_PATH_TOP)
+			grid[x][4] = get_tile(TILE_PATH_BOT)
+		grid[4][3] = get_tile(TILE_PATH_END_HORIZONTAL_NW)
+		grid[4][4] = get_tile(TILE_PATH_END_HORIZONTAL_SW)
+	
+	if exits.contains("S"):
+		for y in range(5,7):	
+			grid[3][y] = get_tile(TILE_PATH_LEFT)
+			grid[4][y] = get_tile(TILE_PATH_RIGHT)
+		grid[3][4] = get_tile(TILE_PATH_END_VERTICAL_NW)
+		grid[4][4] = get_tile(TILE_PATH_END_VERTICAL_NE)
+	
+	if exits.contains("W"):
+		for x in range(1,3):	
+			grid[x][3] = get_tile(TILE_PATH_TOP)
+			grid[x][4] = get_tile(TILE_PATH_BOT)
+		grid[3][3] = get_tile(TILE_PATH_END_HORIZONTAL_NE)
+		grid[3][4] = get_tile(TILE_PATH_END_HORIZONTAL_SE)
+			
+	# construct center for all 2 exit turning rooms
+	if exits.contains("N") && exits.contains("E"):
+		grid[3][3] = get_tile(TILE_TURN_NE_NW)
+		grid[4][3] = get_tile(TILE_TURN_NE_NE)
+		grid[4][4] = get_tile(TILE_TURN_NE_SE)
 		
+	if exits.contains("E") && exits.contains("S"):
+		grid[3][4] = get_tile(TILE_TURN_SE_SW)
+		grid[4][3] = get_tile(TILE_TURN_SE_NE)
+		grid[4][4] = get_tile(TILE_TURN_SE_SE)
+		
+	if exits.contains("S") && exits.contains("W"):
+		grid[3][3] = get_tile(TILE_TURN_SW_NW)
+		grid[3][4] = get_tile(TILE_TURN_SW_SW)
+		grid[4][4] = get_tile(TILE_TURN_SW_SE)
+		
+	if exits.contains("W") && exits.contains("N"):
+		grid[3][3] = get_tile(TILE_TURN_NW_NW)
+		grid[3][4] = get_tile(TILE_TURN_NW_SW)
+		grid[4][3] = get_tile(TILE_TURN_NW_NE)
+		
+	# construct straight line rows	
+	if exits.contains("N") && exits.contains("S"):
+		grid[3][3] = get_tile(TILE_PATH_LEFT)
+		grid[3][4] = get_tile(TILE_PATH_LEFT)
+		grid[4][3] = get_tile(TILE_PATH_RIGHT)
+		grid[4][4] = get_tile(TILE_PATH_RIGHT)
+		
+	if exits.contains("E") && exits.contains("W"):
+		grid[3][3] = get_tile(TILE_PATH_TOP)
+		grid[3][4] = get_tile(TILE_PATH_BOT)
+		grid[4][3] = get_tile(TILE_PATH_TOP)
+		grid[4][4] = get_tile(TILE_PATH_BOT)	
+	# construct center for all 3 exit rooms
+	if exits.contains("N") && exits.contains("E") && exits.contains("S"):
+		grid[3][3] = get_tile(TILE_PATH_LEFT)
+		grid[3][4] = get_tile(TILE_PATH_LEFT)
+		grid[4][3] = get_tile(TILE_INTERSECTION_NE)
+		grid[4][4] = get_tile(TILE_INTERSECTION_SE)
+		
+	if exits.contains("E") && exits.contains("S") && exits.contains("W"):
+		grid[3][3] = get_tile(TILE_PATH_TOP)
+		grid[3][4] = get_tile(TILE_INTERSECTION_SW)
+		grid[4][3] = get_tile(TILE_PATH_TOP)
+		grid[4][4] = get_tile(TILE_INTERSECTION_SE)
+		
+	if exits.contains("S") && exits.contains("W") && exits.contains("N"):
+		grid[3][3] = get_tile(TILE_INTERSECTION_NW)
+		grid[3][4] = get_tile(TILE_INTERSECTION_SW)
+		grid[4][3] = get_tile(TILE_PATH_RIGHT)
+		grid[4][4] = get_tile(TILE_PATH_RIGHT)
+		
+	if exits.contains("W") && exits.contains("N") && exits.contains("E"):
+		grid[3][3] = get_tile(TILE_INTERSECTION_NW)
+		grid[3][4] = get_tile(TILE_PATH_BOT)
+		grid[4][3] = get_tile(TILE_INTERSECTION_NE)
+		grid[4][4] = get_tile(TILE_PATH_BOT)
+	
+	# finally, the case for 4 exits
+	if exits.contains("N") && exits.contains("E") && exits.contains("S") && exits.contains("W"):
+		grid[3][3] = get_tile(TILE_INTERSECTION_NW)
+		grid[3][4] = get_tile(TILE_INTERSECTION_SW)
+		grid[4][3] = get_tile(TILE_INTERSECTION_NE)
+		grid[4][4] = get_tile(TILE_INTERSECTION_SE)
 	
 	
 func get_tile(tilename):
