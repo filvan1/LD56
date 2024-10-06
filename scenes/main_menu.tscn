@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4amwhomgj8x3"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_bdkai"]
-[ext_resource type="Texture2D" uid="uid://bvxsi18sqpytx" path="res://textures/room.png" id="1_pndw3"]
+[ext_resource type="Texture2D" uid="uid://02spu5pehprr" path="res://textures/ui/menu_bg.png" id="2_mif1j"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="3_y6n10"]
 
 [node name="MainMenu" type="Control"]
@@ -21,7 +21,7 @@ layer = 0
 [node name="TextureRect" type="TextureRect" parent="Background"]
 offset_right = 256.0
 offset_bottom = 256.0
-texture = ExtResource("1_pndw3")
+texture = ExtResource("2_mif1j")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
