@@ -97,7 +97,7 @@ func _process(delta: float) -> void:
 		
 func _fire(aim: Vector2):
 	var candidates = swarm.get_swarming_ants()
-	if candidates.size() == 0:
+	if candidates.size() <= 1:
 		return
 		
 	time_since_fire = 0
