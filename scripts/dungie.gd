@@ -18,7 +18,13 @@ func _ready() -> void:
 	NextState = EnemyState.IDLE
 
 func _physics_process(delta: float) -> void:
+	sprite.speed_scale = 1
+	
+	var time_before = time_since_crash
 	time_since_crash += delta
+	if time_before < crash_cooldown and time_since_crash >= crash_cooldown:
+			position += (get_room_center() - global_position).normalized() * 10
+	
 	if alive and time_since_crash > crash_cooldown:
 		change_state()
 		if (player.get_control_position() - global_position).length() < 128:
@@ -32,7 +38,6 @@ func _physics_process(delta: float) -> void:
 		
 		if move_and_slide():
 			velocity = Vector2.ZERO
-			position += (get_room_center() - global_position).normalized() * 10
 			on_crash.emit()
 			time_since_crash = 0
 			NextState = EnemyState.IDLE
