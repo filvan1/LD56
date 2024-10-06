@@ -18,6 +18,7 @@ var current_room_coords = Vector2i.ZERO
 var is_aiming = false
 
 signal enter_room(coords: Vector2i)
+signal die
 signal pause_game
 
 # Called when the node enters the scene tree for the first time.
@@ -46,6 +47,9 @@ func get_control_position():
 func _process(delta: float) -> void:
 	time_since_fire += delta
 	
+	if get_health() == 0:
+		die.emit()
+
 	$Ants.tracking_target = $Ants.center_of_mass + Input.get_vector("move_left", "move_right", "move_up", "move_down") * 40
 	#$Control.position
 	
