@@ -217,6 +217,7 @@ CurrentState = 1
 NextState = 1
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(-15, 9.53674e-07)
 rotation = 1.5708
 scale = Vector2(0.610539, 0.61192)
