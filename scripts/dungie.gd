@@ -47,8 +47,10 @@ func change_state():
 		CurrentState = NextState
 		match(CurrentState):
 			EnemyState.ATTACKING:
+				pass
 				$AudioPlayer.play()
 			EnemyState.IDLE:
+				pass
 				$AudioPlayer.stop()
 				$AudioPlayer.pitch_scale = 0.01
 
