@@ -17,6 +17,8 @@ var rooms: Dictionary = {}
 
 const RoomNode = preload("res://scenes/room.tscn")
 
+signal camera_land
+
 func enter_room(room: Vector2i, teleport: bool):
 	if active_room != null:
 		active_room.on_leave()
@@ -63,12 +65,13 @@ func generate():
 				room_node.level = self
 				room_node.layout = room
 				rooms[room_coords] = room_node
-				$Rooms.add_child(room_node)
 				
 				if room.contains("A"):
 					start_room = room_coords
 					room_node.open()
-					room_node.cleared = true
+					room_node.encounter = preload("res://scenes/encounters/start_encounter.tscn")
+					
+				$Rooms.add_child(room_node)
 					
 				tiles = room_factory.generate(room)
 				var base = room_tile_position(room_coords)
@@ -98,3 +101,6 @@ func get_room_center(room: Vector2i):
 	
 func get_start_position() -> Vector2:
 	return get_room_center(start_room)
+
+func _on_camera_camera_land() -> void:
+	active_room.on_camera_land()

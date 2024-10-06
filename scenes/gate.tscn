@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://hmn6rk1dl7u4"]
+
+[ext_resource type="Script" path="res://scripts/gate.gd" id="1_lwgsl"]
+[ext_resource type="Texture2D" uid="uid://bvkssnpn8bh3s" path="res://textures/gate-small.png" id="2_utekb"]
+
+[sub_resource type="Curve" id="Curve_s5klf"]
+min_value = -20.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -20), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wd8qs"]
+a = Vector2(-36, 18)
+b = Vector2(36, 18)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hcpyq"]
+a = Vector2(-12, 0)
+b = Vector2(14.2119, -0.15146)
+
+[node name="Gate" type="Node2D"]
+script = ExtResource("1_lwgsl")
+open_curve = SubResource("Curve_s5klf")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_utekb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 20
+position = Vector2(18, 0)
+rotation = 1.5708
+shape = SubResource("SegmentShape2D_wd8qs")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(9, -10)
+rotation = 0.696386
+shape = SubResource("SegmentShape2D_hcpyq")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(11, 7)
+rotation = 2.33176
+shape = SubResource("SegmentShape2D_hcpyq")
+one_way_collision = true

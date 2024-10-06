@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://58sq2takmgfe"]
+[gd_scene load_steps=5 format=3 uid="uid://58sq2takmgfe"]
 
+[ext_resource type="PackedScene" uid="uid://ccn4oo6pi7bfu" path="res://scenes/encounters/dungie_encounter.tscn" id="2_cmeh7"]
 [ext_resource type="Script" path="res://scripts/room.gd" id="2_pxbe5"]
+[ext_resource type="Texture2D" uid="uid://bvxsi18sqpytx" path="res://textures/room.png" id="2_vvleq"]
+[ext_resource type="PackedScene" uid="uid://hmn6rk1dl7u4" path="res://scenes/gate.tscn" id="3_qrx53"]
 
 [node name="Room" type="Node2D"]
+process_mode = 4
 script = ExtResource("2_pxbe5")
+encounter = ExtResource("2_cmeh7")
+
+[node name="Room" type="Sprite2D" parent="."]
+visible = false
+z_index = -10
+texture = ExtResource("2_vvleq")
+
+[node name="West" parent="." instance=ExtResource("3_qrx53")]
+position = Vector2(-127, 0)
+
+[node name="North" parent="." instance=ExtResource("3_qrx53")]
+position = Vector2(0, -128)
+rotation = 1.5708
+
+[node name="East" parent="." instance=ExtResource("3_qrx53")]
+position = Vector2(128, 0)
+rotation = 3.14159
+
+[node name="South" parent="." instance=ExtResource("3_qrx53")]
+position = Vector2(0, 127)
+rotation = 4.71239

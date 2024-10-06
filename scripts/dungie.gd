@@ -22,8 +22,8 @@ func _physics_process(delta: float) -> void:
 	
 	var time_before = time_since_crash
 	time_since_crash += delta
-	if time_before < crash_cooldown and time_since_crash >= crash_cooldown:
-			position += (get_room_center() - global_position).normalized() * 10
+	if alive and time_before < crash_cooldown and time_since_crash >= crash_cooldown:
+		position += (get_room_center() - global_position).normalized() * 10
 	
 	if alive and time_since_crash > crash_cooldown:
 		change_state()
@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity += (get_room_center() - global_position) * delta * 0.15
 			velocity = velocity.limit_length(patrol_speed)
-		
 		
 		if move_and_slide():
 			velocity = Vector2.ZERO

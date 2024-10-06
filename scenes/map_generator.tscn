@@ -145,3 +145,4 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAAHAAEAAAAAAAIAAAAHAAE
 tile_set = SubResource("TileSet_j3yeq")
 
 [node name="Rooms" type="Node2D" parent="."]
+z_index = 5

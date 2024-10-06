@@ -13,8 +13,11 @@ var scroll_t = 1.0
 
 var scroll_from = Vector2.ZERO
 var scroll_to = Vector2.ZERO
+var scrolling = false
 
 const ROOM_SIZE = Vector2(256, 256)
+
+signal camera_land
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,16 +33,24 @@ func _process(delta: float) -> void:
 		$Camera.position = Vector2.ZERO
 	else:
 		$Camera.position = shake_scale * Vector2(shake_x.sample(shake_t), shake_y.sample(shake_t))
-		
-	scroll_t += delta / scroll_duration
-	if scroll_t > 1.0:
-		position = scroll_to + ROOM_SIZE / 2
-	else:
-		position = scroll_from + (scroll_to - scroll_from) * scroll_curve.sample(scroll_t) + ROOM_SIZE / 2
+	
+	if scrolling:
+		scroll_t += delta / scroll_duration
+		if scroll_t >= 1.0:
+			_land()
+		else:
+			position = scroll_from + (scroll_to - scroll_from) * scroll_curve.sample(scroll_t) + ROOM_SIZE / 2
 
+func _land():
+	position = scroll_to + ROOM_SIZE / 2
+	camera_land.emit()
+	scrolling = false
 
 func _on_player_enter_room(coords: Vector2i, teleport: bool) -> void:
 	scroll_to = Vector2(coords) * ROOM_SIZE
 	if not teleport:
 		scroll_from = position - ROOM_SIZE / 2
 		scroll_t = 0.0
+		scrolling = true
+	else:
+		_land()
