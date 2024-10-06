@@ -74,7 +74,10 @@ func generate_level():
 		grid[boss_position.x][boss_position.y] += "W"
 	grid[boss_position.x][boss_position.y] += "-B"  # Mark the boss room
 		
-		
+	
+	#replace null values with empty string
+	grid = replace_null_values(grid)
+	
 	print_grid()
 
 # Randomly place the first room (entrance) along the edge of the grid
@@ -156,6 +159,13 @@ func count_paths(room_positions):
 func print_grid():
 	for row in grid:
 		print(row)
+		
+func replace_null_values(array2d):
+	for i in range(GRID_SIZE):
+		for j in range(GRID_SIZE):
+			if array2d[i][j] == null:
+				array2d[i][j] = ""
+	return array2d
 
 func get_layout():
 	return grid
