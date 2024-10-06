@@ -12,6 +12,7 @@ radius = 5.0
 process_physics_priority = 20
 script = ExtResource("1_iigm6")
 shoot_range = 80.0
+windup_time = 0.2
 
 [node name="Control" type="CharacterBody2D" parent="."]
 collision_layer = 0

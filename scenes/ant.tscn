@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwvu5v5kgsed0"]
+[gd_scene load_steps=13 format=3 uid="uid://bwvu5v5kgsed0"]
 
 [ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
 [ext_resource type="Script" path="res://scripts/ant.gd" id="1_j8bc2"]
+[ext_resource type="AudioStream" uid="uid://bgseu0sv1kl35" path="res://sounds/click.wav" id="3_74rry"]
 
 [sub_resource type="Curve" id="Curve_4rsrx"]
 max_value = 20.0
@@ -45,6 +46,26 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_byf4t"]
 radius = 2.0
 
+[sub_resource type="Curve" id="Curve_1t6h5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.753333, 0.813187), 0.0, 0.0, 0, 0, Vector2(0.893333, 0.186813), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_l46k3"]
+curve = SubResource("Curve_1t6h5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ik8ki"]
+particle_flag_disable_z = true
+angle_min = -443.4
+angle_max = -443.4
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = 56.33
+initial_velocity_max = 84.51
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_l46k3")
+color = Color(0.757498, 0.792877, 1.54018e-06, 1)
+
 [node name="Ant" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 9
@@ -60,3 +81,15 @@ frame_progress = 0.993501
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_byf4t")
+
+[node name="ParticleEmitter" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ik8ki")
+lifetime = 0.5
+one_shot = true
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_74rry")
+volume_db = 2.0
+pitch_scale = 0.01

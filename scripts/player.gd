@@ -6,13 +6,19 @@ var max_speed: float = 35.0
 @export var shoot_cooldown = 0.5
 @export var shoot_range = 20.0
 
+@export var windup_time = 0.5
+@export var aim_grace_period = 1.0
+
 @onready var aim_indicator = $AimIndicator
 @onready var swarm: Swarm = $Ants
 
-var cooldown_remaining: float = 0
+var time_since_fire: float = 1000
+var time_since_aim: float = aim_grace_period + 1
 var current_room_coords = Vector2i.ZERO
+var is_aiming = false
 
 signal enter_room(coords: Vector2i)
+signal die
 signal pause_game
 
 # Called when the node enters the scene tree for the first time.
@@ -39,21 +45,37 @@ func get_control_position():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	cooldown_remaining -= delta
+	time_since_fire += delta
 	
+	if get_health() == 0:
+		die.emit()
+
 	$Ants.tracking_target = $Ants.center_of_mass + Input.get_vector("move_left", "move_right", "move_up", "move_down") * 40
 	#$Control.position
 	
 	var aim = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 	if aim.length() > 0.5:
+		if not is_aiming:
+			time_since_aim = 0
+		else:
+			time_since_aim += delta
+		is_aiming = true
+		
 		aim = $Ants.center_of_mass + aim * shoot_range
 		aim_indicator.position = aim
 		aim_indicator.visible = true
 		
-		if cooldown_remaining < 0:
+		if time_since_aim > windup_time and time_since_fire > shoot_cooldown:
 			_fire(aim)
 	else:
-		aim_indicator.visible = false
+		if is_aiming:
+			time_since_aim = 0
+		else:
+			time_since_aim += delta
+		is_aiming = false
+		
+		if time_since_aim > aim_grace_period:
+			aim_indicator.visible = false
 		
 	var room_coords = get_room_coords()
 	if room_coords != self.current_room_coords:
@@ -69,7 +91,7 @@ func _fire(aim: Vector2):
 	if candidates.size() == 0:
 		return
 		
-	cooldown_remaining = shoot_cooldown
+	time_since_fire = 0
 	
 	# Choose random ant
 	var ant = candidates.pick_random()

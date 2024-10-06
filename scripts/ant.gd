@@ -20,6 +20,7 @@ var alive = true
 var current_enemy: Enemy
 var murder_target_position: Vector2
 var murder_target_position_offset: Vector2
+var murder_target_rotation_offset: float
 var murder_timer = 0.0
 var current_tick_number = 0
 const max_damage_ticks = 5
@@ -57,22 +58,28 @@ func _physics_process(delta: float) -> void:
 
 	if state == AntState.MURDERING:
 		murder_timer += delta
-		global_position = current_enemy.global_position - murder_target_position_offset.rotated(current_enemy.rotation)
+		global_position = current_enemy.global_position + murder_target_position_offset.rotated(current_enemy.rotation - murder_target_rotation_offset)
 		
 		if murder_timer > tick_time:
 			current_enemy._take_damage(10.0)
 			current_tick_number += 1
 			murder_timer = 0
-			print("murder")
+			$ParticleEmitter.restart()
+			$AudioPlayer.play()
+			
 		
 		if current_tick_number >= max_damage_ticks:
 			
 			current_enemy = null
+			$ParticleEmitter.emitting = false
 			state = AntState.HOMING
 			murder_timer = 0
 			current_tick_number = 0
-
-
+			
+	if state == AntState.YEETING or state == AntState.MURDERING:
+		z_index = 100
+	else:
+		z_index = 0
 
 	if state == AntState.SWARMING or state == AntState.HOMING:
 		var speed = new_velocity.length()
@@ -113,6 +120,14 @@ func stop_murder():
 func on_hit(enemy: Enemy):
 	current_enemy = enemy
 	current_enemy.died.connect(stop_murder)
-	murder_target_position_offset = enemy.global_position - global_position
-	print(murder_target_position_offset)
+	
+	$AudioPlayer.volume_db = 8
+	$AudioPlayer.pitch_scale = 0.5
+	$AudioPlayer.play()
+	$AudioPlayer.volume_db = 8
+	$AudioPlayer.pitch_scale = 8.0
+	
+	murder_target_position_offset = global_position - enemy.global_position
+	murder_target_rotation_offset = enemy.rotation
+	
 	state = AntState.MURDERING
