@@ -8,13 +8,18 @@ signal on_crash
 @export var patrol_speed = 30.0
 @export var charge_speed = 60.0
 
+@export var crash_cooldown = 1.5
+
+var time_since_crash = crash_cooldown + 1
+
 func _ready() -> void:
 	velocity = Vector2(-patrol_speed, 0)
 	CurrentState = EnemyState.IDLE
 	NextState = EnemyState.IDLE
 
 func _physics_process(delta: float) -> void:
-	if alive:
+	time_since_crash += delta
+	if alive and time_since_crash > crash_cooldown:
 		change_state()
 		if (player.get_control_position() - global_position).length() < 128:
 			velocity += (player.get_control_position() - global_position) * delta * 0.15
@@ -29,7 +34,9 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector2.ZERO
 			position += (get_room_center() - global_position).normalized() * 10
 			on_crash.emit()
+			time_since_crash = 0
 			NextState = EnemyState.IDLE
+			sprite.play("idle")
 		else:
 			var v = get_real_velocity()
 			if v.length() > 1.0:
@@ -54,7 +61,21 @@ func change_state():
 				$AudioPlayer.pitch_scale = 0.01
 
 func _process(delta: float) -> void:
+	$Concussion.rotation = -rotation
+	$Concussion.global_position = $BodyArea/CollisionShape2D.global_position + Vector2(0, -10)
+	
 	super._process(delta)
+	
+	var concussed = alive and time_since_crash < crash_cooldown
+	$Concussion.visible = concussed
+	if concussed:
+		$AudioPlayer.stop()
+		$GPUParticles2D.emitting = false
+		$GPUParticles2D2.emitting = false
+	elif alive:
+		$GPUParticles2D.emitting = true
+		$GPUParticles2D2.emitting = true
+		
 	
 func _lethal() -> bool:
 	return true

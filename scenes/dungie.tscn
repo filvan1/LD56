@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://brx8osdc0d37a"]
+[gd_scene load_steps=30 format=3 uid="uid://brx8osdc0d37a"]
 
 [ext_resource type="Script" path="res://scripts/dungie.gd" id="1_xukpb"]
 [ext_resource type="Texture2D" uid="uid://iwrvm7lbg8my" path="res://textures/dungie.png" id="2_mqgnn"]
 [ext_resource type="AudioStream" uid="uid://1xe174f5ch7q" path="res://sounds/myrljud.wav" id="3_asjpo"]
+[ext_resource type="Texture2D" uid="uid://3u8175t20kgn" path="res://textures/concussion.png" id="4_fksvg"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8clo"]
 particle_flag_disable_z = true
@@ -123,7 +124,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -154,6 +155,35 @@ radius = 13.0
 radius = 6.0
 height = 24.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii886"]
+atlas = ExtResource("4_fksvg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lad0f"]
+atlas = ExtResource("4_fksvg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl4al"]
+atlas = ExtResource("4_fksvg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_821op"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii886")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lad0f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rl4al")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="EnemyBody2" type="CharacterBody2D"]
 position = Vector2(17, 0)
 collision_layer = 4
@@ -178,7 +208,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-17, 0)
 rotation = -1.5708
 sprite_frames = SubResource("SpriteFrames_3431a")
-animation = &"die"
+animation = &"idle"
 
 [node name="BallCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
@@ -204,6 +234,12 @@ shape = SubResource("CapsuleShape2D_2dmbx")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_asjpo")
+
+[node name="Concussion" type="AnimatedSprite2D" parent="."]
+position = Vector2(-29, -19)
+sprite_frames = SubResource("SpriteFrames_821op")
+autoplay = "default"
+frame_progress = 0.565258
 
 [connection signal="died" from="." to="." method="_on_died"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
