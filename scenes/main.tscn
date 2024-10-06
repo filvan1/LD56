@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=12 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://dkmo0stllcs2n" path="res://scenes/room.tscn" id="1_sxbc5"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="5_gf0ek"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="6_a6m6d"]
-[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/enemy.tscn" id="6_woxhm"]
+[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/beetle.tscn" id="6_woxhm"]
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
+[ext_resource type="PackedScene" uid="uid://brx8osdc0d37a" path="res://scenes/dungie.tscn" id="9_t7o5o"]
+[ext_resource type="PackedScene" uid="uid://dp3vfby37ujd1" path="res://scenes/pause_menu.tscn" id="10_gphms"]
 
 [sub_resource type="Curve" id="Curve_cmcic"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.327338, 0.0984148), 0.550859, 0.550859, 0, 0, Vector2(0.507194, 0.497688), 2.88435, 2.88435, 0, 0, Vector2(1, 1), -1.8159e-07, 0.0, 0, 0]
@@ -21,28 +23,47 @@ point_count = 4
 position = Vector2(384, 128)
 
 [node name="Player" parent="." instance=ExtResource("4_cieux")]
+process_mode = 1
 position = Vector2(123, 200)
 
-[node name="Enemy" parent="." instance=ExtResource("6_woxhm")]
-position = Vector2(130, 131)
-
-[node name="HealthBar" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
-position = Vector2(128, 233)
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_woxhm")]
+process_mode = 1
+position = Vector2(389, 127)
 player = NodePath("../Player")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("5_gf0ek")
 autoplay = true
 parameters/looping = true
 
 [node name="Camera" type="Node2D" parent="."]
+process_mode = 1
 position = Vector2(128, 128)
 script = ExtResource("6_a6m6d")
 shake_x = ExtResource("7_rqdsw")
 shake_y = ExtResource("8_a2ukd")
 scroll_curve = SubResource("Curve_cmcic")
 
+[node name="HealthBar" parent="Camera" node_paths=PackedStringArray("player") instance=ExtResource("7_l2jr0")]
+position = Vector2(0, 105)
+player = NodePath("../../Player")
+
 [node name="Camera" type="Camera2D" parent="Camera"]
 
+[node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_t7o5o")]
+process_mode = 1
+position = Vector2(128, 58)
+player = NodePath("../Player")
+
+[node name="PauseMenu" parent="." instance=ExtResource("10_gphms")]
+process_mode = 2
+offset_left = -526.0
+offset_top = -324.0
+offset_right = -526.0
+offset_bottom = -324.0
+
 [connection signal="enter_room" from="Player" to="Camera" method="_on_player_enter_room"]
+[connection signal="pause_game" from="Player" to="PauseMenu" method="_on_player_pause_game"]
 [connection signal="on_charge" from="Enemy" to="Camera" method="shake"]
+[connection signal="on_crash" from="Enemy2" to="Camera" method="shake"]

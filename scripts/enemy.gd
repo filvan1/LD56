@@ -1,16 +1,16 @@
-class_name Enemy extends Node2D
+class_name Enemy extends CharacterBody2D
 
 signal died
 
 enum EnemyState {NONE, IDLE, MOVING, ATTACKING}
 @export var CurrentState = EnemyState.NONE
 @export var NextState = EnemyState.NONE
+@export var player: Node2D
 var counter = 0.0
 var activity_time = 2.0
 var rand = RandomNumberGenerator.new()
 var aggro_range = 0.0
-@onready var player: Node2D = $"../Player/Control"
-@onready var collider = $Collider
+#@onready var collider = $Collider
 
 var alive = true
 var health = 100.0
@@ -18,6 +18,12 @@ var health = 100.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+	
+func get_room_coords() -> Vector2:
+	return Vector2i((global_position / Vector2(256, 256)).floor())
+	
+func get_room_center() -> Vector2:
+	return Vector2(get_room_coords()) * Vector2(256, 256) + Vector2(128, 128)
 
 func set_activity_time(tim: float):
 	activity_time = tim
@@ -55,6 +61,11 @@ func _on_collider_body_entered(body: Node2D) -> void:
 	if is_instance_of(body, Ant):
 		if body.state == Ant.AntState.YEETING:
 			body.on_hit(self)
+
+func _on_weapon_body_entered(body: Node2D) -> void:
+	if is_instance_of(body, Ant):
+		if body.state == Ant.AntState.YEETING:
+			pass
 		elif _lethal():
 			body.die()
 

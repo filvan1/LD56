@@ -91,30 +91,6 @@ position = Vector2(4, -7)
 [node name="Ant20" parent="Ants" instance=ExtResource("2_rl1ch")]
 position = Vector2(7, 3)
 
-[node name="Ant21" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(9, -2)
-
-[node name="Ant22" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(2, 1)
-
-[node name="Ant23" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(7, 7)
-
-[node name="Ant24" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(-1, -3)
-
-[node name="Ant25" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(3, -8)
-
-[node name="Ant26" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(11, -7)
-
-[node name="Ant27" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(14, 3)
-
-[node name="Ant28" parent="Ants" instance=ExtResource("2_rl1ch")]
-position = Vector2(16, -2)
-
 [node name="AimIndicator" type="Node2D" parent="."]
 
 [node name="Crosshair" type="Sprite2D" parent="AimIndicator"]

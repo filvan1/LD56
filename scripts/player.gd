@@ -13,6 +13,7 @@ var cooldown_remaining: float = 0
 var current_room_coords = Vector2i.ZERO
 
 signal enter_room(coords: Vector2i)
+signal pause_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +33,9 @@ func get_ammo():
 	
 func get_room_coords():
 	return Vector2i(($Control.global_position / Vector2(256, 256)).floor())
+	
+func get_control_position():
+	return $Control.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -55,6 +59,9 @@ func _process(delta: float) -> void:
 	if room_coords != self.current_room_coords:
 		self.current_room_coords = room_coords
 		enter_room.emit(room_coords)
+
+	if Input.is_action_just_pressed("pause"):
+		pause_game.emit()
 		
 		
 func _fire(aim: Vector2):

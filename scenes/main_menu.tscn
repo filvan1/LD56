@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4amwhomgj8x3"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_bdkai"]
+[ext_resource type="Texture2D" uid="uid://bvxsi18sqpytx" path="res://textures/room.png" id="1_pndw3"]
+[ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="3_y6n10"]
+
+[node name="MainMenu" type="Control"]
+top_level = true
+custom_minimum_size = Vector2(1024, 1024)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bdkai")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("1_pndw3")
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer"]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 192.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MenuLayer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Enter The BOID"
+scroll_active = false
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Play"
+
+[node name="VolumeLabel" type="Label" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="MainMenuAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_y6n10")
+autoplay = true
+
+[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="value_changed" from="MenuLayer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
