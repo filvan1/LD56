@@ -117,8 +117,12 @@ script = ExtResource("1_sd1jd")
 [node name="RoomFactory" type="Node2D" parent="LevelManager"]
 script = ExtResource("2_mpqw0")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="LevelManager/RoomFactory"]
-tile_set = SubResource("TileSet_j3yeq")
-
 [node name="LayoutGenerator" type="Node2D" parent="LevelManager"]
 script = ExtResource("4_eo4db")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="LevelManager"]
+tile_set = SubResource("TileSet_j3yeq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(640, 640)
+zoom = Vector2(0.2, 0.2)
