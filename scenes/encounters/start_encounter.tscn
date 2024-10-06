@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://b72jh8c0mi0wl"]
+[gd_scene load_steps=2 format=3 uid="uid://b72jh8c0mi0wl"]
+
+[ext_resource type="Texture2D" uid="uid://bld6j6065kimj" path="res://textures/tutorial.png" id="1_2lruc"]
 
 [node name="StartEncounter" type="Node2D"]
+
+[node name="Tutorial" type="Sprite2D" parent="."]
+z_as_relative = false
+texture = ExtResource("1_2lruc")
