@@ -16,6 +16,7 @@ func _ready() -> void:
 	velocity = Vector2(-patrol_speed, 0)
 	CurrentState = EnemyState.IDLE
 	NextState = EnemyState.IDLE
+	aggro_range = 100.0
 
 func _physics_process(delta: float) -> void:
 	sprite.speed_scale = 1
@@ -46,12 +47,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			var v = get_real_velocity()
 			if v.length() > 1.0:
+				if (player.get_control_position() - global_position).length() < aggro_range:
+					print("aggro")
 			
-				rotation = atan2(v.y, v.x)
-				sprite.play("roll")
-				sprite.speed_scale = velocity.length() / 50.0 * 2
-				NextState = EnemyState.ATTACKING
-				$RunAudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
+					rotation = atan2(v.y, v.x)
+					sprite.play("roll")
+					sprite.speed_scale = velocity.length() / 50.0 * 2
+					NextState = EnemyState.ATTACKING
+					$RunAudioPlayer.pitch_scale = velocity.length() / 100.0 * 2
 			else:
 				sprite.speed_scale = 1.0
 				sprite.play("idle")
