@@ -53,7 +53,11 @@ func _ready() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	
 	if encounter_scene == null:
-		encounter_scene = NORMAL_ENCOUNTERS.pick_random()
+		if layout.contains("B"):
+			encounter_scene = BOSS_ENCOUNTERS.pick_random()
+		else:
+			encounter_scene = NORMAL_ENCOUNTERS.pick_random()
+
 	encounter = encounter_scene.instantiate()
 	add_child(encounter)
 
