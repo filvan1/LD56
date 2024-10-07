@@ -2,7 +2,7 @@
 extends Node
 
 const GRID_SIZE = 5  # 5x5 grid
-const ROOM_COUNT = 2
+const ROOM_COUNT = 11
 
 var grid = []
 
