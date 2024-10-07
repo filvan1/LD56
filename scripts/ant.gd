@@ -55,7 +55,6 @@ func yeet(to: Vector2):
 	
 func _physics_process(delta: float) -> void:
 	if not alive:
-		sprite.play("idle")
 		return
 
 	if state == AntState.MURDERING:

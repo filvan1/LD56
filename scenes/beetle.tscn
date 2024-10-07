@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dqaw5juj53epg"]
+[gd_scene load_steps=21 format=3 uid="uid://dqaw5juj53epg"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_wvsy4"]
 [ext_resource type="Texture2D" uid="uid://0je5ijstclbd" path="res://textures/StagBeetle.png" id="2_a3l8o"]
@@ -8,17 +8,33 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2i0p"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7hb4y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkidc"]
 atlas = ExtResource("2_a3l8o")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_acp1m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk7vf"]
 atlas = ExtResource("2_a3l8o")
-region = Rect2(32, 32, 32, 32)
+region = Rect2(160, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ka5rd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_26afr"]
 atlas = ExtResource("2_a3l8o")
-region = Rect2(64, 32, 32, 32)
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5atd"]
+atlas = ExtResource("2_a3l8o")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2k8h"]
+atlas = ExtResource("2_a3l8o")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1oy0q"]
+atlas = ExtResource("2_a3l8o")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88iul"]
+atlas = ExtResource("2_a3l8o")
+region = Rect2(320, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0a6fj"]
 atlas = ExtResource("2_a3l8o")
@@ -44,17 +60,34 @@ region = Rect2(0, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7hb4y")
+"texture": SubResource("AtlasTexture_kkidc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_acp1m")
+"texture": SubResource("AtlasTexture_wk7vf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ka5rd")
+"texture": SubResource("AtlasTexture_26afr")
 }],
 "loop": true,
 "name": &"attack",
-"speed": 8.0
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5atd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2k8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1oy0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88iul")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -111,8 +144,7 @@ shape = SubResource("RectangleShape2D_d2i0p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_4k0lk")
-animation = &"attack"
-frame_progress = 0.309806
+animation = &"die"
 
 [node name="DashParticlesL" type="GPUParticles2D" parent="."]
 position = Vector2(0, -13)
@@ -136,5 +168,6 @@ stream = ExtResource("4_32hc7")
 [node name="DashStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_xjkmh")
 
+[connection signal="died" from="." to="." method="_on_died"]
 [connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]

@@ -27,8 +27,6 @@ func _process(delta: float) -> void:
 		if t >= 1:
 			state = State.OPEN
 			$StaticBody2D/CollisionShape2D.disabled = true
-			$StaticBody2D/CollisionShape2D2.disabled = true
-			$StaticBody2D/CollisionShape2D3.disabled = true
 		$Sprite.position.x = open_curve.sample(t)
 	elif state == State.CLOSING:
 		if t >= 1:
@@ -44,14 +42,10 @@ func unlock():
 func unlock_immediately():
 	state = State.OPEN
 	$StaticBody2D/CollisionShape2D.disabled = true
-	$StaticBody2D/CollisionShape2D2.disabled = true
-	$StaticBody2D/CollisionShape2D3.disabled = true
 	$Sprite.position.x = open_curve.sample(1)
 	
 func lock():
 	$StaticBody2D/CollisionShape2D.disabled = false
-	$StaticBody2D/CollisionShape2D2.disabled = false
-	$StaticBody2D/CollisionShape2D3.disabled = false
 	if state == State.CLOSED:
 		return
 	t = 0

@@ -38,7 +38,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not alive:
-		sprite.speed_scale = 0
 		return
 	
 
@@ -162,3 +161,8 @@ func _process(delta: float) -> void:
 	
 func _lethal() -> bool:
 	return current_attack_state == AttackingStates.BITING
+
+func _on_died() -> void:
+	sprite.play("die")
+	print("ded")
+	$BiteStreamPlayer.stop()

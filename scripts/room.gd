@@ -4,6 +4,7 @@ extends Node2D
 const NORMAL_ENCOUNTERS = [
 	preload("res://scenes/encounters/beetle_encounter.tscn"),
 	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
+	preload("res://scenes/encounters/rolypoly_encounter.tscn"),
 ]
 	
 const BOSS_ENCOUNTERS = [
