@@ -57,6 +57,7 @@ layout_mode = 2
 size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
+value = 1.0
 
 [node name="MainMenuAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_y6n10")

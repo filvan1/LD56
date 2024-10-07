@@ -50,7 +50,7 @@ layout_mode = 2
 [node name="ContinueButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "CONTIUNUE"
+text = "CONTINUE"
 
 [node name="QuitButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
