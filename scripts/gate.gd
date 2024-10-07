@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 			$StaticBody2D/CollisionShape2D.disabled = true
 		$Sprite.position.x = open_curve.sample(t)
 	elif state == State.CLOSING:
-		if t >= 1:
+		if t >= 2:
 			state = State.CLOSED
 		$Sprite.position.x = open_curve.sample(1 - t)
 
