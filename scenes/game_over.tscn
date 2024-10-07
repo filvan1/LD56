@@ -56,5 +56,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "QUIT"
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="pressed" from="MenuLayer/container/buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MenuLayer/container/buttons/QuitButton" to="." method="_on_quit_button_pressed"]

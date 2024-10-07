@@ -94,7 +94,7 @@ func _process(delta: float) -> void:
 		
 	
 func _lethal() -> bool:
-	return true
+	return current_attack_state == AttackingStates.ROLLING
 
 func _on_died() -> void:
 	sprite.play("die")
