@@ -34,20 +34,11 @@ func _ready() -> void:
 	CurrentState = EnemyState.IDLE
 	NextState = EnemyState.IDLE
 	sprite.play("idle")
-	sprite.speed_scale = 1
+	sprite.speed_scale = 0.5
 
 func _physics_process(delta: float) -> void:
 	if not alive:
 		return
-	
-
-
-func _process(delta: float) -> void:
-	if not alive:
-		return
-		
-	super._process(delta)
-
 	match(CurrentState):
 		EnemyState.NONE: pass
 		# Moving state
@@ -55,10 +46,10 @@ func _process(delta: float) -> void:
 			match(current_move_state):
 				MoveStates.TURNING:
 					move_counter += delta
-					
+					var target_dir = rotation - 90 * move_dir
 					
 					if(move_counter < 1.0):
-						rotation = rotate_toward(rotation, rotation + 90 * move_dir, delta * 2.0)
+						rotation = rotate_toward(rotation, target_dir, delta * 2.0)
 					elif(move_counter > 1.5):
 						p0 = global_position
 						p1 = p0 + Vector2(20.0, 0.0).rotated(rotation)
@@ -68,10 +59,9 @@ func _process(delta: float) -> void:
 				MoveStates.WALKING:
 					
 					move_counter += delta
-					
-					if(move_counter < 1.0):
-						move_along_bezier(p0, p1, p2, move_counter)
-					elif(move_counter > 2.0):
+					velocity = Vector2(10.0, 0).rotated(rotation)
+					move_and_slide()
+					if(move_counter > 2.0):
 						current_move_state = MoveStates.NONE
 						CurrentState = EnemyState.IDLE
 						move_counter = 0.0
@@ -121,6 +111,8 @@ func _process(delta: float) -> void:
 					#get_bezier_position(attack_start_pos, attack_target_pos, attack_target_pos, attack_counter)
 					if(attack_counter > 1.0):
 						sprite.play("idle")
+						
+						sprite.speed_scale = 0.5
 						attack_counter = 0
 						current_attack_state = AttackingStates.NONE
 						CurrentState = EnemyState.IDLE
@@ -158,6 +150,16 @@ func _process(delta: float) -> void:
 						
 			
 		CurrentState = NextState
+
+
+
+func _process(delta: float) -> void:
+	if not alive:
+		return
+		
+	super._process(delta)
+
+	
 	
 func _lethal() -> bool:
 	return current_attack_state == AttackingStates.BITING
