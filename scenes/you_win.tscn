@@ -1,61 +1,89 @@
-[gd_scene load_steps=4 format=3 uid="uid://boid5lnb7ash1"]
+[gd_scene load_steps=10 format=3 uid="uid://ddfh0jir8r0bc"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_t03ui"]
-
-[sub_resource type="Curve" id="Curve_j4xls"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_b4dlk"]
-curve = SubResource("Curve_j4xls")
+[ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_onbc3"]
+[ext_resource type="Texture2D" uid="uid://bnp85osc7unxd" path="res://textures/ui/youwintext.png" id="3_knccn"]
+[ext_resource type="Texture2D" uid="uid://dxfeusnyebl1p" path="res://textures/ui/retrybutton.png" id="4_vr054"]
+[ext_resource type="Texture2D" uid="uid://c2j8w6ruvkxm7" path="res://textures/ui/retrybuttonhover.png" id="5_dsem5"]
+[ext_resource type="BitMap" uid="uid://bk1uws0up0wtv" path="res://textures/ui/retrybutton_mask.png" id="6_ghph4"]
+[ext_resource type="Texture2D" uid="uid://ck57kyavrk3u8" path="res://textures/ui/quitbutton.png" id="7_2wywl"]
+[ext_resource type="Texture2D" uid="uid://bx2imwel1u68s" path="res://textures/ui/quitbuttonhover.png" id="8_5n7y4"]
+[ext_resource type="BitMap" uid="uid://qpbubjocb6o8" path="res://textures/ui/quitbutton_mask.png" id="9_a8epq"]
 
 [node name="YouWin" type="Control"]
 top_level = true
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(1024, 1024)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 256.0
-scale = Vector2(1, 0.982409)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00295, 1)
 script = ExtResource("1_t03ui")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
-self_modulate = Color(1, 1, 1, 0.215686)
-top_level = true
 offset_right = 256.0
 offset_bottom = 256.0
-texture = SubResource("CurveTexture_b4dlk")
+texture = ExtResource("2_onbc3")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
-[node name="container" type="VBoxContainer" parent="MenuLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer"]
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 192.0
-offset_bottom = 206.0
+offset_top = 49.885
+offset_right = 206.0
+offset_bottom = 163.885
 
-[node name="title" type="RichTextLabel" parent="MenuLayer/container"]
-clip_contents = false
-custom_minimum_size = Vector2(64, 20)
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]YOU WIN"
-scroll_active = false
-
-[node name="buttons" type="VBoxContainer" parent="MenuLayer/container"]
+[node name="spacer_5" type="Control" parent="MenuLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 55.95)
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="MenuLayer/container/buttons"]
+[node name="gameover" type="TextureRect" parent="MenuLayer/VBoxContainer/spacer_5"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "RETRY"
+offset_left = -17.535
+offset_top = -1.045
+offset_right = 146.465
+offset_bottom = 45.955
+scale = Vector2(1.00321, 1)
+texture = ExtResource("3_knccn")
+stretch_mode = 2
 
-[node name="QuitButton" type="Button" parent="MenuLayer/container/buttons"]
+[node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "QUIT"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="spacer_5" type="Control" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(0, 32.06)
+layout_mode = 2
 
-[connection signal="pressed" from="MenuLayer/container/buttons/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuLayer/container/buttons/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="retrybutton" type="TextureButton" parent="MenuLayer/VBoxContainer/ButtonsContainer/spacer_5"]
+layout_mode = 2
+offset_left = -8.875
+offset_top = -13.46
+offset_right = 147.125
+offset_bottom = 32.54
+texture_normal = ExtResource("4_vr054")
+texture_hover = ExtResource("5_dsem5")
+texture_click_mask = ExtResource("6_ghph4")
+
+[node name="spacer_4" type="Control" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="quitbutton" type="TextureButton" parent="MenuLayer/VBoxContainer/spacer_4"]
+layout_mode = 2
+offset_left = 17.1
+offset_top = 38.63
+offset_right = 168.1
+offset_bottom = 65.63
+scale = Vector2(0.993027, 1.00356)
+texture_normal = ExtResource("7_2wywl")
+texture_hover = ExtResource("8_5n7y4")
+texture_click_mask = ExtResource("9_a8epq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/spacer_5/retrybutton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MenuLayer/VBoxContainer/spacer_4/quitbutton" to="." method="_on_quit_button_pressed"]

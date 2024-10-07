@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://drfdj5sutodh0"]
+[gd_scene load_steps=12 format=3 uid="uid://drfdj5sutodh0"]
 
 [ext_resource type="PackedScene" uid="uid://bc34mteplgg13" path="res://scenes/map_generator.tscn" id="1_r0uww"]
 [ext_resource type="PackedScene" uid="uid://delg17ewn0h2t" path="res://scenes/player.tscn" id="4_cieux"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
+[ext_resource type="PackedScene" uid="uid://ddfh0jir8r0bc" path="res://scenes/you_win.tscn" id="10_brnh2"]
 [ext_resource type="PackedScene" uid="uid://dxslfmhpsglig" path="res://scenes/pause_menu.tscn" id="10_gphms"]
-[ext_resource type="PackedScene" uid="uid://cixasxcxg48u7" path="res://scenes/game_over.tscn" id="11_4x2kj"]
+[ext_resource type="PackedScene" uid="uid://c06gfxs245gpj" path="res://scenes/game_over.tscn" id="11_4x2kj"]
 
 [sub_resource type="Curve" id="Curve_cmcic"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.327338, 0.0984148), 0.550859, 0.550859, 0, 0, Vector2(0.507194, 0.497688), 2.88435, 2.88435, 0, 0, Vector2(1, 1), -1.8159e-07, 0.0, 0, 0]
@@ -17,6 +18,7 @@ point_count = 4
 [node name="World" type="Node2D"]
 
 [node name="LevelManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_r0uww")]
+scale = Vector2(0.986092, 1)
 player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("4_cieux")]
@@ -60,8 +62,14 @@ offset_top = 308.0
 offset_right = 100.0
 offset_bottom = 564.0
 
+[node name="YouWin" parent="." instance=ExtResource("10_brnh2")]
+offset_left = -306.0
+offset_top = -250.0
+offset_right = -306.0
+offset_bottom = -250.0
+
 [connection signal="encounter_finish" from="LevelManager" to="Camera/HealthBar" method="_on_level_manager_encounter_finish"]
-[connection signal="encounter_finish" from="LevelManager" to="GameOver" method="_on_level_manager_encounter_finish"]
+[connection signal="encounter_finish" from="LevelManager" to="YouWin" method="_on_level_manager_encounter_finish"]
 [connection signal="encounter_start" from="LevelManager" to="Camera/HealthBar" method="_on_level_manager_encounter_start"]
 [connection signal="die" from="Player" to="AudioStreamPlayer" method="stop"]
 [connection signal="die" from="Player" to="GameOver" method="_on_player_die"]
@@ -70,3 +78,4 @@ offset_bottom = 564.0
 [connection signal="pause_game" from="Player" to="PauseMenu" method="_on_player_pause_game"]
 [connection signal="camera_land" from="Camera" to="LevelManager" method="_on_camera_camera_land"]
 [connection signal="win_for_real" from="GameOver" to="AudioStreamPlayer" method="stop"]
+[connection signal="win_for_real" from="YouWin" to="AudioStreamPlayer" method="stop"]
