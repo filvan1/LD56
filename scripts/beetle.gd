@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 					
 					velocity = -Vector2(5.0, 0).rotated(target_dir.angle())
 					move_and_slide()
-					if(target_angle_diff < 0.01 && attack_counter > 2.0):
+					if(target_angle_diff < 0.01 && attack_counter > 3.0):
 						attack_counter = 0
 						attack_start_pos = global_position
 						attack_target_pos = global_position + (player.get_control_position() - global_position).normalized() * 50.0
