@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqaw5juj53epg"]
+[gd_scene load_steps=17 format=3 uid="uid://dqaw5juj53epg"]
 
 [ext_resource type="Script" path="res://scripts/beetle.gd" id="1_wvsy4"]
 [ext_resource type="Texture2D" uid="uid://0je5ijstclbd" path="res://textures/StagBeetle.png" id="2_a3l8o"]
 [ext_resource type="Texture2D" uid="uid://1iydg1el0goa" path="res://textures/StagBeetle_flipped.png" id="3_hmirm"]
+[ext_resource type="AudioStream" uid="uid://cgvxpn56o6o0g" path="res://sounds/bite.wav" id="4_32hc7"]
+[ext_resource type="AudioStream" uid="uid://b1itnwddg5hms" path="res://sounds/dash.wav" id="5_xjkmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2i0p"]
 
@@ -127,6 +129,12 @@ amount = 16
 process_material = SubResource("ParticleProcessMaterial_1alp1")
 lifetime = 0.3
 one_shot = true
+
+[node name="BiteStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_32hc7")
+
+[node name="DashStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_xjkmh")
 
 [connection signal="body_entered" from="Area" to="." method="_on_collider_body_entered"]
 [connection signal="body_entered" from="Area" to="." method="_on_weapon_body_entered"]

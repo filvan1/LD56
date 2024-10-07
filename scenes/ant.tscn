@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwvu5v5kgsed0"]
+[gd_scene load_steps=14 format=3 uid="uid://bwvu5v5kgsed0"]
 
 [ext_resource type="Texture2D" uid="uid://g5uyxgf1mv8t" path="res://textures/ant.png" id="1_apb61"]
 [ext_resource type="Script" path="res://scripts/ant.gd" id="1_j8bc2"]
+[ext_resource type="AudioStream" uid="uid://b6w8yvtge4if8" path="res://sounds/tap.wav" id="3_1uiba"]
 [ext_resource type="AudioStream" uid="uid://bgseu0sv1kl35" path="res://sounds/click.wav" id="3_74rry"]
 
 [sub_resource type="Curve" id="Curve_4rsrx"]
@@ -89,7 +90,10 @@ process_material = SubResource("ParticleProcessMaterial_ik8ki")
 lifetime = 0.5
 one_shot = true
 
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="ClickAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1uiba")
+
+[node name="LandAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_74rry")
-volume_db = 2.0
-pitch_scale = 0.01
+volume_db = 8.0
+pitch_scale = 8.0

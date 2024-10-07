@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 		self.state = AntState.SWARMING
 
 func _land():
+	$LandAudioPlayer.play()
 	state = AntState.HOMING
 	
 func die():
@@ -66,12 +67,11 @@ func _physics_process(delta: float) -> void:
 			current_tick_number += 1
 			murder_timer = 0
 			$ParticleEmitter.restart()
-			$AudioPlayer.play()
+			$ClickAudioPlayer.play()
 			
 		
 		if current_tick_number >= max_damage_ticks:
 			
-			current_enemy = null
 			$ParticleEmitter.emitting = false
 			state = AntState.HOMING
 			murder_timer = 0
@@ -128,10 +128,14 @@ func _physics_process(delta: float) -> void:
 			
 func stop_murder():
 	print("murder done")
+	current_enemy.died.disconnect(stop_murder)
+	current_enemy.disengage.disconnect(fling_away)
 	current_enemy = null
 	state = AntState.HOMING
 
 func fling_away():
+	current_enemy.died.disconnect(stop_murder)
+	current_enemy.disengage.disconnect(fling_away)
 	current_enemy = null
 	origin = position
 	target = position + fling_strength * Vector2(randf(), randf())
@@ -143,11 +147,7 @@ func on_hit(enemy: Enemy):
 	current_enemy.died.connect(stop_murder)
 	current_enemy.disengage.connect(fling_away)
 	
-	$AudioPlayer.volume_db = 8
-	$AudioPlayer.pitch_scale = 0.5
-	$AudioPlayer.play()
-	$AudioPlayer.volume_db = 8
-	$AudioPlayer.pitch_scale = 8.0
+	$ClickAudioPlayer.play()
 	
 	murder_target_position_offset = global_position - enemy.global_position
 	murder_target_rotation_offset = enemy.rotation

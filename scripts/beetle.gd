@@ -93,6 +93,8 @@ func _process(delta: float) -> void:
 						attack_start_pos = global_position
 						attack_target_pos = global_position + (player.get_control_position() - global_position).normalized() * 50.0
 						current_attack_state = AttackingStates.CHARGING
+						
+						$DashStreamPlayer.play()
 						disengage.emit()
 						on_charge.emit()
 						$/root/World/Camera.shake()
@@ -111,6 +113,7 @@ func _process(delta: float) -> void:
 					if(attack_counter > 0.5):
 						attack_counter = 0
 						current_attack_state = AttackingStates.BITING
+						$BiteStreamPlayer.play()
 						sprite.play("attack")
 					
 				AttackingStates.BITING:
