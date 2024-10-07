@@ -4,6 +4,7 @@ extends Node2D
 const NORMAL_ENCOUNTERS = [
 	preload("res://scenes/encounters/beetle_encounter.tscn"),
 	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
+	preload("res://scenes/encounters/rolypoly_encounter.tscn"),
 ]
 
 const TREASURE_ENCOUNTERS = [
@@ -57,8 +58,14 @@ func _ready() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	
 	if encounter_scene == null:
-		encounter_scene = NORMAL_ENCOUNTERS.pick_random()
+		if layout.contains("B"):
+			encounter_scene = BOSS_ENCOUNTERS.pick_random()
+		else:
+			encounter_scene = NORMAL_ENCOUNTERS.pick_random()
+
 	encounter = encounter_scene.instantiate()
+	encounter.is_boss = layout.contains("B")
+		
 	add_child(encounter)
 
 	for child in encounter.get_children():

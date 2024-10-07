@@ -10,6 +10,7 @@ var state = AntState.SWARMING
 
 var new_velocity: Vector2 = Vector2.ZERO
 var max_speed: float = 40.0
+var min_return_speed: float = 60.0
 
 var origin: Vector2
 var target: Vector2
@@ -55,7 +56,6 @@ func yeet(to: Vector2):
 	
 func _physics_process(delta: float) -> void:
 	if not alive:
-		sprite.play("idle")
 		return
 
 	if state == AntState.MURDERING:
@@ -82,7 +82,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		z_index = 0
 
-	if state == AntState.SWARMING or state == AntState.HOMING:
+	if state == AntState.SWARMING:
 		var speed = new_velocity.length()
 		velocity = new_velocity
 		if speed > max_speed:
@@ -97,7 +97,21 @@ func _physics_process(delta: float) -> void:
 		else:
 			sprite.play("idle")
 			
-			
+	if state == AntState.HOMING:
+		var speed = new_velocity.length()
+		velocity = new_velocity
+		if speed < min_return_speed:
+			velocity = new_velocity.normalized() * min_return_speed
+		
+		move_and_slide()
+		
+		velocity = get_real_velocity()
+		if velocity.length_squared() > 1.0:
+			rotation = atan2(velocity.y, velocity.x)
+			sprite.play("walk")
+		else:
+			sprite.play("idle")
+		
 	if state == AntState.YEETING:
 		t += delta
 		
