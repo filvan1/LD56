@@ -5,6 +5,11 @@ signal win_for_real
 @onready var win_audio = preload("res://sounds/fanfar.wav")
 @onready var lose_audio = preload("res://sounds/you_died.wav")
 
+func _ready() -> void:
+	hide()
+	$MenuLayer.hide()
+	$Background.hide()
+
 func load_level(level_path):
 	# Load a level scene
 	var level = load(level_path)

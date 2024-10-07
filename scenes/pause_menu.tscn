@@ -1,70 +1,106 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp3vfby37ujd1"]
+[gd_scene load_steps=13 format=3 uid="uid://dxslfmhpsglig"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_odmeu"]
-
-[sub_resource type="Curve" id="Curve_j4xls"]
-
-[sub_resource type="CurveTexture" id="CurveTexture_b4dlk"]
-curve = SubResource("Curve_j4xls")
+[ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_frtkw"]
+[ext_resource type="Texture2D" uid="uid://bjxy5nlytqff2" path="res://textures/ui/pausedtext.png" id="3_0sijt"]
+[ext_resource type="Texture2D" uid="uid://8plufi2eeemh" path="res://textures/ui/continuebutton.png" id="3_7fa2u"]
+[ext_resource type="BitMap" uid="uid://ckj4u3j6qipvj" path="res://textures/ui/continuebutton_mask.png" id="5_j3uou"]
+[ext_resource type="Texture2D" uid="uid://bf7e3cisthdb7" path="res://textures/ui/continuebuttonhover.png" id="5_rpewe"]
+[ext_resource type="Texture2D" uid="uid://dqsdidd2awqco" path="res://textures/ui/volumebuttonmini.png" id="6_3yoc4"]
+[ext_resource type="Texture2D" uid="uid://cyuq50pex7f4m" path="res://textures/ui/StagBeetleOpen.png" id="7_1xp41"]
+[ext_resource type="Texture2D" uid="uid://c1sxil1mfgi5n" path="res://textures/ui/StagBeetleClosed.png" id="8_lx3m3"]
+[ext_resource type="Texture2D" uid="uid://ck57kyavrk3u8" path="res://textures/ui/quitbutton.png" id="9_xv8hr"]
+[ext_resource type="Texture2D" uid="uid://bx2imwel1u68s" path="res://textures/ui/quitbuttonhover.png" id="10_qbgsy"]
+[ext_resource type="BitMap" uid="uid://qpbubjocb6o8" path="res://textures/ui/quitbutton_mask.png" id="10_vjdlg"]
 
 [node name="PauseMenu" type="Control"]
 top_level = true
-custom_minimum_size = Vector2(256, 256)
+custom_minimum_size = Vector2(1024, 1024)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 256.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_odmeu")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
-self_modulate = Color(1, 1, 1, 0.215686)
-top_level = true
 offset_right = 256.0
 offset_bottom = 256.0
-texture = SubResource("CurveTexture_b4dlk")
+texture = ExtResource("2_frtkw")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer"]
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 192.0
-offset_bottom = 206.0
+offset_top = 49.885
+offset_right = 206.0
+offset_bottom = 163.885
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuLayer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(64, 20)
+[node name="pause" type="TextureRect" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[center]PAUSE"
-scroll_active = false
+texture = ExtResource("3_0sijt")
+stretch_mode = 2
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+[node name="spacer_5" type="Control" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(0, 32.06)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "CONTINUE"
 
-[node name="QuitButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+[node name="continuebutton" type="TextureButton" parent="MenuLayer/VBoxContainer/ButtonsContainer/spacer_5"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "QUIT"
+offset_left = -8.875
+offset_top = 4.35
+offset_right = 142.125
+offset_bottom = 36.35
+texture_normal = ExtResource("3_7fa2u")
+texture_hover = ExtResource("5_rpewe")
+texture_click_mask = ExtResource("5_j3uou")
 
-[node name="VolumeLabel" type="Label" parent="MenuLayer/VBoxContainer"]
+[node name="spacer_3" type="Control" parent="MenuLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2.825)
 layout_mode = 2
-text = "Volume"
-horizontal_alignment = 1
 
-[node name="VolumeSlider" type="HSlider" parent="MenuLayer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
+texture = ExtResource("6_3yoc4")
+stretch_mode = 2
+
+[node name="spacer_2" type="Control" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSlider" type="HSlider" parent="MenuLayer/VBoxContainer/spacer_2"]
+layout_mode = 2
+offset_top = -4.36
+offset_right = 151.0
+offset_bottom = 27.64
 size_flags_vertical = 1
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("7_1xp41")
+theme_override_icons/grabber_highlight = ExtResource("8_lx3m3")
 max_value = 1.0
 step = 0.01
+value = 1.0
 
-[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
-[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="value_changed" from="MenuLayer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[node name="spacer_4" type="Control" parent="MenuLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="quitbutton" type="TextureButton" parent="MenuLayer/VBoxContainer/spacer_4"]
+layout_mode = 2
+offset_left = 9.375
+offset_top = 33.435
+offset_right = 160.375
+offset_bottom = 60.435
+scale = Vector2(0.993027, 1.00356)
+texture_normal = ExtResource("9_xv8hr")
+texture_hover = ExtResource("10_qbgsy")
+texture_click_mask = ExtResource("10_vjdlg")
+
+[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/spacer_5/continuebutton" to="." method="_on_continue_button_pressed"]
+[connection signal="value_changed" from="MenuLayer/VBoxContainer/spacer_2/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="MenuLayer/VBoxContainer/spacer_4/quitbutton" to="." method="_on_quit_button_pressed"]

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvbd7uhyjfbxp" path="res://scenes/health_bar.tscn" id="7_l2jr0"]
 [ext_resource type="Curve" uid="uid://1p4ga38jct1m" path="res://misc/camera_shake.tres" id="7_rqdsw"]
 [ext_resource type="Curve" uid="uid://bkdj3qf467q66" path="res://misc/camera_shake_y.tres" id="8_a2ukd"]
-[ext_resource type="PackedScene" uid="uid://dp3vfby37ujd1" path="res://scenes/pause_menu.tscn" id="10_gphms"]
+[ext_resource type="PackedScene" uid="uid://dxslfmhpsglig" path="res://scenes/pause_menu.tscn" id="10_gphms"]
 [ext_resource type="PackedScene" uid="uid://cixasxcxg48u7" path="res://scenes/game_over.tscn" id="11_4x2kj"]
 
 [sub_resource type="Curve" id="Curve_cmcic"]
@@ -46,7 +46,7 @@ player = NodePath("../../Player")
 [node name="Camera" type="Camera2D" parent="Camera"]
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_gphms")]
-process_mode = 2
+process_mode = 3
 offset_left = -526.0
 offset_top = -324.0
 offset_right = -526.0

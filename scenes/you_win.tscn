@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cixasxcxg48u7"]
+[gd_scene load_steps=4 format=3 uid="uid://boid5lnb7ash1"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_tsvtv"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_t03ui"]
 
 [sub_resource type="Curve" id="Curve_j4xls"]
 
 [sub_resource type="CurveTexture" id="CurveTexture_b4dlk"]
 curve = SubResource("Curve_j4xls")
 
-[node name="GameOver" type="Control"]
+[node name="YouWin" type="Control"]
 top_level = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 256.0
-script = ExtResource("1_tsvtv")
+scale = Vector2(1, 0.982409)
+script = ExtResource("1_t03ui")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0
@@ -38,7 +39,7 @@ clip_contents = false
 custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center]GAME OVER"
+text = "[center]YOU WIN"
 scroll_active = false
 
 [node name="buttons" type="VBoxContainer" parent="MenuLayer/container"]
