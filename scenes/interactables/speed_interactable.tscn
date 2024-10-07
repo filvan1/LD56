@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://btfyhb8xohhvb"]
+
+[ext_resource type="Texture2D" uid="uid://cbthpy1tpbc8d" path="res://textures/speed-ant.png" id="1_m2008"]
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="1_qcvm4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ud5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1j63"]
+atlas = ExtResource("1_m2008")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5eqf"]
+atlas = ExtResource("1_m2008")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc0ta"]
+atlas = ExtResource("1_m2008")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la0aa"]
+atlas = ExtResource("1_m2008")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx6ck"]
+atlas = ExtResource("1_m2008")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_degg6"]
+atlas = ExtResource("1_m2008")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwyfw"]
+atlas = ExtResource("1_m2008")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qk43v"]
+atlas = ExtResource("1_m2008")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l6534"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1j63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5eqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc0ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la0aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx6ck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_degg6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwyfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qk43v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[node name="SpeedInteractable" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_qcvm4")
+interactable_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w8ud5")
+
+[node name="UpgradeIcon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l6534")
+autoplay = "default"
+frame_progress = 0.186519
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

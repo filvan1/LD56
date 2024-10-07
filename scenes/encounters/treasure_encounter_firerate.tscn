@@ -1,66 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://d4ihp55egsosw"]
+[gd_scene load_steps=5 format=3 uid="uid://d4ihp55egsosw"]
 
 [ext_resource type="Script" path="res://scripts/encounter.gd" id="1_sviq8"]
 [ext_resource type="Texture2D" uid="uid://cef7grveb7el7" path="res://textures/firerate.png" id="3_dg2ys"]
-[ext_resource type="Texture2D" uid="uid://cjde4dpnb6xm" path="res://textures/firerate-ant.png" id="4_0oopw"]
-[ext_resource type="PackedScene" uid="uid://cjthanc1ilqjg" path="res://scenes/interactables/jar_interactable.tscn" id="4_ptp68"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyxu1"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyi2u"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phsn1"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cd3hh"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eyk34"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ruqwy"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g436a"]
-atlas = ExtResource("4_0oopw")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2sid2"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lyxu1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lyi2u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phsn1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cd3hh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eyk34")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ruqwy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g436a")
-}],
-"loop": true,
-"name": &"default",
-"speed": 11.0
-}]
+[ext_resource type="PackedScene" uid="uid://dft7vudd6kf36" path="res://scenes/interactables/fire_interactable.tscn" id="4_pra60"]
+[ext_resource type="PackedScene" uid="uid://cus1p71eahi8y" path="res://scenes/interactables/jar_interactable.tscn" id="4_ptp68"]
 
 [node name="StartEncounter" type="Node2D"]
 script = ExtResource("1_sviq8")
@@ -69,11 +12,11 @@ script = ExtResource("1_sviq8")
 z_as_relative = false
 texture = ExtResource("3_dg2ys")
 
-[node name="UpgradeIcon" type="AnimatedSprite2D" parent="."]
-position = Vector2(-70, -61)
-sprite_frames = SubResource("SpriteFrames_2sid2")
-autoplay = "default"
-frame_progress = 0.499991
+[node name="FireInteractable" parent="." instance=ExtResource("4_pra60")]
+position = Vector2(-71, -60)
 
 [node name="JarInteractable" parent="." instance=ExtResource("4_ptp68")]
 position = Vector2(58, -64)
+
+[connection signal="picked" from="FireInteractable" to="JarInteractable" method="_on_picked"]
+[connection signal="picked" from="JarInteractable" to="FireInteractable" method="_on_picked"]

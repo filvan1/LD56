@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://7iu7yi00u8hw"]
+
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="1_2aih8"]
+[ext_resource type="Texture2D" uid="uid://ck7bq61argmwr" path="res://textures/damage-ant.png" id="2_s7ua1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ud5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a30gj"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmbax"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooiia"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn6lr"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg1qx"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx7uk"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea25e"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vytd"]
+atlas = ExtResource("2_s7ua1")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qav7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a30gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmbax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooiia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn6lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg1qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx7uk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea25e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vytd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="DamageInteractable" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_2aih8")
+interactable_type = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w8ud5")
+
+[node name="UpgradeIcon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4qav7")
+autoplay = "default"
+frame = 5
+frame_progress = 0.760425
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -37,6 +37,11 @@ func get_alive_ants():
 
 func get_ant_count():
 	return get_child_count()
+	
+func add_ant_damage(value: float):
+	print("adding damage")
+	for a in get_children():
+		a.set_damage(value, true)
 
 func spawn_ant(spawn_position: Vector2):
 	var instance: Ant = ant_scene.instantiate()

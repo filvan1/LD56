@@ -28,7 +28,7 @@ signal pause_game
 func _ready() -> void:
 	_spawn_ants(initial_ants, global_position)# Replace with function body.
 
-func _spawn_ants(n: int, spawn_position: Vector2):
+func _spawn_ants(n: int, spawn_position = $Control.global_position):
 	for i in n:
 		swarm.spawn_ant(spawn_position)
 	
@@ -40,6 +40,9 @@ func get_health():
 	
 func get_ammo():
 	return swarm.get_swarming_ants().size()
+
+func damage_upgrade(value: float):
+	swarm.add_ant_damage(value)
 	
 func get_room_coords():
 	return Vector2i(($Control.global_position / Vector2(256, 256)).floor())
