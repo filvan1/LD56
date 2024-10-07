@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dft7vudd6kf36"]
 
 [ext_resource type="Script" path="res://scripts/interactable.gd" id="1_lqc47"]
-[ext_resource type="Texture2D" uid="uid://cjde4dpnb6xm" path="res://textures/firerate-ant.png" id="2_4ofnv"]
+[ext_resource type="Texture2D" uid="uid://b4alywf8oeeon" path="res://textures/firerate-ant.png" id="2_4ofnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ud5"]
 
