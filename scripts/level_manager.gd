@@ -52,7 +52,6 @@ func generate():
 	for child in $Rooms.get_children():
 		$Rooms.remove_child(child)
 		
-	print(level_grid)
 	rooms = {}
 	
 	for row in level_grid:
@@ -88,7 +87,7 @@ func generate():
 	# Open all start room neighbors.
 	
 	
-	print($Rooms.get_children())
+	#print($Rooms.get_children())
 	print("start position: ", start_room)
 	print(get_start_position())
 

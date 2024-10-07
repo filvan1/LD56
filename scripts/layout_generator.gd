@@ -73,9 +73,23 @@ func generate_level():
 	grid[boss_position.x][boss_position.y] += "-B"  # Mark the boss room
 		
 	
-	#replace null values with empty string
+	# replace null values with empty string
 	grid = replace_null_values(grid)
 	
+	# Place treasure rooms
+	
+	var possible_treasure_rooms = []
+	var treasure_rooms = []
+	for room in room_positions:
+		if room != entrance && room != exit:
+			possible_treasure_rooms.append(room)
+	
+	possible_treasure_rooms.sort_custom(func(a, b): return len(grid[a[0]][a[1]]) < len(grid[b[0]][b[1]]))
+	treasure_rooms.append_array(possible_treasure_rooms.slice(0,3))
+
+	for room in treasure_rooms:
+		grid[room[0]][room[1]] += "-T"
+		
 	print_grid()
 	return grid
 

@@ -5,6 +5,10 @@ const NORMAL_ENCOUNTERS = [
 	preload("res://scenes/encounters/beetle_encounter.tscn"),
 	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
 ]
+
+const TREASURE_ENCOUNTERS = [
+	preload("res://scenes/encounters/treasure_encounter_1.tscn"),
+]
 	
 const BOSS_ENCOUNTERS = [
 	preload("res://scenes/encounters/dungie_encounter.tscn"),
