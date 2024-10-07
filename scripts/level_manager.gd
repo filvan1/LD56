@@ -16,6 +16,7 @@ var active_room: Room
 var rooms: Dictionary = {}
 
 const RoomNode = preload("res://scenes/room.tscn")
+@onready var altmusic = preload("res://sounds/synth.mp3")
 
 signal encounter_start(encounter: Encounter)
 signal encounter_finish(encounter: Encounter)
@@ -25,6 +26,11 @@ func enter_room(room: Vector2i, teleport: bool):
 		active_room.on_leave()
 	active_room = get_room(room)
 	active_room.on_enter()
+	if active_room.encounter.is_boss:
+		var audioplayer: AudioStreamPlayer = get_parent().get_node("AudioStreamPlayer")
+		audioplayer.stop()
+		audioplayer.stream = altmusic
+		audioplayer.play()
 	print("open: ", room_is_open(room))
 
 func get_room(at: Vector2i) -> Room:

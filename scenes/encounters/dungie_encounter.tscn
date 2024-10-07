@@ -9,3 +9,4 @@ is_boss = true
 
 [node name="Dungie" parent="." instance=ExtResource("1_vv875")]
 position = Vector2(15, -73)
+max_health = 2000.0

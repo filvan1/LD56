@@ -28,7 +28,7 @@ var cleared = false
 var layout: String
 
 @export var encounter_scene: PackedScene
-var encounter: Encounter
+@export var encounter: Encounter
 
 func on_leave():
 	print("left ", coords)
