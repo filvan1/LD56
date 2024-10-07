@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bqpyiap0oyrrp"]
+[gd_scene load_steps=21 format=3 uid="uid://ddfh0jir8r0bc"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_t03ui"]
 [ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_onbc3"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8o4gssj7yfyo"]
+
+[ext_resource type="Script" path="res://scripts/encounter.gd" id="1_lr1u8"]
+[ext_resource type="PackedScene" uid="uid://dk72q68bnphu8" path="res://scenes/rolypoly.tscn" id="2_s2xgl"]
+
+[node name="DoubleRolyPolyEncounter" type="Node2D"]
+script = ExtResource("1_lr1u8")
+
+[node name="RolyPoly" parent="." instance=ExtResource("2_s2xgl")]
+position = Vector2(-59, 53)
+
+[node name="RolyPoly2" parent="." instance=ExtResource("2_s2xgl")]
+position = Vector2(51, -55)

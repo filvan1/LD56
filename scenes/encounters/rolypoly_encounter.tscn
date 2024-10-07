@@ -7,3 +7,4 @@
 script = ExtResource("1_igtvj")
 
 [node name="RolyPoly" parent="." instance=ExtResource("2_n3tsg")]
+max_health = 200.0

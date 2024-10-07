@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://codcae60atigr"]
+
+[ext_resource type="Script" path="res://scripts/encounter.gd" id="1_3k7l0"]
+[ext_resource type="PackedScene" uid="uid://dqaw5juj53epg" path="res://scenes/beetle.tscn" id="2_tv4wa"]
+[ext_resource type="PackedScene" uid="uid://dk72q68bnphu8" path="res://scenes/rolypoly.tscn" id="3_5jqbw"]
+
+[node name="ComboEncounter" type="Node2D"]
+script = ExtResource("1_3k7l0")
+
+[node name="Beetle" parent="." instance=ExtResource("2_tv4wa")]
+position = Vector2(51, -55)
+
+[node name="RolyPoly" parent="." instance=ExtResource("3_5jqbw")]
+position = Vector2(-59, 53)

@@ -5,6 +5,8 @@ const NORMAL_ENCOUNTERS = [
 	preload("res://scenes/encounters/beetle_encounter.tscn"),
 	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
 	preload("res://scenes/encounters/rolypoly_encounter.tscn"),
+	preload("res://scenes/encounters/double_rolypoly_encounter.tscn"),
+	preload("res://scenes/encounters/combo_encounter.tscn"),
 ]
 
 const TREASURE_ENCOUNTERS = [

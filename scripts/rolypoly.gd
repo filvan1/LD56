@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 							current_attack_state = AttackingStates.WINDUP
 							current_idle_state = IdleStates.NONE
 							timer = 0
+							sprite.play_backwards("roll")
 							NextState = EnemyState.ATTACKING
 			
 			EnemyState.ATTACKING:
