@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/encounter.gd" id="1_sviq8"]
 [ext_resource type="Texture2D" uid="uid://cef7grveb7el7" path="res://textures/firerate.png" id="3_dg2ys"]
 [ext_resource type="PackedScene" uid="uid://dft7vudd6kf36" path="res://scenes/interactables/fire_interactable.tscn" id="4_pra60"]
-[ext_resource type="PackedScene" uid="uid://cjthanc1ilqjg" path="res://scenes/interactables/jar_interactable.tscn" id="4_ptp68"]
+[ext_resource type="PackedScene" uid="uid://cus1p71eahi8y" path="res://scenes/interactables/jar_interactable.tscn" id="4_ptp68"]
 
 [node name="StartEncounter" type="Node2D"]
 script = ExtResource("1_sviq8")

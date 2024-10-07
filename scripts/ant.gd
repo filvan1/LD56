@@ -27,10 +27,17 @@ var current_tick_number = 0
 const max_damage_ticks = 5
 const tick_time = 0.5
 const fling_strength = 50.0
+var ant_damage = 10.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func set_damage(value: float, add: bool):
+	if add:
+		ant_damage += value
+	else:
+		ant_damage = value
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -63,7 +70,7 @@ func _physics_process(delta: float) -> void:
 		global_position = current_enemy.global_position + murder_target_position_offset.rotated(current_enemy.rotation - murder_target_rotation_offset)
 		
 		if murder_timer > tick_time:
-			current_enemy._take_damage(10.0)
+			current_enemy._take_damage(ant_damage)
 			current_tick_number += 1
 			murder_timer = 0
 			$ParticleEmitter.restart()

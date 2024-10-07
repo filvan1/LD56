@@ -1,83 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwaligl8x41dk"]
+[gd_scene load_steps=5 format=3 uid="uid://bwaligl8x41dk"]
 
 [ext_resource type="Script" path="res://scripts/encounter.gd" id="1_ei617"]
 [ext_resource type="Texture2D" uid="uid://ceim3o4u0ggro" path="res://textures/speed.png" id="3_2hh0s"]
-[ext_resource type="Texture2D" uid="uid://cbthpy1tpbc8d" path="res://textures/speed-ant.png" id="4_1h0p4"]
-[ext_resource type="PackedScene" uid="uid://cjthanc1ilqjg" path="res://scenes/interactables/jar_interactable.tscn" id="4_xlkae"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0iibr"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gkkkw"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gqufc"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e8p01"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phvx1"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_isi3p"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gjoso"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_er08s"]
-atlas = ExtResource("4_1h0p4")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nsdms"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0iibr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gkkkw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gqufc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e8p01")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phvx1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_isi3p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gjoso")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_er08s")
-}],
-"loop": true,
-"name": &"default",
-"speed": 15.0
-}]
+[ext_resource type="PackedScene" uid="uid://btfyhb8xohhvb" path="res://scenes/interactables/speed_interactable.tscn" id="4_0emdf"]
+[ext_resource type="PackedScene" uid="uid://cus1p71eahi8y" path="res://scenes/interactables/jar_interactable.tscn" id="4_xlkae"]
 
 [node name="StartEncounter" type="Node2D"]
 script = ExtResource("1_ei617")
-
-[node name="UpgradeIcon" type="AnimatedSprite2D" parent="."]
-z_index = 1
-position = Vector2(-69, -58)
-sprite_frames = SubResource("SpriteFrames_nsdms")
-autoplay = "default"
-frame_progress = 0.903291
 
 [node name="Background" type="Sprite2D" parent="."]
 z_as_relative = false
@@ -85,3 +14,9 @@ texture = ExtResource("3_2hh0s")
 
 [node name="JarInteractable" parent="." instance=ExtResource("4_xlkae")]
 position = Vector2(59, -65)
+
+[node name="SpeedInteractable" parent="." instance=ExtResource("4_0emdf")]
+position = Vector2(-67, -58)
+
+[connection signal="picked" from="JarInteractable" to="SpeedInteractable" method="_on_picked"]
+[connection signal="picked" from="SpeedInteractable" to="JarInteractable" method="_on_picked"]

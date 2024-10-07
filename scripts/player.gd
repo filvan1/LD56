@@ -40,6 +40,9 @@ func get_health():
 	
 func get_ammo():
 	return swarm.get_swarming_ants().size()
+
+func damage_upgrade(value: float):
+	swarm.add_ant_damage(value)
 	
 func get_room_coords():
 	return Vector2i(($Control.global_position / Vector2(256, 256)).floor())
