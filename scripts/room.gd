@@ -10,7 +10,7 @@ const NORMAL_ENCOUNTERS = [
 const TREASURE_ENCOUNTERS = [
 	preload("res://scenes/encounters/treasure_encounter_damage.tscn"),
 	preload("res://scenes/encounters/treasure_encounter_firerate.tscn"),
-	preload("res://scenes/encounters/treasure_encounter_speed.tscn"),
+	#preload("res://scenes/encounters/treasure_encounter_speed.tscn"),
 ]
 	
 const BOSS_ENCOUNTERS = [
