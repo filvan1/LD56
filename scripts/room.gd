@@ -53,7 +53,6 @@ func _ready() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	
 	if encounter_scene == null:
-		print("asuhdiasuhdiasudghauidg")
 		encounter_scene = NORMAL_ENCOUNTERS.pick_random()
 	encounter = encounter_scene.instantiate()
 	add_child(encounter)
