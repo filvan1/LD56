@@ -8,7 +8,9 @@ const NORMAL_ENCOUNTERS = [
 ]
 
 const TREASURE_ENCOUNTERS = [
-	preload("res://scenes/encounters/treasure_encounter_1.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_damage.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_firerate.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_speed.tscn"),
 ]
 	
 const BOSS_ENCOUNTERS = [
@@ -60,6 +62,8 @@ func _ready() -> void:
 	if encounter_scene == null:
 		if layout.contains("B"):
 			encounter_scene = BOSS_ENCOUNTERS.pick_random()
+		elif layout.contains("T"):
+			encounter_scene = TREASURE_ENCOUNTERS.pick_random()
 		else:
 			encounter_scene = NORMAL_ENCOUNTERS.pick_random()
 
