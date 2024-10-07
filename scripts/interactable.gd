@@ -15,7 +15,7 @@ func _on_body_entered(body:Node2D) -> void:
 	if is_instance_of(other_owner, Player):
 		match(interactable_type):
 			InteractableType.ANTS:
-				other_owner._spawn_ants(5)
+				other_owner.call_deferred("_spawn_ants", 5)
 			InteractableType.FIRE:
 				other_owner.shoot_cooldown -= 0.1
 			InteractableType.DAMAGE:

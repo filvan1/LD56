@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4amwhomgj8x3"]
+[gd_scene load_steps=10 format=3 uid="uid://b4amwhomgj8x3"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_bdkai"]
 [ext_resource type="Texture2D" uid="uid://02spu5pehprr" path="res://textures/ui/menu_bg.png" id="2_mif1j"]
+[ext_resource type="Texture2D" uid="uid://di8txca1e8rot" path="res://textures/ui/playbutton.png" id="3_gaf2f"]
 [ext_resource type="AudioStream" uid="uid://bivkgctppcyqq" path="res://sounds/ldjam56_demo_rev3.mp3" id="3_y6n10"]
+[ext_resource type="Texture2D" uid="uid://cp7ob1g1h5bs8" path="res://textures/ui/playbuttonhover.png" id="4_abbjt"]
+[ext_resource type="Texture2D" uid="uid://dqsdidd2awqco" path="res://textures/ui/volumebuttonmini.png" id="5_ofx8l"]
+[ext_resource type="BitMap" uid="uid://c2688eytbl7vg" path="res://textures/ui/play_mask.png" id="5_va8xw"]
+[ext_resource type="Texture2D" uid="uid://cyuq50pex7f4m" path="res://textures/ui/StagBeetleOpen.png" id="7_p701k"]
+[ext_resource type="Texture2D" uid="uid://c1sxil1mfgi5n" path="res://textures/ui/StagBeetleClosed.png" id="8_quuy0"]
 
 [node name="MainMenu" type="Control"]
 top_level = true
@@ -27,34 +33,48 @@ texture = ExtResource("2_mif1j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer"]
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 192.0
-offset_bottom = 192.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MenuLayer/VBoxContainer"]
-clip_contents = false
-custom_minimum_size = Vector2(64, 20)
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]Enter The BOID"
-scroll_active = false
+offset_top = 49.885
+offset_right = 206.0
+offset_bottom = 163.885
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
+[node name="PlayButton2" type="TextureButton" parent="MenuLayer/VBoxContainer/ButtonsContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Play"
+texture_normal = ExtResource("3_gaf2f")
+texture_hover = ExtResource("4_abbjt")
+texture_click_mask = ExtResource("5_va8xw")
 
-[node name="VolumeLabel" type="Label" parent="MenuLayer/VBoxContainer"]
+[node name="spacer_1" type="Control" parent="MenuLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-text = "Volume"
-horizontal_alignment = 1
 
-[node name="VolumeSlider" type="HSlider" parent="MenuLayer/VBoxContainer"]
+[node name="texture_node" type="Control" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MenuLayer/VBoxContainer/texture_node"]
+layout_mode = 2
+offset_left = 5.43
+offset_right = 147.43
+offset_bottom = 17.0
+texture = ExtResource("5_ofx8l")
+stretch_mode = 2
+
+[node name="spacer_2" type="Control" parent="MenuLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="VolumeSlider" type="HSlider" parent="MenuLayer/VBoxContainer/spacer_2"]
+layout_mode = 2
+offset_left = -7.63
+offset_top = 12.905
+offset_right = 134.37
+offset_bottom = 44.905
 size_flags_vertical = 1
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("7_p701k")
+theme_override_icons/grabber_highlight = ExtResource("8_quuy0")
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -63,5 +83,5 @@ value = 1.0
 stream = ExtResource("3_y6n10")
 autoplay = true
 
-[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="value_changed" from="MenuLayer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="MenuLayer/VBoxContainer/ButtonsContainer/PlayButton2" to="." method="_on_play_button_pressed"]
+[connection signal="value_changed" from="MenuLayer/VBoxContainer/spacer_2/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

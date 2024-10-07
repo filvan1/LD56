@@ -1,5 +1,10 @@
 extends Control
 
+func _ready() -> void:
+	hide()
+	$MenuLayer.hide()
+	$Background.hide()
+
 func load_level(level_path):
 	# Load a level scene
 	var level = load(level_path)

@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://c2688eytbl7vg"
+path="res://.godot/imported/play_mask.png-e412942ccca0df9d5f535e05e3a89be1.res"
+
+[deps]
+
+source_file="res://textures/ui/play_mask.png"
+dest_files=["res://.godot/imported/play_mask.png-e412942ccca0df9d5f535e05e3a89be1.res"]
+
+[params]
+
+create_from=1
+threshold=0.5
