@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/ldjam56_demo_rev3.mp3-858f1319c2325f9831ca45b
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
