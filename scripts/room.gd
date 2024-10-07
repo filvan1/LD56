@@ -59,6 +59,8 @@ func _ready() -> void:
 			encounter_scene = NORMAL_ENCOUNTERS.pick_random()
 
 	encounter = encounter_scene.instantiate()
+	encounter.is_boss = layout.contains("B")
+		
 	add_child(encounter)
 
 	for child in encounter.get_children():
