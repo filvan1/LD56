@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://delg17ewn0h2t"]
+[gd_scene load_steps=6 format=3 uid="uid://delg17ewn0h2t"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_iigm6"]
 [ext_resource type="Script" path="res://scripts/swarm.gd" id="2_2uxy4"]
 [ext_resource type="Texture2D" uid="uid://dbfiksexirp3g" path="res://textures/crosshair.png" id="2_7w71w"]
+[ext_resource type="AudioStream" uid="uid://eqpdlryrerwg" path="res://sounds/yeet_new.wav" id="2_54tad"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b824v"]
 radius = 5.0
@@ -20,6 +21,9 @@ motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control"]
 shape = SubResource("CircleShape2D_b824v")
+
+[node name="YeetAudioSource" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("2_54tad")
 
 [node name="Ants" type="Node2D" parent="."]
 process_physics_priority = 10

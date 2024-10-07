@@ -96,6 +96,8 @@ func _process(delta: float) -> void:
 		
 		
 func _fire(aim: Vector2):
+	$Control/YeetAudioSource.pitch_scale = 1.0 + randf_range(-.3, .3)
+	$Control/YeetAudioSource.play()
 	var candidates = swarm.get_swarming_ants()
 	if candidates.size() <= 1:
 		return
