@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/encounter.gd" id="1_yvbwr"]
 [ext_resource type="Texture2D" uid="uid://cii2efeyq33om" path="res://textures/damage.png" id="3_kpgvf"]
-[ext_resource type="PackedScene" uid="uid://cus1p71eahi8y" path="res://scenes/interactables/jar_interactable.tscn" id="4_lakb5"]
-[ext_resource type="PackedScene" uid="uid://7iu7yi00u8hw" path="res://scenes/interactables/damage_interactable.tscn" id="4_s8xdd"]
+[ext_resource type="PackedScene" uid="uid://cjthanc1ilqjg" path="res://scenes/interactables/jar_interactable.tscn" id="4_lakb5"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/damage_interactable.tscn" id="4_s8xdd"]
 
 [node name="StartEncounter" type="Node2D"]
 script = ExtResource("1_yvbwr")

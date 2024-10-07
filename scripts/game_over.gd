@@ -30,7 +30,7 @@ func _on_player_die() -> void:
 	$MenuLayer.show()
 	$Background.show()
 	$AudioStreamPlayer.stream = lose_audio
-	$AudioStreamPlayer.play()
+	$AudioStreamPlayer.play("victory")
 
 func _on_level_manager_encounter_finish(encounter:Encounter) -> void:
 	if encounter.is_boss:
@@ -40,5 +40,6 @@ func _on_level_manager_encounter_finish(encounter:Encounter) -> void:
 		$Background.show()
 		$AudioStreamPlayer.stream = win_audio
 		$AudioStreamPlayer.play()
+		$Background/QueenSprite.play()
 			
 	

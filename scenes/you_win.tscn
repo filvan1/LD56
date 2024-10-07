@@ -1,14 +1,86 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddfh0jir8r0bc"]
+[gd_scene load_steps=21 format=3 uid="uid://bqpyiap0oyrrp"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_t03ui"]
 [ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_onbc3"]
 [ext_resource type="Texture2D" uid="uid://bnp85osc7unxd" path="res://textures/ui/youwintext.png" id="3_knccn"]
+[ext_resource type="Texture2D" uid="uid://h72k6yvgkfq7" path="res://textures/queen.png" id="3_onr2d"]
 [ext_resource type="Texture2D" uid="uid://dxfeusnyebl1p" path="res://textures/ui/retrybutton.png" id="4_vr054"]
 [ext_resource type="Texture2D" uid="uid://c2j8w6ruvkxm7" path="res://textures/ui/retrybuttonhover.png" id="5_dsem5"]
 [ext_resource type="BitMap" uid="uid://bk1uws0up0wtv" path="res://textures/ui/retrybutton_mask.png" id="6_ghph4"]
 [ext_resource type="Texture2D" uid="uid://ck57kyavrk3u8" path="res://textures/ui/quitbutton.png" id="7_2wywl"]
 [ext_resource type="Texture2D" uid="uid://bx2imwel1u68s" path="res://textures/ui/quitbuttonhover.png" id="8_5n7y4"]
 [ext_resource type="BitMap" uid="uid://qpbubjocb6o8" path="res://textures/ui/quitbutton_mask.png" id="9_a8epq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32e0j"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehai1"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5imxx"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blauy"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scfup"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lk5fb"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l03nv"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfv1"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iej0b"]
+atlas = ExtResource("3_onr2d")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ua5ll"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32e0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehai1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5imxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blauy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scfup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lk5fb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l03nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btfv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iej0b")
+}],
+"loop": false,
+"name": &"victory",
+"speed": 3.0
+}]
 
 [node name="YouWin" type="Control"]
 top_level = true
@@ -29,6 +101,11 @@ layer = 0
 offset_right = 256.0
 offset_bottom = 256.0
 texture = ExtResource("2_onbc3")
+
+[node name="QueenSprite" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(128, 151)
+sprite_frames = SubResource("SpriteFrames_ua5ll")
+animation = &"victory"
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
