@@ -2,9 +2,12 @@ class_name Room
 extends Node2D
 
 const NORMAL_ENCOUNTERS = [
-	preload("res://scenes/encounters/beetle_encounter.tscn"),
-	preload("res://scenes/encounters/double_beetle_encounter.tscn"),
-	preload("res://scenes/encounters/rolypoly_encounter.tscn"),
+	#preload("res://scenes/encounters/beetle_encounter.tscn"),
+	#preload("res://scenes/encounters/double_beetle_encounter.tscn"),
+	#preload("res://scenes/encounters/rolypoly_encounter.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_damage.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_firerate.tscn"),
+	preload("res://scenes/encounters/treasure_encounter_speed.tscn"),
 ]
 
 const TREASURE_ENCOUNTERS = [

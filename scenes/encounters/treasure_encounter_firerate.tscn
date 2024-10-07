@@ -1,31 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://tpgrcmd2buy0"]
+[gd_scene load_steps=13 format=3 uid="uid://d4ihp55egsosw"]
 
 [ext_resource type="Script" path="res://scripts/encounter.gd" id="1_sviq8"]
-[ext_resource type="Texture2D" uid="uid://y08jl5j8apf7" path="res://textures/JarOfAnts.png" id="2_gfll8"]
 [ext_resource type="Texture2D" uid="uid://cef7grveb7el7" path="res://textures/firerate.png" id="3_dg2ys"]
 [ext_resource type="Texture2D" uid="uid://cjde4dpnb6xm" path="res://textures/firerate-ant.png" id="4_0oopw"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5wejr"]
-atlas = ExtResource("2_gfll8")
-region = Rect2(0, 15, 16, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5pueu"]
-atlas = ExtResource("2_gfll8")
-region = Rect2(16, 15, 16, 17)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_f00vw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5wejr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5pueu")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="PackedScene" uid="uid://cjthanc1ilqjg" path="res://scenes/interactables/jar_interactable.tscn" id="4_ptp68"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyxu1"]
 atlas = ExtResource("4_0oopw")
@@ -87,13 +65,6 @@ animations = [{
 [node name="StartEncounter" type="Node2D"]
 script = ExtResource("1_sviq8")
 
-[node name="AntIcon" type="AnimatedSprite2D" parent="."]
-z_index = 1
-position = Vector2(56, -62)
-sprite_frames = SubResource("SpriteFrames_f00vw")
-autoplay = "default"
-frame_progress = 0.297088
-
 [node name="Background" type="Sprite2D" parent="."]
 z_as_relative = false
 texture = ExtResource("3_dg2ys")
@@ -103,3 +74,6 @@ position = Vector2(-70, -61)
 sprite_frames = SubResource("SpriteFrames_2sid2")
 autoplay = "default"
 frame_progress = 0.499991
+
+[node name="JarInteractable" parent="." instance=ExtResource("4_ptp68")]
+position = Vector2(58, -64)

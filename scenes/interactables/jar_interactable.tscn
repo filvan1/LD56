@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjthanc1ilqjg"]
+
+[ext_resource type="Script" path="res://scripts/jar_interactable.gd" id="1_fhmyh"]
+[ext_resource type="Texture2D" uid="uid://y08jl5j8apf7" path="res://textures/JarOfAnts.png" id="1_w547k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wejr"]
+atlas = ExtResource("1_w547k")
+region = Rect2(0, 15, 16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pueu"]
+atlas = ExtResource("1_w547k")
+region = Rect2(16, 15, 16, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4dnbh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wejr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pueu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ud5"]
+
+[node name="JarInteractable" type="Node2D"]
+script = ExtResource("1_fhmyh")
+
+[node name="AntIcon" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_4dnbh")
+autoplay = "default"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_w8ud5")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
