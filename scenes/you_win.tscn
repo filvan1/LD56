@@ -1,16 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://c06gfxs245gpj"]
+[gd_scene load_steps=10 format=3 uid="uid://ddfh0jir8r0bc"]
 
-[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_tsvtv"]
-[ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_earho"]
-[ext_resource type="Texture2D" uid="uid://diy0b35js86k2" path="res://textures/ui/gameovertext.png" id="3_m5ynl"]
-[ext_resource type="Texture2D" uid="uid://dxfeusnyebl1p" path="res://textures/ui/retrybutton.png" id="4_kiq7g"]
-[ext_resource type="Texture2D" uid="uid://c2j8w6ruvkxm7" path="res://textures/ui/retrybuttonhover.png" id="5_8ee6b"]
-[ext_resource type="BitMap" uid="uid://bk1uws0up0wtv" path="res://textures/ui/retrybutton_mask.png" id="6_tf5lg"]
-[ext_resource type="Texture2D" uid="uid://ck57kyavrk3u8" path="res://textures/ui/quitbutton.png" id="10_gmlkn"]
-[ext_resource type="Texture2D" uid="uid://bx2imwel1u68s" path="res://textures/ui/quitbuttonhover.png" id="11_uos34"]
-[ext_resource type="BitMap" uid="uid://qpbubjocb6o8" path="res://textures/ui/quitbutton_mask.png" id="12_5ni4b"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="1_t03ui"]
+[ext_resource type="Texture2D" uid="uid://1na3c23eccqb" path="res://textures/ui/othermenubackground.png" id="2_onbc3"]
+[ext_resource type="Texture2D" uid="uid://bnp85osc7unxd" path="res://textures/ui/youwintext.png" id="3_knccn"]
+[ext_resource type="Texture2D" uid="uid://dxfeusnyebl1p" path="res://textures/ui/retrybutton.png" id="4_vr054"]
+[ext_resource type="Texture2D" uid="uid://c2j8w6ruvkxm7" path="res://textures/ui/retrybuttonhover.png" id="5_dsem5"]
+[ext_resource type="BitMap" uid="uid://bk1uws0up0wtv" path="res://textures/ui/retrybutton_mask.png" id="6_ghph4"]
+[ext_resource type="Texture2D" uid="uid://ck57kyavrk3u8" path="res://textures/ui/quitbutton.png" id="7_2wywl"]
+[ext_resource type="Texture2D" uid="uid://bx2imwel1u68s" path="res://textures/ui/quitbuttonhover.png" id="8_5n7y4"]
+[ext_resource type="BitMap" uid="uid://qpbubjocb6o8" path="res://textures/ui/quitbutton_mask.png" id="9_a8epq"]
 
-[node name="GameOver" type="Control"]
+[node name="YouWin" type="Control"]
 top_level = true
 custom_minimum_size = Vector2(1024, 1024)
 layout_mode = 3
@@ -20,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00295, 1)
-script = ExtResource("1_tsvtv")
+script = ExtResource("1_t03ui")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = 0
@@ -28,7 +28,7 @@ layer = 0
 [node name="TextureRect" type="TextureRect" parent="Background"]
 offset_right = 256.0
 offset_bottom = 256.0
-texture = ExtResource("2_earho")
+texture = ExtResource("2_onbc3")
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 
@@ -48,7 +48,8 @@ offset_left = -17.535
 offset_top = -1.045
 offset_right = 146.465
 offset_bottom = 45.955
-texture = ExtResource("3_m5ynl")
+scale = Vector2(1.00321, 1)
+texture = ExtResource("3_knccn")
 stretch_mode = 2
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="MenuLayer/VBoxContainer"]
@@ -64,9 +65,9 @@ offset_left = -8.875
 offset_top = -13.46
 offset_right = 147.125
 offset_bottom = 32.54
-texture_normal = ExtResource("4_kiq7g")
-texture_hover = ExtResource("5_8ee6b")
-texture_click_mask = ExtResource("6_tf5lg")
+texture_normal = ExtResource("4_vr054")
+texture_hover = ExtResource("5_dsem5")
+texture_click_mask = ExtResource("6_ghph4")
 
 [node name="spacer_4" type="Control" parent="MenuLayer/VBoxContainer"]
 layout_mode = 2
@@ -78,9 +79,9 @@ offset_top = 38.63
 offset_right = 168.1
 offset_bottom = 65.63
 scale = Vector2(0.993027, 1.00356)
-texture_normal = ExtResource("10_gmlkn")
-texture_hover = ExtResource("11_uos34")
-texture_click_mask = ExtResource("12_5ni4b")
+texture_normal = ExtResource("7_2wywl")
+texture_hover = ExtResource("8_5n7y4")
+texture_click_mask = ExtResource("9_a8epq")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://bk1uws0up0wtv"
+path="res://.godot/imported/retrybutton_mask.png-c254785da743a6b707de3df69bb37370.res"
+
+[deps]
+
+source_file="res://textures/ui/retrybutton_mask.png"
+dest_files=["res://.godot/imported/retrybutton_mask.png-c254785da743a6b707de3df69bb37370.res"]
+
+[params]
+
+create_from=0
+threshold=0.17

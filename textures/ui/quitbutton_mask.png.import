@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://qpbubjocb6o8"
+path="res://.godot/imported/quitbutton_mask.png-6a80456b88238f822392703191f87fdc.res"
+
+[deps]
+
+source_file="res://textures/ui/quitbutton_mask.png"
+dest_files=["res://.godot/imported/quitbutton_mask.png-6a80456b88238f822392703191f87fdc.res"]
+
+[params]
+
+create_from=0
+threshold=0.05
