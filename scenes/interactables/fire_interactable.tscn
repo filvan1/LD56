@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://dft7vudd6kf36"]
+
+[ext_resource type="Script" path="res://scripts/fire_interactable.gd" id="1_vem6s"]
+[ext_resource type="Texture2D" uid="uid://cjde4dpnb6xm" path="res://textures/firerate-ant.png" id="2_4ofnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8ud5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyxu1"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyi2u"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phsn1"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd3hh"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyk34"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruqwy"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g436a"]
+atlas = ExtResource("2_4ofnv")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l6534"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyxu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyi2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phsn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd3hh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyk34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruqwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g436a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[node name="FireInteractable" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_vem6s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w8ud5")
+
+[node name="UpgradeIcon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l6534")
+autoplay = "default"
+
+[connection signal="body_entered" from="." to="." method="_on_area_2d_body_entered"]

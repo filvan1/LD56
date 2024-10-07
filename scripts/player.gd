@@ -28,7 +28,7 @@ signal pause_game
 func _ready() -> void:
 	_spawn_ants(initial_ants, global_position)# Replace with function body.
 
-func _spawn_ants(n: int, spawn_position: Vector2):
+func _spawn_ants(n: int, spawn_position = $Control.global_position):
 	for i in n:
 		swarm.spawn_ant(spawn_position)
 	

@@ -22,6 +22,10 @@ window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
 window/stretch/scale=4.0
 
+[global_group]
+
+Player=""
+
 [input]
 
 move_up={
@@ -76,7 +80,7 @@ pause={
 2d_physics/layer_2="Ants"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemyArea"
-2d_physics/layer_5="Upgrades"
+2d_physics/layer_5="PlayerArea"
 
 [rendering]
 

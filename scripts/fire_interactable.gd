@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 signal picked
 
@@ -9,12 +9,12 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body:Node2D) -> void:
 	var other_owner = body.owner
 	if is_instance_of(other_owner, Player):
-		other_owner._spawn_ants(5)
+		other_owner.shoot_cooldown -= 0.1
 		$CollisionShape2D.disabled = true
 		picked.emit()
 		hide()
 
-
+	
 func _on_picked() -> void:
 	$CollisionShape2D.disabled = true
 	hide()
